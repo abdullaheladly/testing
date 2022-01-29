@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "786737308319",
+    "firebase_url": "https://findyourhome-7378b.firebaseio.com",
+    "project_id": "findyourhome-7378b",
+    "storage_bucket": "findyourhome-7378b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786737308319:android:8d7810fbe3578b513438aa",
+        "android_client_info": {
+          "package_name": "com.abdullah996.leadscrm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786737308319-2mh7cnj7n1i25ehdfkojge4389rri5hf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.abdullah996.leadscrm",
+            "certificate_hash": "7921bad9bdf08bbe8f9a850b681e2b56c7a961a3"
+          }
+        },
+        {
+          "client_id": "786737308319-0k5ggdafodf2g8gk0dfm892pim82l5la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcvFNGxiwsq5lS5B1woIx_6AI2q4-a7r0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786737308319-0k5ggdafodf2g8gk0dfm892pim82l5la.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
