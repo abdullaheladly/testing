@@ -16,18 +16,16 @@ import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.ui.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import javax.inject.Inject
 
-class FirebaseInstanceIDService @Inject constructor(
-    private val sharedPreferenceMangerImpl: SharedPreferenceMangerImpl
-) : FirebaseMessagingService() {
+
+class FirebaseInstanceIDService()  : FirebaseMessagingService() {
+
 
     private var count = 0
 
     override fun onNewToken(p0: String) {
         super.onNewToken(p0)
 
-        sharedPreferenceMangerImpl.userToken = p0
     }
 
 

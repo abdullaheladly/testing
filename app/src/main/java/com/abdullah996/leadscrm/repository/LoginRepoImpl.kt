@@ -1,5 +1,6 @@
 package com.abdullah996.leadscrm.repository
 
+import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
 import com.abdullah996.leadscrm.model.user.UserResponse
 import com.abdullah996.leadscrm.network.Apis
 import dagger.hilt.android.scopes.ActivityRetainedScoped
@@ -13,6 +14,13 @@ class LoginRepoImpl @Inject constructor(
 ):LoginRepo {
     override suspend fun login(email: String, password: String, notificationToken: String?):Response<UserResponse> {
         return apis.userLogin(email, password, notificationToken)
+    }
+
+    override suspend fun logout(
+        company_id: Int?,
+        notificationToken: String?
+    ): Response<UpdateLeadsRespons> {
+        return apis.logout(company_id, notificationToken)
     }
 
 }

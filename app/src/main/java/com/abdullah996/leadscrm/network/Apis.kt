@@ -51,5 +51,15 @@ interface Apis {
         @Field("reason") reasons :String,
     ):Response<UpdateLeadsRespons>
 
+    @POST("user/logout")
+    @FormUrlEncoded
+    suspend fun logout(
+        @Query("company_id") company_id:Int?,
+        @Field("firebase_token") notificationToken: String?
+    ):Response<UpdateLeadsRespons>
+
+
+
+
 
 }

@@ -201,15 +201,27 @@
             android:text="Residential"
             />
     </com.google.android.material.chip.ChipGroup>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvLeads"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/s_to_refresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chip_group"
         android:layout_margin="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLeads"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chip_group"
+            android:layout_margin="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

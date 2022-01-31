@@ -50,8 +50,10 @@ class HomeFragment : Fragment(),OnLeadsClickListener {
         _binding= FragmentHomeBinding.inflate(layoutInflater,container,false)
         token= activity?.intent?.getStringExtra("token")
       // Toast.makeText(requireContext(), token, Toast.LENGTH_SHORT).show()
+        setupSwipeTorefresh()
         setupRecycleView()
         if (hasInternetConnection()){
+            binding.sToRefresh.isRefreshing=true
             getAllLeads()
         }else{
             Toast.makeText(requireContext(), "no internet ", Toast.LENGTH_SHORT).show()
@@ -65,6 +67,21 @@ class HomeFragment : Fragment(),OnLeadsClickListener {
        })*/
         return binding.root
     }
+
+    private fun setupSwipeTorefresh() {
+        binding.sToRefresh.setOnRefreshListener {
+            binding.sToRefresh.isRefreshing =true
+            if (hasInternetConnection()){
+                getAllLeads()
+            }
+            else{
+                makeToast("no internet")
+                binding.sToRefresh.isRefreshing=false
+            }
+
+        }
+    }
+
     fun getAllLeads(){
         homeViewModel.getAllLeads(1,"a",null,sharedPreferenceManger.userToken).observe(viewLifecycleOwner,{
             when(it.status){
@@ -72,10 +89,12 @@ class HomeFragment : Fragment(),OnLeadsClickListener {
                     makeToast(it.data?.message.toString())
                     if (it.data?.data?.data!=null) {
                         leadsAdapter.saveData(it.data.data.data)
+                        binding.sToRefresh.isRefreshing=false
                     }
                 }
                 ApiStatus.ERROR->{
                     makeToast(it.message.toString())
+                    binding.sToRefresh.isRefreshing=false
                 }
                 ApiStatus.LOADING->{
 

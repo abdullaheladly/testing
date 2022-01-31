@@ -5,6 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
+import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
 import com.abdullah996.leadscrm.model.user.UserResponse
 import com.abdullah996.leadscrm.repository.LoginRepoImpl
 import com.abdullah996.leadscrm.utill.ApiResult
@@ -36,6 +37,32 @@ application: Application
 
 
      }*/
+   fun logout( company_id: Int?,
+               notificationToken: String?)= flow<ApiResult<UpdateLeadsRespons>> {
+       emit(ApiResult.Loading(null,true))
+       val response= withContext(Dispatchers.IO){
+           loginRepoImpl.logout(company_id,notificationToken)
+       }
+       if (response.isSuccessful){
+           emit(ApiResult.Success(response.body()))
+       }else{
+           /* val errorMsg=response.errorBody()?.toString()
+            response.errorBody()?.close()
+            emit(ApiResult.Error(errorMsg!!))*/
+           if (response.message().toString().contains("timeout")){
+               emit(ApiResult.Error("Timeout"))
+           }else if (response.code()==401){
+               emit(ApiResult.Error("UnAuthenticated"))
+           }
+           else {
+               emit(ApiResult.Error(response.errorBody()?.string().toString()))
+               response.errorBody()?.close()
+           }
+       }
+   }.map {
+       it
+   }.asLiveData()
+
 
     fun userLiveData(email:String,password:String,fcm_token:String?)= flow<ApiResult<UserResponse>> {
         emit(ApiResult.Loading(null,true))

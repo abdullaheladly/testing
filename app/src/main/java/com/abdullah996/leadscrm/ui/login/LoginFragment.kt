@@ -1,6 +1,9 @@
 package com.abdullah996.leadscrm.ui.login
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -54,8 +57,10 @@ class LoginFragment : Fragment() {
 
     private fun setListeners() {
         binding.btnLogin.setOnClickListener {
-            if (checkValidInput()){
-                   /* loginViewModel.login(email, password, token?:null).observe(viewLifecycleOwner,{
+            if (checkValidInput()) {
+                if (hasInternetConnection()) {
+                    binding.progressBar.visibility = View.VISIBLE
+                    /* loginViewModel.login(email, password, token?:null).observe(viewLifecycleOwner,{
                         makeToast(it.data!!.token!!)
                         /*val action=LoginFragmentDirections.actionLoginFragmentToHomeFragment(it.data!!.token)
                         findNavController().navigate(action)*/
@@ -63,28 +68,36 @@ class LoginFragment : Fragment() {
                         intet.putExtra("token",it.data.token)
                         startActivity(intet)
                     })*/
-                loginViewModel.userLiveData(email,password,token?:null).observe(viewLifecycleOwner,{
-                    when(it.status){
-                        ApiStatus.SUCCESS->{
-                            val intet=Intent(requireActivity(),HomeActivity::class.java)
-                            intet.putExtra("token",it.data?.data?.token)
-                            sharedPreferenceManger.isLoggedIn=true
-                            sharedPreferenceManger.userToken=it.data?.data?.token.toString()
-                            startActivity(intet)
+                    loginViewModel.userLiveData(email, password, token ?: null)
+                        .observe(viewLifecycleOwner, {
+                            when (it.status) {
+                                ApiStatus.SUCCESS -> {
+                                    val intet = Intent(requireActivity(), HomeActivity::class.java)
+                                    intet.putExtra("token", it.data?.data?.token)
+                                    sharedPreferenceManger.isLoggedIn = true
+                                    sharedPreferenceManger.userToken =
+                                        it.data?.data?.token.toString()
+                                    startActivity(intet)
+                                    requireActivity().finish()
+                                    binding.progressBar.visibility = View.INVISIBLE
 
-                        }
-                        ApiStatus.ERROR->{
-                            makeToast(it.message.toString())
-                        }
-                        ApiStatus.LOADING->{
+                                }
+                                ApiStatus.ERROR -> {
+                                    makeToast(it.message.toString())
+                                    binding.progressBar.visibility = View.INVISIBLE
+                                }
+                                ApiStatus.LOADING -> {
 
-                        }
-                    }
+                                }
+                            }
 
-                })
-                   /* loginViewModel.loginResponse.observe(viewLifecycleOwner, {
+                        })
+                    /* loginViewModel.loginResponse.observe(viewLifecycleOwner, {
 
                     })*/
+                }else{
+                    makeToast("no internet connection")
+                }
             }
         }
 
@@ -126,6 +139,19 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null
+    }
+    private fun hasInternetConnection():Boolean{
+        val connectivityManager=requireActivity().getSystemService(
+            Context.CONNECTIVITY_SERVICE
+        ) as ConnectivityManager
+        val activeNetwork=connectivityManager.activeNetwork?:return false
+        val capabilities=connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
+        return  when{
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ->true
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            else -> false
+        }
     }
 
 
