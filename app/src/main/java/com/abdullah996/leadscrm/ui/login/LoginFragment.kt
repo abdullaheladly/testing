@@ -14,6 +14,9 @@ import com.abdullah996.leadscrm.R
 
 import com.abdullah996.leadscrm.databinding.FragmentLoginBinding
 import com.abdullah996.leadscrm.ui.HomeActivity
+import com.abdullah996.leadscrm.utill.ApiResult
+import com.abdullah996.leadscrm.utill.ApiStatus
+import com.abdullah996.leadscrm.utill.SharedPreferenceManger
 import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +33,7 @@ class LoginFragment : Fragment() {
     private lateinit var email:String
     private lateinit var password:String
     private  var token:String?=null
+    private lateinit var sharedPreferenceManger:SharedPreferenceManger
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +47,7 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding= FragmentLoginBinding.inflate(layoutInflater,container,false)
         getNotificationToken()
+        sharedPreferenceManger=SharedPreferenceMangerImpl(requireContext())
         setListeners()
         return binding.root
     }
@@ -50,14 +55,33 @@ class LoginFragment : Fragment() {
     private fun setListeners() {
         binding.btnLogin.setOnClickListener {
             if (checkValidInput()){
-                    loginViewModel.login(email, password, token?:null).observe(viewLifecycleOwner,{
+                   /* loginViewModel.login(email, password, token?:null).observe(viewLifecycleOwner,{
                         makeToast(it.data!!.token!!)
                         /*val action=LoginFragmentDirections.actionLoginFragmentToHomeFragment(it.data!!.token)
                         findNavController().navigate(action)*/
                         val intet=Intent(requireActivity(),HomeActivity::class.java)
                         intet.putExtra("token",it.data.token)
                         startActivity(intet)
-                    })
+                    })*/
+                loginViewModel.userLiveData(email,password,token?:null).observe(viewLifecycleOwner,{
+                    when(it.status){
+                        ApiStatus.SUCCESS->{
+                            val intet=Intent(requireActivity(),HomeActivity::class.java)
+                            intet.putExtra("token",it.data?.data?.token)
+                            sharedPreferenceManger.isLoggedIn=true
+                            sharedPreferenceManger.userToken=it.data?.data?.token.toString()
+                            startActivity(intet)
+
+                        }
+                        ApiStatus.ERROR->{
+                            makeToast(it.message.toString())
+                        }
+                        ApiStatus.LOADING->{
+
+                        }
+                    }
+
+                })
                    /* loginViewModel.loginResponse.observe(viewLifecycleOwner, {
 
                     })*/

@@ -1,6 +1,7 @@
 package com.abdullah996.leadscrm.repository
 
 import com.abdullah996.leadscrm.model.leeds.LeedsReponse
+import retrofit2.Response
 
 interface LeedsRepo {
     suspend fun getAllLeads(
@@ -8,5 +9,5 @@ interface LeedsRepo {
         search:String,
         company_id:Int?,
         token:String
-    ):LeedsReponse
+    ):Response<LeedsReponse>
 }

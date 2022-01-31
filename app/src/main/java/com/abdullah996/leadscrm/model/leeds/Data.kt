@@ -7,7 +7,7 @@ data class Data(
     @SerializedName("current_page")
     val currentPage: Int,
     @SerializedName("data")
-    val `data`: List<DataX>,
+    val `data`: List<Leads>,
     @SerializedName("first_page_url")
     val firstPageUrl: String,
     @SerializedName("from")

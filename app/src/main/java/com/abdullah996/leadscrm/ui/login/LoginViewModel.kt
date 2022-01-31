@@ -1,32 +1,29 @@
 package com.abdullah996.leadscrm.ui.login
 
 import android.app.Application
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.abdullah996.leadscrm.base.BaseViewModel
+import androidx.lifecycle.asLiveData
 import com.abdullah996.leadscrm.model.user.UserResponse
 import com.abdullah996.leadscrm.repository.LoginRepoImpl
-import com.abdullah996.leadscrm.utill.NetworkResult
-import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
-import com.google.firebase.messaging.FirebaseMessaging
-import dagger.hilt.android.AndroidEntryPoint
+import com.abdullah996.leadscrm.utill.ApiResult
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import retrofit2.Response
 
 
 class LoginViewModel @ViewModelInject constructor(
 private val loginRepoImpl: LoginRepoImpl,
 //private val sharedPreferenceMangerImpl: SharedPreferenceMangerImpl,
-//application: Application
-):BaseViewModel() {
+application: Application
+):AndroidViewModel(application) {
     var loginResponse: MutableLiveData<UserResponse> = MutableLiveData()
 
 
 
-    fun login(email:String,password:String,fcm_token:String?) = handleRequestLiveData<UserResponse> {
+   /* fun login(email:String,password:String,fcm_token:String?) = handleRequestLiveData<UserResponse> {
 
         val result= withContext(Dispatchers.IO){
             loginRepoImpl.login(email,password,fcm_token)
@@ -38,7 +35,32 @@ private val loginRepoImpl: LoginRepoImpl,
         emit(result)
 
 
-     }
+     }*/
+
+    fun userLiveData(email:String,password:String,fcm_token:String?)= flow<ApiResult<UserResponse>> {
+        emit(ApiResult.Loading(null,true))
+        val response= withContext(Dispatchers.IO){
+            loginRepoImpl.login(email,password,fcm_token)
+        }
+        if (response.isSuccessful){
+            emit(ApiResult.Success(response.body()))
+        }else{
+           /* val errorMsg=response.errorBody()?.toString()
+            response.errorBody()?.close()
+            emit(ApiResult.Error(errorMsg!!))*/
+                if (response.message().toString().contains("timeout")){
+                    emit(ApiResult.Error("Timeout"))
+                }else if (response.code()==401){
+                    emit(ApiResult.Error("UnAuthenticated"))
+                }
+                else {
+                    emit(ApiResult.Error(response.errorBody()?.string().toString()))
+                    response.errorBody()?.close()
+                }
+        }
+    }.map {
+        it
+    }.asLiveData()
 
 
 }

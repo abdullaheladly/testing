@@ -9,5 +9,30 @@
         android:id="@+id/homeFragment2"
         android:name="com.abdullah996.leadscrm.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment2_to_editLeadFragment2"
+            app:destination="@id/editLeadFragment2" />
+        <action
+            android:id="@+id/action_homeFragment2_to_actionsFragment"
+            app:destination="@id/actionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editLeadFragment2"
+        android:name="com.abdullah996.leadscrm.ui.edit.EditLeadFragment"
+        android:label="fragment_edit_lead"
+        tools:layout="@layout/fragment_edit_lead" >
+        <argument
+            android:name="lead"
+            app:argType="com.abdullah996.leadscrm.model.leeds.Leads" />
+    </fragment>
+    <fragment
+        android:id="@+id/actionsFragment"
+        android:name="com.abdullah996.leadscrm.ui.actions.ActionsFragment"
+        android:label="fragment_actions"
+        tools:layout="@layout/fragment_actions" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

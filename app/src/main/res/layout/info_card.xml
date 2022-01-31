@@ -3,27 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="16dp"
+    android:background="@drawable/leads_bg"
+    android:layout_marginBottom="@dimen/_8sdp"
+    android:paddingTop="24dp"
+    android:paddingBottom="24dp"
+    android:paddingEnd="30dp"
+    android:paddingStart="32dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
         android:id="@+id/imageProfile"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_ingo_avatar__1_"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@color/black"
-        android:layout_margin="8dp"/>
+        app:layout_constraintTop_toTopOf="parent"/>
     <TextView
         android:id="@+id/txt_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Info"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginStart="16dp"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_semibold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageProfile"
         />
@@ -32,29 +35,20 @@
         android:id="@+id/btn_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/ic_trash__1_"
+        android:backgroundTint="@color/white"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_baseline_delete_24"
-        android:backgroundTint="@color/white"
-        android:layout_margin="5dp"/>
-    <ImageButton
-        android:id="@+id/btn_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/btn_delete"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_baseline_note_add_24"
-        android:backgroundTint="@color/white"
-        android:layout_margin="5dp"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="14dp"
         android:text="Phone: "
-        android:textSize="20sp"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -63,10 +57,10 @@
         android:id="@+id/txt_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-
+        android:layout_marginTop="14dp"
         android:text="01060651249"
-        android:textSize="20sp"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/phone"
         app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -77,11 +71,10 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-
+        android:layout_marginTop="14dp"
         android:text="Name: "
-        android:textSize="20sp"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
@@ -90,9 +83,10 @@
         android:id="@+id/txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="14dp"
         android:text="Abdullah"
-        android:textSize="20sp"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
@@ -100,11 +94,10 @@
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-
+        android:layout_marginTop="14dp"
         android:text="Email: "
-        android:textSize="20sp"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone" />
@@ -113,61 +106,147 @@
         android:id="@+id/txt_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="14dp"
         android:text="Abdullaheladly@gmail.com"
-        android:textSize="20sp"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/email"
         app:layout_constraintTop_toBottomOf="@+id/phone" />
     <TextView
-        android:id="@+id/lastCall"
+        android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-
-        android:text="lastCall: "
-        android:textSize="20sp"
+        android:layout_marginTop="14dp"
+        android:text="Status "
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <TextView
-        android:id="@+id/txt_lastCall"
+        android:id="@+id/txt_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="1/1/2020"
-        android:textSize="20sp"
+        android:layout_marginTop="14dp"
+        android:text="stable"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@+id/lastCall"
+        app:layout_constraintStart_toEndOf="@+id/status"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <TextView
         android:id="@+id/Note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="14dp"
         android:text="Note"
-        android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastCall" />
+        app:layout_constraintTop_toBottomOf="@+id/status" />
 
     <TextView
         android:id="@+id/details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:text="heu asjkh kaj n jk sl; sa  sdjd n msandkasnd s dkdmskadbdajdhsjhddashd ks dm  kl saklnnd sadn sajd skld ss jnsad kasnd sa dkn daskd k"
-        android:textSize="15sp"
-        android:textColor="@color/black"
-        android:layout_marginBottom="5dp"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Note"
+        app:layout_constraintTop_toBottomOf="@+id/Note" />
+
+    <TextView
+        android:id="@+id/editInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="14sp"
+        android:text="Edit info "
+        android:textColor="@color/darkGreen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/details"
+        app:drawableEndCompat="@drawable/ic_angle_small_down" />
+
+    <TextView
+        android:id="@+id/action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:text="Action"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editInfo" />
+
+    <TextView
+        android:id="@+id/action_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Action "
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/action" />
+
+    <TextView
+        android:id="@+id/txt_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="no answer"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/action_t"
+        app:layout_constraintTop_toBottomOf="@+id/action" />
+
+    <TextView
+        android:id="@+id/comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Comment "
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/action_t" />
+
+    <TextView
+        android:id="@+id/txt_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="asjkhk as n ks  n n"
+        android:maxLines="2"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/comment"
+        app:layout_constraintTop_toBottomOf="@+id/action_t" />
+
+
+    <TextView
+        android:id="@+id/addaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="14sp"
+        android:text="Add Action "
+        android:textColor="@color/darkGreen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/comment"
+        app:drawableEndCompat="@drawable/ic_angle_small_down"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 

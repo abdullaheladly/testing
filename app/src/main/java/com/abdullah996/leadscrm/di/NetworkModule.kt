@@ -1,11 +1,14 @@
 package com.abdullah996.leadscrm.di
 
+import android.content.Context
 import com.abdullah996.leadscrm.network.Apis
 import com.abdullah996.leadscrm.utill.Constants.Companion.BASE_URL
+import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -29,10 +32,13 @@ object NetworkModule{
 
     @Singleton
     @Provides
-    fun headersInterceptor():Interceptor= Interceptor {chain->
+    fun headersInterceptor(@ApplicationContext context: Context):Interceptor= Interceptor { chain->
         var request=chain.request()
+        val sharedPreferenceManger=SharedPreferenceMangerImpl(context)
         request= request.newBuilder()
-            .header("Accept", "application/json")
+            //.header("Accept", "application/json")
+            .header("Authorization","Bearer ${sharedPreferenceManger.userToken}")
+            .addHeader("Accept", "application/json")
             .build()
         chain.proceed(request)
     }

@@ -6,6 +6,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 
 interface SharedPreferenceManger{
     var userToken: String
+    var isLoggedIn:Boolean
 
 }
 class SharedPreferenceMangerImpl(context: Context):SharedPreferenceManger{
@@ -19,7 +20,12 @@ private val sharedPreference:SharedPreferences=
     override var userToken: String
         get() = getString(userTokenKey)
         set(value) {
-            editor.putString(userTokenKey,"Bearer $value").apply()
+            editor.putString(userTokenKey,value).apply()
+        }
+    override var isLoggedIn: Boolean
+        get() = sharedPreference.getBoolean(isLoggedInKey,false)
+        set(value) {
+            editor.putBoolean(isLoggedInKey,value).apply()
         }
 
 

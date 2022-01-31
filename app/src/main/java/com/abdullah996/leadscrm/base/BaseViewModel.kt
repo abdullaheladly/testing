@@ -1,12 +1,13 @@
 package com.abdullah996.leadscrm.base
 
 
-import androidx.lifecycle.LiveDataScope
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
+import com.abdullah996.leadscrm.utill.ApiResult
 import com.abdullah996.leadscrm.utill.errorHandler
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
+import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
 
 open class BaseViewModel : ViewModel(), CoroutineScope {
@@ -130,6 +131,33 @@ open class BaseViewModel : ViewModel(), CoroutineScope {
             }
         }
     }
+
+   /* fun <T> handleFlowResponse(requst:suspend () -> Response<T>)= flow<ApiResult<T>> {
+        emit(ApiResult.Loading(null,true))
+        val response= withContext(Dispatchers.IO){
+            requst
+        }
+        if (response.){
+            emit(ApiResult.Success(response.body()))
+        }else{
+            /* val errorMsg=response.errorBody()?.toString()
+             response.errorBody()?.close()
+             emit(ApiResult.Error(errorMsg!!))*/
+            if (response.message().toString().contains("timeout")){
+                emit(ApiResult.Error("Timeout"))
+            }else if (response.code()==401){
+                emit(ApiResult.Error("UnAuthenticated"))
+            }
+            else {
+                emit(ApiResult.Error(response.errorBody()?.string().toString()))
+                response.errorBody()?.close()
+            }
+        }
+    }.map {
+        it
+    }.asLiveData()*/
+
+
 
     fun handleRequest(block:suspend CoroutineScope.() -> Unit
     ) {

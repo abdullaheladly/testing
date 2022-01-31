@@ -11,7 +11,7 @@ import javax.inject.Inject
 class LoginRepoImpl @Inject constructor(
     private val apis: Apis
 ):LoginRepo {
-    override suspend fun login(email: String, password: String, notificationToken: String?):UserResponse {
+    override suspend fun login(email: String, password: String, notificationToken: String?):Response<UserResponse> {
         return apis.userLogin(email, password, notificationToken)
     }
 

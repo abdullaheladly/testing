@@ -4,20 +4,26 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/btn_login_background.xml" value="0.16944444444444445" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/btn_save_background.xml" value="0.1824074074074074" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/edit_text_background.xml" value="0.1046875" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/edt_back.xml" value="0.15" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/edt_background.xml" value="0.1685185185185185" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/ic_baseline_autorenew_24.xml" value="0.1046875" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/ic_baseline_note_add_24.xml" value="0.1046875" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/ic_hamburger_menu.xml" value="0.16944444444444445" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/leads_bg.xml" value="0.1824074074074074" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/view_background.xml" value="0.18425925925925926" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/view_background_green.xml" value="0.1824074074074074" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/view_bg_black.xml" value="0.18425925925925926" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/layout/action_card.xml" value="0.33" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/activity_home.xml" value="0.14" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/content_home.xml" value="0.11503623188405797" />
-        <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_login.xml" value="0.16" />
-        <entry key="..\:/projets/leadscrm/app/src/main/res/layout/info_card.xml" value="0.25" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_actions.xml" value="0.18" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_edit_lead.xml" value="0.16" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_home.xml" value="0.18" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_login.xml" value="0.22" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/layout/info_card.xml" value="0.2" />
       </map>
     </option>
   </component>

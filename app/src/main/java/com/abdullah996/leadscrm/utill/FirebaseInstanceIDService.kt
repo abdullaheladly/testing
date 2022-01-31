@@ -21,6 +21,7 @@ import javax.inject.Inject
 class FirebaseInstanceIDService @Inject constructor(
     private val sharedPreferenceMangerImpl: SharedPreferenceMangerImpl
 ) : FirebaseMessagingService() {
+
     private var count = 0
 
     override fun onNewToken(p0: String) {

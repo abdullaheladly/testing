@@ -8,5 +8,5 @@ interface LoginRepo {
         email: String,
         password: String,
         notificationToken: String?
-    ):UserResponse
+    ):Response<UserResponse>
 }

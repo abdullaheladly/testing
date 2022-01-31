@@ -3,6 +3,7 @@ package com.abdullah996.leadscrm.repository
 import com.abdullah996.leadscrm.model.leeds.LeedsReponse
 import com.abdullah996.leadscrm.network.Apis
 import dagger.hilt.android.scopes.ActivityRetainedScoped
+import retrofit2.Response
 import javax.inject.Inject
 
 
@@ -10,7 +11,7 @@ import javax.inject.Inject
 class LeedsRepoImpl@Inject constructor(
     private val apis: Apis
 ):LeedsRepo {
-    override suspend fun getAllLeads(is_paginate: Int, search: String, company_id: Int?,token:String):LeedsReponse {
+    override suspend fun getAllLeads(is_paginate: Int, search: String, company_id: Int?,token:String):Response<LeedsReponse> {
         return apis.getAllLeads(is_paginate,search,company_id,"Bearer $token")
     }
 
