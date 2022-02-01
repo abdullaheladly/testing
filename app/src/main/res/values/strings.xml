@@ -14,4 +14,11 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
+
+    <string-array name="status">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+    </string-array>
+
 </resources>

@@ -18,8 +18,8 @@ class UpdateLeadImpl @Inject constructor(
         notes: String?,
         phone: Array<String>,
         is_qualified: String,
-        reasons: String
+        reasons: String,
     ): Response<UpdateLeadsRespons> {
-       return apis.updateLead(company_id, lead_id, name, email, notes ,arrayOf("+971554457056"), is_qualified, reasons)
+       return apis.updateLead(company_id, lead_id, name, email, notes ,phone, is_qualified, reasons)
     }
 }

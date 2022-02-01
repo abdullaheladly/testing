@@ -20,6 +20,7 @@
       />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/edtLeadScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/saveEdit"
@@ -32,7 +33,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/edit_lead_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:background="@drawable/leads_bg"
         android:paddingStart="13.5dp"
@@ -80,7 +81,7 @@
         <EditText
             android:id="@+id/edt_mobile2"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40ssp"
+            android:layout_height="@dimen/_35ssp"
             android:background="@drawable/leads_bg"
             android:hint="Mobile 2"
             android:textColor="@color/black"
@@ -114,7 +115,7 @@
 
         <Switch
             android:id="@+id/edt_is_qualified_spinner"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="@dimen/_40ssp"
            android:text="Is Qualified"
             android:textSize="14sp"
@@ -124,7 +125,8 @@
             android:layout_marginTop="15dp"
             android:textOn="Yes"
             android:textOff="No"
-            android:padding="13dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edt_unit_interest_edit"
@@ -133,9 +135,9 @@
         <EditText
             android:id="@+id/edt_unit_interest_edit"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40ssp"
+            android:layout_height="@dimen/_35ssp"
             android:background="@drawable/leads_bg"
-            android:hint="unit interest"
+            android:hint="Reasons"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:drawableEnd="@drawable/ic_asterisk_solid"
@@ -157,26 +159,29 @@
             android:backgroundTint="@color/black"
             android:fontFamily="@font/poppins"
             android:textColor="@color/black"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_7sdp"
             app:layout_constraintTop_toBottomOf="@id/edt_is_qualified_spinner"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
     <Button
         android:id="@+id/saveEdit"
         android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_35sdp"
+        android:layout_height="@dimen/_30sdp"
         app:background="@drawable/btn_save_background"
         app:backgroundTint="@color/darkGreen"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Save"
+        app:layout_constraintTop_toBottomOf="@id/edtLeadScroll"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

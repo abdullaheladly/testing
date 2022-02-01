@@ -10,10 +10,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.FragmentHomeBinding
 import com.abdullah996.leadscrm.model.leeds.Leads
 import com.abdullah996.leadscrm.ui.HomeActivity
@@ -21,6 +23,7 @@ import com.abdullah996.leadscrm.utill.ApiStatus
 import com.abdullah996.leadscrm.utill.SharedPreferenceManger
 import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 import dagger.hilt.android.AndroidEntryPoint
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 
 
 @AndroidEntryPoint
@@ -50,6 +53,10 @@ class HomeFragment : Fragment(),OnLeadsClickListener {
         _binding= FragmentHomeBinding.inflate(layoutInflater,container,false)
         token= activity?.intent?.getStringExtra("token")
       // Toast.makeText(requireContext(), token, Toast.LENGTH_SHORT).show()
+
+        /*binding.txtNewLeads.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment2_to_createLeadFragment)
+        }*/
         setupSwipeTorefresh()
         setupRecycleView()
         if (hasInternetConnection()){
@@ -66,6 +73,12 @@ class HomeFragment : Fragment(),OnLeadsClickListener {
            leadsAdapter.saveData(it.data.data)
        })*/
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.findViewById<ConstraintLayout>(R.id.bottom_nav)?.visibility=View.VISIBLE
+
     }
 
     private fun setupSwipeTorefresh() {
@@ -109,6 +122,9 @@ class HomeFragment : Fragment(),OnLeadsClickListener {
     private fun setupRecycleView() {
         binding.rvLeads.adapter=leadsAdapter
         binding.rvLeads.layoutManager=LinearLayoutManager(requireContext())
+        binding.rvLeads.itemAnimator=SlideInLeftAnimator().apply {
+            addDuration=500
+        }
     }
 
     override fun onDestroyView() {
@@ -127,6 +143,29 @@ class HomeFragment : Fragment(),OnLeadsClickListener {
         val action=HomeFragmentDirections.actionHomeFragment2ToActionsFragment(id)
         findNavController().navigate(action)
     }
+
+    override fun onDeleteLeadClick(id: Int) {
+        if (hasInternetConnection()){
+        homeViewModel.deleteLead(null,id.toString()).observe(viewLifecycleOwner,{
+            when(it.status){
+                ApiStatus.SUCCESS->{
+                    binding.sToRefresh.isRefreshing=true
+                    getAllLeads()
+                }
+                ApiStatus.ERROR->{
+                    makeToast(it.message.toString())
+                    binding.sToRefresh.isRefreshing=false
+                }
+                ApiStatus.LOADING->{
+
+                }
+
+        }
+
+    })
+        }
+    }
+
     private fun hasInternetConnection():Boolean{
         val connectivityManager=requireActivity().getSystemService(
             Context.CONNECTIVITY_SERVICE

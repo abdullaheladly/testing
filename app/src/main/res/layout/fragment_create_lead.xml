@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.create.CreateLeadFragment">
+
+    <TextView
+        android:id="@+id/edit_lead_create"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Create lead"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/saveEdit_create"
+        app:layout_constraintTop_toBottomOf="@id/edit_lead_create"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/edit_lead_layout_create"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/leads_bg"
+            android:paddingStart="13.5dp"
+            android:paddingEnd="13.5dp"
+            android:paddingTop="19dp"
+            android:paddingBottom="19dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@id/saveEdit_create"
+            app:layout_constraintTop_toBottomOf="@id/edit_lead_create"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <EditText
+                android:id="@+id/edt_name_create"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40ssp"
+                android:background="@drawable/leads_bg"
+                android:hint="Name"
+                android:drawableEnd="@drawable/ic_asterisk_solid"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
+                android:inputType="text"
+                android:padding="13dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <EditText
+                android:id="@+id/edt_mobile_Create"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40ssp"
+                android:background="@drawable/leads_bg"
+                android:hint="Mobile"
+                android:drawableEnd="@drawable/ic_asterisk_solid"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins"
+                android:inputType="number"
+                android:padding="13dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edt_name_create"/>
+
+            <EditText
+                android:id="@+id/edt_mobile2_create"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40ssp"
+                android:background="@drawable/leads_bg"
+                android:hint="sources"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_marginTop="15dp"
+
+                android:fontFamily="@font/poppins"
+                android:inputType="number"
+                android:padding="13dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edt_mobile_Create"/>
+
+            <EditText
+                android:id="@+id/edt_email_edit_create"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40ssp"
+                android:background="@drawable/leads_bg"
+                android:hint="email"
+                android:drawableEnd="@drawable/ic_asterisk_solid"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_marginTop="15dp"
+
+                android:fontFamily="@font/poppins"
+                android:inputType="textEmailAddress"
+                android:padding="13dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edt_mobile2_create"/>
+
+            <Switch
+                android:visibility="gone"
+                android:id="@+id/edt_is_qualified_spinner_create"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40ssp"
+                android:text="Is Qualified"
+                android:textSize="14sp"
+                android:background="@drawable/leads_bg"
+                android:fontFamily="@font/poppins"
+                android:spinnerMode="dropdown"
+                android:layout_marginTop="15dp"
+                android:textOn="Yes"
+                android:textOff="No"
+                android:padding="13dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edt_unit_interest_edit_create"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/edt_unit_interest_edit_create"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40ssp"
+                android:background="@drawable/leads_bg"
+                android:hint="unit interest"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:drawableEnd="@drawable/ic_asterisk_solid"
+                android:fontFamily="@font/poppins"
+                android:inputType="text"
+                android:layout_marginTop="15dp"
+                android:padding="13dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edt_email_edit_create"/>
+
+            <EditText
+                android:id="@+id/edit_Note_create"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="note"
+                android:textSize="11sp"
+                android:drawableEnd="@drawable/ic_asterisk_solid"
+                android:backgroundTint="@color/black"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="@dimen/_7sdp"
+                app:layout_constraintTop_toBottomOf="@id/edt_is_qualified_spinner_create"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+    <Button
+        android:id="@+id/saveEdit_create"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_35sdp"
+        app:background="@drawable/btn_save_background"
+        app:backgroundTint="@color/darkGreen"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

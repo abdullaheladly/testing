@@ -3,6 +3,7 @@ package com.abdullah996.leadscrm.ui.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,9 @@ class LeadsAdapter(onLeadsClickListener: OnLeadsClickListener):RecyclerView.Adap
         }
         holder.itemView.findViewById<TextView>(R.id.addaction).setOnClickListener {
             onClickListener.onAddActionClick(leadsList[position].id)
+        }
+        holder.itemView.findViewById<ImageView>(R.id.btn_delete).setOnClickListener {
+            onClickListener.onDeleteLeadClick(leadsList[position].id)
         }
     }
 

@@ -24,6 +24,9 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right"/>
+        <action
+            android:id="@+id/action_homeFragment2_to_createLeadFragment"
+            app:destination="@id/createLeadFragment" />
     </fragment>
     <fragment
         android:id="@+id/editLeadFragment2"
@@ -43,4 +46,9 @@
             android:name="id"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/createLeadFragment"
+        android:name="com.abdullah996.leadscrm.ui.create.CreateLeadFragment"
+        android:label="fragment_create_lead"
+        tools:layout="@layout/fragment_create_lead" />
 </navigation>

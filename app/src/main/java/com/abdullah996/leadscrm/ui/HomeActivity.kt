@@ -3,10 +3,14 @@ package com.abdullah996.leadscrm.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.ActivityHomeBinding
 import com.abdullah996.leadscrm.ui.login.LoginViewModel
+import com.abdullah996.leadscrm.utill.ApiStatus
 import com.abdullah996.leadscrm.utill.SharedPreferenceManger
 import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,9 +30,26 @@ class HomeActivity : AppCompatActivity() {
         sharedPreferenceManger=SharedPreferenceMangerImpl(this)
         binding.logout.setOnClickListener {
             loginViewModel.logout(null,null).observe(this,{
-                sharedPreferenceManger.isLoggedIn=false
-                startActivity(Intent(this,MainActivity::class.java))
+                when(it.status) {
+                    ApiStatus.SUCCESS -> {
+                        sharedPreferenceManger.isLoggedIn=false
+                        startActivity(Intent(this,MainActivity::class.java))
+                        Toast.makeText(this, "done", Toast.LENGTH_SHORT).show()
+                    }
+                    ApiStatus.ERROR -> {
+                        Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
+
+                    }
+                    ApiStatus.LOADING -> {
+
+                    }
+                }
+
             })
+        }
+        binding.createLead.setOnClickListener {
+
+            findNavController(R.id.nav_hot_fragment).navigate(R.id.action_homeFragment2_to_createLeadFragment)
         }
         setContentView(binding.root)
     }

@@ -9,6 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/viewsLayout"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -154,6 +155,7 @@
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chip_group"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"

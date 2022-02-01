@@ -5,10 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.FragmentEditLeadBinding
+import com.abdullah996.leadscrm.utill.ApiStatus
 
 class EditLeadFragment : Fragment() {
     private var _binding:FragmentEditLeadBinding?=null
@@ -22,6 +27,7 @@ class EditLeadFragment : Fragment() {
     private  var note:String?=null
     private  var reasons:String?=null
     private  var isQualified:String="0"
+
 
 
     private var phones= mutableListOf<String>()
@@ -39,20 +45,38 @@ class EditLeadFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
+        activity?.findViewById<ConstraintLayout>(R.id.bottom_nav)?.visibility=View.GONE
+
         _binding= FragmentEditLeadBinding.inflate(layoutInflater,container,false)
         setViews()
+
         binding.saveEdit.setOnClickListener {
             if (checkFields()){
 
                 editLeadViewModel.getAllLeads(null,args.lead.id.toString(),name,email,note,
                    phonesArr.toTypedArray() ,isQualified,reasons!!).observe(viewLifecycleOwner,{
-                    Toast.makeText(requireContext(), "done", Toast.LENGTH_SHORT).show()
+                    phonesArr=ArrayList()
+                    when(it.status) {
+                        ApiStatus.SUCCESS -> {
+                            Toast.makeText(requireContext(), "done", Toast.LENGTH_SHORT).show()
+                        }
+                        ApiStatus.ERROR -> {
+                            Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
+
+                        }
+                        ApiStatus.LOADING -> {
+
+                        }
+                    }
+
                 })
             }
         }
 
         return binding.root
     }
+
+
 
     private fun setViews() {
         binding.edtName.setText(args.lead.name.toString())
@@ -85,7 +109,8 @@ class EditLeadFragment : Fragment() {
         }else if(binding.editNote.text.isNullOrEmpty()) {
             Toast.makeText(requireContext(), "please enter notes", Toast.LENGTH_SHORT).show()
             return false
-        }else{
+        }
+       else{
             reasons=binding.edtUnitInterestEdit.text.toString()
             name=binding.edtName.text.toString()
             mobile=binding.edtMobile.text.toString()
@@ -105,6 +130,8 @@ class EditLeadFragment : Fragment() {
             }else{
                 isQualified="0"
             }
+
+
             return true
         }
 
@@ -114,6 +141,8 @@ class EditLeadFragment : Fragment() {
         super.onDestroyView()
         _binding=null
     }
+
+
 
 
 }
