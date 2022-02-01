@@ -11,16 +11,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var sharedPreferenceManger: SharedPreferenceManger
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        sharedPreferenceManger=SharedPreferenceMangerImpl(this)
-        if (sharedPreferenceManger.isLoggedIn){
-            val intet= Intent(this,HomeActivity::class.java)
-            intet.putExtra("token",sharedPreferenceManger.userToken)
-            startActivity(intet)
 
-        }
     }
 }
