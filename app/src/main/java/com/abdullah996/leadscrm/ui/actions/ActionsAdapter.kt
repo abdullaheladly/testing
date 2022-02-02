@@ -21,6 +21,7 @@ class ActionsAdapter():RecyclerView.Adapter<ActionsAdapter.MyViewHolder>() {
     private var actionsList= emptyList<Actions>()
 
 
+
     class MyViewHolder(itemView:View):RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

@@ -2,6 +2,7 @@ package com.abdullah996.leadscrm.model.leeds
 
 
 import android.os.Parcelable
+import com.abdullah996.leadscrm.model.getstatus.Actions
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
@@ -32,5 +33,7 @@ data class Leads(
     @SerializedName("users")
     val users: @RawValue List<User>,
     @SerializedName("users_count")
-    val usersCount: Int
+    val usersCount: Int,
+    @SerializedName("status")
+    val status: @RawValue Actions
 ):Parcelable

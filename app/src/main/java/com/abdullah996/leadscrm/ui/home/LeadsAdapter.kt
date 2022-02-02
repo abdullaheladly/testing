@@ -36,6 +36,17 @@ class LeadsAdapter(onLeadsClickListener: OnLeadsClickListener):RecyclerView.Adap
         holder.itemView.findViewById<ImageView>(R.id.btn_delete).setOnClickListener {
             onClickListener.onDeleteLeadClick(leadsList[position].id)
         }
+        if (leadsList[position].status!=null){
+            if (leadsList[position].status.name!=null){
+                holder.itemView.findViewById<TextView>(R.id.txt_action).text=leadsList[position].status.name.toString()
+                holder.itemView.findViewById<TextView>(R.id.txt_status).text=leadsList[position].status.name.toString()
+
+            }
+            if (leadsList[position].status.comment!=null){
+                holder.itemView.findViewById<TextView>(R.id.txt_comment).text=leadsList[position].status.comment.toString()
+
+            }
+        }
     }
 
     override fun getItemCount(): Int {

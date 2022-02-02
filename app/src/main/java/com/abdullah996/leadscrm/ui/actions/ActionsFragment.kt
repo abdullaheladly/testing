@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdullah996.leadscrm.R
@@ -109,6 +110,7 @@ class ActionsFragment : Fragment(),OnActionClickListeners, AdapterView.OnItemSel
                 when (it.status) {
                     ApiStatus.SUCCESS -> {
                         Toast.makeText(requireContext(), "done", Toast.LENGTH_SHORT).show()
+                        getAllStatus()
                     }
                     ApiStatus.ERROR -> {
                         Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT)

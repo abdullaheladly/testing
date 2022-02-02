@@ -72,7 +72,7 @@ class FirebaseInstanceIDService()  : FirebaseMessagingService() {
         mBuilder.setContentTitle(title)
             .setContentText(messageBody)
             .setAutoCancel(true)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.ic_logo)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
             .setChannelId("Leadscrm").priority = NotificationCompat.PRIORITY_HIGH

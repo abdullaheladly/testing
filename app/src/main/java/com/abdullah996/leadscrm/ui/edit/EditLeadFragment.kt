@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.FragmentEditLeadBinding
@@ -59,6 +60,8 @@ class EditLeadFragment : Fragment() {
                     when(it.status) {
                         ApiStatus.SUCCESS -> {
                             Toast.makeText(requireContext(), "done", Toast.LENGTH_SHORT).show()
+                            findNavController().navigateUp()
+
                         }
                         ApiStatus.ERROR -> {
                             Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()

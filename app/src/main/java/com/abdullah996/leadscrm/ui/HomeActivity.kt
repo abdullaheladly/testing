@@ -28,6 +28,18 @@ class HomeActivity : AppCompatActivity() {
         loginViewModel=ViewModelProvider(this).get(LoginViewModel::class.java)
         _binding= ActivityHomeBinding.inflate(layoutInflater)
         sharedPreferenceManger=SharedPreferenceMangerImpl(this)
+        binding.home.setOnClickListener {
+            Toast.makeText(this, "This Feature will be added soon ", Toast.LENGTH_SHORT).show()
+        }
+        binding.homeSearch.setOnClickListener {
+            Toast.makeText(this, "This Feature will be added soon ", Toast.LENGTH_SHORT).show()
+        }
+        binding.menu.setOnClickListener {
+            Toast.makeText(this, "This Feature will be added soon ", Toast.LENGTH_SHORT).show()
+        }
+        binding.notification.setOnClickListener {
+            Toast.makeText(this, "This Feature will be added soon ", Toast.LENGTH_SHORT).show()
+        }
         binding.logout.setOnClickListener {
             loginViewModel.logout(null,null).observe(this,{
                 when(it.status) {
