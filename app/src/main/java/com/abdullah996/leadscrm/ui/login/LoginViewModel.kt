@@ -1,5 +1,6 @@
 package com.abdullah996.leadscrm.ui.login
 
+import android.app.Activity
 import android.app.Application
 import androidx.datastore.preferences.protobuf.Api
 import androidx.hilt.lifecycle.ViewModelInject
@@ -22,7 +23,9 @@ class LoginViewModel @ViewModelInject constructor(
 private val loginRepoImpl: LoginRepoImpl,
 //private val sharedPreferenceMangerImpl: SharedPreferenceMangerImpl,
 //application: Application
-):BaseViewModel()
+application: Application
+
+):BaseViewModel(application)
 //AndroidViewModel(application)
  {
 

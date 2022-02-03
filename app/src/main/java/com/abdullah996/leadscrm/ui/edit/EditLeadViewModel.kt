@@ -1,5 +1,6 @@
 package com.abdullah996.leadscrm.ui.edit
 
+import android.app.Activity
 import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
@@ -15,8 +16,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class EditLeadViewModel @ViewModelInject constructor(
-    private val updateLeadImpl: UpdateLeadImpl
-):BaseViewModel() {
+    private val updateLeadImpl: UpdateLeadImpl,
+    application: Application
+):BaseViewModel(application) {
     fun getAllLeads(  company_id:Int?,
                       lead_id: String?,
                       name:String?,

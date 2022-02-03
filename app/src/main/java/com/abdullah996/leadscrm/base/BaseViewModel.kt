@@ -1,6 +1,12 @@
 package com.abdullah996.leadscrm.base
 
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.lifecycle.*
 import com.abdullah996.leadscrm.utill.ApiResult
 import com.abdullah996.leadscrm.utill.errorHandler
@@ -11,9 +17,11 @@ import org.json.JSONObject
 import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
 
-open class BaseViewModel : ViewModel() {
+open class BaseViewModel(application: Application) : AndroidViewModel(application) {
+
 
     fun <T> handleFlowResponse(requst:suspend () -> Response<T>)= flow<ApiResult<T>> {
+        if (hasInternetConnection()){
         emit(ApiResult.Loading(null,true))
         val response= withContext(Dispatchers.IO){
             requst.invoke()
@@ -53,10 +61,29 @@ open class BaseViewModel : ViewModel() {
                 emit(ApiResult.Error("error"))
 
             }
+        }}else{
+            emit(ApiResult.Error("no internet"))
+
         }
     }.map {
         it
     }.asLiveData()
+
+
+
+    private fun hasInternetConnection():Boolean{
+        val connectivityManager=getApplication<Application>().getSystemService(
+            Context.CONNECTIVITY_SERVICE
+        ) as ConnectivityManager
+        val activeNetwork=connectivityManager.activeNetwork?:return false
+        val capabilities=connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
+        return  when{
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ->true
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            else -> false
+        }
+    }
 
 
 

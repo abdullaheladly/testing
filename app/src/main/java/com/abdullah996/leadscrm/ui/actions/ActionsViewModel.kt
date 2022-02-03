@@ -1,5 +1,6 @@
 package com.abdullah996.leadscrm.ui.actions
 
+import android.app.Activity
 import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
@@ -18,8 +19,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class ActionsViewModel @ViewModelInject constructor(
-    private val actionRepoImpl: ActionRepoImpl
-): BaseViewModel(){
+    private val actionRepoImpl: ActionRepoImpl,
+    application: Application
+): BaseViewModel(application){
     fun getStatus()= handleFlowResponse {
         actionRepoImpl.getStatus()
     }

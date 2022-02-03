@@ -1,5 +1,6 @@
 package com.abdullah996.leadscrm.ui.create
 
+import android.app.Activity
 import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
@@ -14,8 +15,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class CreateLeadViewModel@ViewModelInject constructor(
-    private val leadsCreateRepo: LeadsCreateRepoImpl
-): BaseViewModel(){
+    private val leadsCreateRepo: LeadsCreateRepoImpl,
+    application: Application
+): BaseViewModel(application){
     fun createLead(   company_id: Int?,
                        name: String?,
                        email: String?,

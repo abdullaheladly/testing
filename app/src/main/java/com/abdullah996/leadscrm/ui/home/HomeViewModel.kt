@@ -1,5 +1,6 @@
 package com.abdullah996.leadscrm.ui.home
 
+import android.app.Activity
 import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
@@ -23,8 +24,10 @@ import kotlinx.coroutines.withContext
 
 class HomeViewModel @ViewModelInject constructor(
     private val leedsRepoImpl: LeedsRepoImpl,
-    private val deleteLeadRepoImpl: DeleteLeadRepoImpl
-): BaseViewModel() {
+    private val deleteLeadRepoImpl: DeleteLeadRepoImpl,
+    application: Application
+
+): BaseViewModel(application) {
 
 
     fun getAllLeads(is_paginate: Int, search: String, company_id: Int?,token :String)= handleFlowResponse {
