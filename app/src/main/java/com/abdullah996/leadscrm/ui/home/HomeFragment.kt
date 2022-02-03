@@ -99,7 +99,6 @@ class HomeFragment : Fragment(),OnLeadsClickListener {
         homeViewModel.getAllLeads(1,"a",null,sharedPreferenceManger.userToken).observe(viewLifecycleOwner,{
             when(it.status){
                 ApiStatus.SUCCESS->{
-                    makeToast(it.data?.message.toString())
                     if (it.data?.data?.data!=null) {
                         leadsAdapter.saveData(it.data.data.data)
                         binding.sToRefresh.isRefreshing=false

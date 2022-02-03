@@ -48,7 +48,6 @@ class CreateLeadFragment : Fragment() {
                     phonesArr=ArrayList()
                     when(it.status) {
                         ApiStatus.SUCCESS -> {
-                            Toast.makeText(requireContext(), "done", Toast.LENGTH_SHORT).show()
                             findNavController().navigateUp()
                         }
                         ApiStatus.ERROR -> {

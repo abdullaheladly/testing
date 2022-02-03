@@ -80,7 +80,6 @@ class ActionsFragment : Fragment(),OnActionClickListeners, AdapterView.OnItemSel
             when(it.status) {
                 ApiStatus.SUCCESS -> {
                     adapter.saveData(it.data!!.data)
-                    Toast.makeText(requireContext(), "done", Toast.LENGTH_SHORT).show()
                 }
                 ApiStatus.ERROR -> {
                     Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
@@ -109,8 +108,8 @@ class ActionsFragment : Fragment(),OnActionClickListeners, AdapterView.OnItemSel
             actionsViewModel.updateLeads(lead_id!!,comment,status_id!!.toString()).observe(viewLifecycleOwner, {
                 when (it.status) {
                     ApiStatus.SUCCESS -> {
-                        Toast.makeText(requireContext(), "done", Toast.LENGTH_SHORT).show()
                         getAllStatus()
+                        binding.actionsCommentsTxt.setText("")
                     }
                     ApiStatus.ERROR -> {
                         Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT)
