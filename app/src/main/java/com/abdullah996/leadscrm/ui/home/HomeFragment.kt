@@ -1,5 +1,6 @@
 package com.abdullah996.leadscrm.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -9,6 +10,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
@@ -24,10 +27,11 @@ import com.abdullah996.leadscrm.utill.SharedPreferenceManger
 import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(),OnLeadsClickListener {
+class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelectedListener  {
     private var _binding:FragmentHomeBinding?=null
     private val binding get() = _binding!!
     private lateinit var homeViewModel: HomeViewModel
@@ -49,9 +53,10 @@ class HomeFragment : Fragment(),OnLeadsClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         _binding= FragmentHomeBinding.inflate(layoutInflater,container,false)
         token= activity?.intent?.getStringExtra("token")
+        setSpinners()
       // Toast.makeText(requireContext(), token, Toast.LENGTH_SHORT).show()
 
         /*binding.txtNewLeads.setOnClickListener {
@@ -67,6 +72,9 @@ class HomeFragment : Fragment(),OnLeadsClickListener {
         }
 
 
+        setListeners()
+
+
        /* homeViewModel.getAllLeads(1,"a",null,sharedPreferenceManger.userToken)
        homeViewModel.leadsResponse.observe(viewLifecycleOwner,{
            Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
@@ -75,9 +83,58 @@ class HomeFragment : Fragment(),OnLeadsClickListener {
         return binding.root
     }
 
+    private fun setListeners() {
+        binding.goFilter.setOnClickListener {
+            binding.sToRefresh.isRefreshing=true
+            val year=binding.yearSpinner.selectedItem.toString()
+            val month=binding.monthSpinner.selectedItem.toString()
+            val months= arrayOf(month)
+            homeViewModel.filterByData(year,months).observe(viewLifecycleOwner,{
+                when(it.status){
+                    ApiStatus.SUCCESS->{
+                        if (!it.data?.data?.data.isNullOrEmpty()) {
+                            leadsAdapter.saveData(it.data?.data?.data!!)
+                            binding.sToRefresh.isRefreshing=false
+                            binding.rvLeads.visibility=View.VISIBLE
+                            binding.noDataFound.visibility=View.GONE
+
+                        }else{
+                            binding.rvLeads.visibility=View.INVISIBLE
+                            binding.noDataFound.visibility=View.VISIBLE
+                            binding.sToRefresh.isRefreshing=false
+
+
+                        }
+                    }
+                    ApiStatus.ERROR->{
+                        makeToast(it.message.toString())
+                        binding.sToRefresh.isRefreshing=false
+                    }
+                    ApiStatus.LOADING->{
+
+                    }
+                }
+            })
+        }
+    }
+
+    @SuppressLint("ResourceType")
+    private fun setSpinners() {
+        ArrayAdapter.createFromResource(requireContext(),R.array.years,android.R.layout.simple_list_item_1).also {
+            binding.yearSpinner.adapter=it
+        }
+        binding.yearSpinner.onItemSelectedListener=this
+        ArrayAdapter.createFromResource(requireContext(),R.array.months,android.R.layout.simple_list_item_1).also {
+            binding.monthSpinner.adapter=it
+        }
+        binding.monthSpinner.onItemSelectedListener=this
+    }
+
     override fun onResume() {
         super.onResume()
         activity?.findViewById<ConstraintLayout>(R.id.bottom_nav)?.visibility=View.VISIBLE
+        activity?.findViewById<ConstraintLayout>(R.id.top_nav)?.visibility=View.VISIBLE
+
 
     }
 
@@ -102,6 +159,9 @@ class HomeFragment : Fragment(),OnLeadsClickListener {
                     if (it.data?.data?.data!=null) {
                         leadsAdapter.saveData(it.data.data.data)
                         binding.sToRefresh.isRefreshing=false
+                        binding.rvLeads.visibility=View.VISIBLE
+
+                        binding.noDataFound.visibility=View.GONE
                     }
                 }
                 ApiStatus.ERROR->{
@@ -177,5 +237,12 @@ class HomeFragment : Fragment(),OnLeadsClickListener {
             capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
             else -> false
         }
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
     }
 }

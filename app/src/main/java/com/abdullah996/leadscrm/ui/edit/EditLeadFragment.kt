@@ -47,6 +47,7 @@ class EditLeadFragment : Fragment() {
         // Inflate the layout for this fragment
 
         activity?.findViewById<ConstraintLayout>(R.id.bottom_nav)?.visibility=View.GONE
+        activity?.findViewById<ConstraintLayout>(R.id.top_nav)?.visibility=View.GONE
 
         _binding= FragmentEditLeadBinding.inflate(layoutInflater,container,false)
         setViews()

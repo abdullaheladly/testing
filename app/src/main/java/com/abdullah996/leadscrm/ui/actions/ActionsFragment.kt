@@ -48,6 +48,9 @@ class ActionsFragment : Fragment(),OnActionClickListeners, AdapterView.OnItemSel
         // Inflate the layout for this fragment
 
 
+        activity?.findViewById<ConstraintLayout>(R.id.bottom_nav)?.visibility=View.GONE
+        activity?.findViewById<ConstraintLayout>(R.id.top_nav)?.visibility=View.GONE
+
         _binding= FragmentActionsBinding.inflate(layoutInflater,container,false)
        lead_id=args.id.toString()
         getStatus()

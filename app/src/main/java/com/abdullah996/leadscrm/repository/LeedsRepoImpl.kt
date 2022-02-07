@@ -15,4 +15,8 @@ class LeedsRepoImpl@Inject constructor(
         return apis.getAllLeads(is_paginate,search,company_id,"Bearer $token")
     }
 
+    override suspend fun filterByDate(year: String, month: Array<String>): Response<LeedsReponse> {
+       return apis.filterByData(year, month)
+    }
+
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdullah996.leadscrm.R
@@ -34,6 +35,8 @@ class NotificationsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        activity?.findViewById<ConstraintLayout>(R.id.bottom_nav)?.visibility=View.GONE
+        activity?.findViewById<ConstraintLayout>(R.id.top_nav)?.visibility=View.GONE
         _binding= FragmentNotificationsBinding.inflate(layoutInflater,container,false)
         notificationsViewModel.getAllNotifications().observe(viewLifecycleOwner,{
             when(it.status) {

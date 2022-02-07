@@ -102,6 +102,12 @@ interface Apis {
     ):Response<NotificationsResponse>
 
 
+    @GET("lead/filter-by-date")
+    suspend fun filterByData(
+        @Query("year") year:String,
+        @Query("months[]") month: Array<String>
+    ):Response<LeedsReponse>
+
 
 
 

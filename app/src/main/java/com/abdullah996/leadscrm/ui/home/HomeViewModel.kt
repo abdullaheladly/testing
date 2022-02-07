@@ -40,4 +40,10 @@ class HomeViewModel @ViewModelInject constructor(
     }
 
 
+    fun filterByData(  year:String,
+                       month: Array<String>)=handleFlowResponse {
+                           leedsRepoImpl.filterByDate(year, month)
+    }
+
+
 }

@@ -24,7 +24,7 @@ class NotificationsAdapter:RecyclerView.Adapter<NotificationsAdapter.MyViewHolde
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.itemView.findViewById<TextView>(R.id.txt_notifications_text).text=notificationsList[position].data.msg
-        holder.itemView.findViewById<TextView>(R.id.txt_notifications_date).text=notificationsList[position].createdAt.take(10)
+        holder.itemView.findViewById<TextView>(R.id.txt_notifications_date).text=notificationsList[position].createdAt
     }
 
     override fun getItemCount(): Int {

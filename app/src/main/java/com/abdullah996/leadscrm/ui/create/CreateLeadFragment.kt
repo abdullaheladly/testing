@@ -36,6 +36,8 @@ class CreateLeadFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         activity?.findViewById<ConstraintLayout>(R.id.bottom_nav)?.visibility=View.GONE
+        activity?.findViewById<ConstraintLayout>(R.id.top_nav)?.visibility=View.GONE
+
         _binding = FragmentCreateLeadBinding.inflate(layoutInflater,container,false)
         setListeners()
         return binding.root
