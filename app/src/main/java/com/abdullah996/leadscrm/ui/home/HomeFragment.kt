@@ -116,6 +116,12 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                 }
             })
         }
+        binding.btnClearFilter.setOnClickListener {
+            binding.filterLayout.visibility=View.GONE
+            binding.sToRefresh.isRefreshing=true
+            getAllLeads()
+            binding.filterBySpinner.setSelection(0)
+        }
     }
 
     @SuppressLint("ResourceType")
@@ -128,6 +134,11 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.monthSpinner.adapter=it
         }
         binding.monthSpinner.onItemSelectedListener=this
+
+        ArrayAdapter.createFromResource(requireContext(),R.array.filters,android.R.layout.simple_list_item_1).also {
+            binding.filterBySpinner.adapter=it
+        }
+        binding.filterBySpinner.onItemSelectedListener=this
     }
 
     override fun onResume() {
@@ -237,7 +248,9 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
+        if (binding.filterBySpinner.selectedItem=="Date"){
+            binding.filterLayout.visibility=View.VISIBLE
+        }
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {

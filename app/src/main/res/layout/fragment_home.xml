@@ -129,6 +129,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
+        android:id="@+id/txt_filter_by"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
@@ -139,6 +140,20 @@
         android:text="FILTER BY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewsLayout"/>
+
+    <Spinner
+        android:id="@+id/filter_by_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:textAlignment="center"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/txt_filter_by"
+        />
     <TextView
         android:id="@+id/btn_clearFilter"
         android:layout_width="wrap_content"
@@ -154,6 +169,7 @@
         app:drawableEndCompat="@drawable/ic_circle_arrow" />
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/filter_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
