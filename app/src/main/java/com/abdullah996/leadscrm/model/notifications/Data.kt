@@ -1,4 +1,4 @@
-package com.abdullah996.leadscrm.model.agent
+package com.abdullah996.leadscrm.model.notifications
 
 
 import com.google.gson.annotations.SerializedName
@@ -7,7 +7,7 @@ data class Data(
     @SerializedName("current_page")
     val currentPage: Int,
     @SerializedName("data")
-    val `data`: List<DataX>,
+    val `data`: List<Notification>,
     @SerializedName("first_page_url")
     val firstPageUrl: String,
     @SerializedName("from")

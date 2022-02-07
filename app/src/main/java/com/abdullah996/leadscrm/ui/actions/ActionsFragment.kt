@@ -30,15 +30,9 @@ class ActionsFragment : Fragment(),OnActionClickListeners, AdapterView.OnItemSel
     private var comment:String?=null
     private var status:String?=null
     private var status_id:Int?=null
-
     private val args by navArgs<ActionsFragmentArgs>()
     private var baseAction:BaseAction?=null
-
-
-
-
     private var list= mutableListOf<String>()
-
     private lateinit var actionsViewModel: ActionsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {

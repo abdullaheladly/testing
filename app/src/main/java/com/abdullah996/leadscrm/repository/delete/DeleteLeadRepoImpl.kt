@@ -1,7 +1,6 @@
 package com.abdullah996.leadscrm.repository.delete
 
 import com.abdullah996.leadscrm.model.delete.DeleteLeadResponse
-import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
 import com.abdullah996.leadscrm.network.Apis
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import retrofit2.Response

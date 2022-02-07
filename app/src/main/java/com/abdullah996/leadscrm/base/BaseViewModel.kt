@@ -1,21 +1,18 @@
 package com.abdullah996.leadscrm.base
 
 
-import android.annotation.SuppressLint
-import android.app.Activity
+
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.*
 import com.abdullah996.leadscrm.utill.ApiResult
-import com.abdullah996.leadscrm.utill.errorHandler
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import org.json.JSONObject
 import retrofit2.Response
-import kotlin.coroutines.CoroutineContext
 
 open class BaseViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -37,6 +34,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
             }else if (response.code()==401){
                 emit(ApiResult.Error("UnAuthenticated"))
             } else if (response.code()<500){
+
                 val responseObject= JSONObject(response.errorBody()?.string().toString())
 
                 if (responseObject.has("errors")){

@@ -38,7 +38,7 @@ class HomeActivity : AppCompatActivity() {
             Toast.makeText(this, "This Feature will be added soon ", Toast.LENGTH_SHORT).show()
         }
         binding.notification.setOnClickListener {
-            Toast.makeText(this, "This Feature will be added soon ", Toast.LENGTH_SHORT).show()
+            findNavController(R.id.nav_hot_fragment).navigate(R.id.action_homeFragment2_to_notificationsFragment)
         }
         binding.logout.setOnClickListener {
             loginViewModel.logout(null,null).observe(this,{

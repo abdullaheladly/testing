@@ -1,11 +1,11 @@
 package com.abdullah996.leadscrm.network
 
-import com.abdullah996.leadscrm.model.agent.AgentResponse
 import com.abdullah996.leadscrm.model.baseactions.BaseAction
 import com.abdullah996.leadscrm.model.create.CreateLeadResponse
 import com.abdullah996.leadscrm.model.delete.DeleteLeadResponse
 import com.abdullah996.leadscrm.model.getstatus.AllStatusReponse
 import com.abdullah996.leadscrm.model.leeds.LeedsReponse
+import com.abdullah996.leadscrm.model.notifications.NotificationsResponse
 import com.abdullah996.leadscrm.model.updateaction.AddActionResponse
 import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
 import com.abdullah996.leadscrm.model.user.UserResponse
@@ -23,18 +23,10 @@ interface Apis {
     ):Response<UserResponse>
 
 
-    @GET("agent/get-all")
 
-    suspend fun getAllAgent(
-        @Query("is_paginate") num:Int,
-        @Query("search") search:String,
-        @Query("company_id") company_id:Int?
-    ):AgentResponse
 
     @GET("lead/get-all")
-
     suspend fun getAllLeads(
-
         @Query("is_paginate") num:Int,
         @Query("search") search:String,
         @Query("company_id") company_id:Int?,
@@ -102,6 +94,12 @@ interface Apis {
     suspend fun getAllStatus(
         @Query("lead_id") lead_id: String?
     ):Response<AllStatusReponse>
+
+
+
+    @GET("user/notification/get-all")
+    suspend fun getAllNotifications(
+    ):Response<NotificationsResponse>
 
 
 

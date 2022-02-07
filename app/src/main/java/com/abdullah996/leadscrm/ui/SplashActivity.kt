@@ -1,5 +1,6 @@
 package com.abdullah996.leadscrm.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,12 +11,11 @@ import com.abdullah996.leadscrm.utill.SharedPreferenceManger
 import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 import kotlinx.coroutines.*
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     private var _binding:ActivitySplashBinding?=null
     private val binding get() = _binding!!
     private lateinit var sharedPreferenceManger: SharedPreferenceManger
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding= ActivitySplashBinding.inflate(layoutInflater)
@@ -23,7 +23,6 @@ class SplashActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.Main){
             goToLogin()
         }
-
         setContentView(binding.root)
     }
     private suspend fun goToLogin(){

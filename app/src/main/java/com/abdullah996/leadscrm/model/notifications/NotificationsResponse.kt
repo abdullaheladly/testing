@@ -1,9 +1,9 @@
-package com.abdullah996.leadscrm.model.agent
+package com.abdullah996.leadscrm.model.notifications
 
 
 import com.google.gson.annotations.SerializedName
 
-data class AgentResponse(
+data class NotificationsResponse(
     @SerializedName("data")
     val `data`: Data,
     @SerializedName("message")

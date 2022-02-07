@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_homeFragment2_to_createLeadFragment"
             app:destination="@id/createLeadFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
     </fragment>
     <fragment
         android:id="@+id/editLeadFragment2"
@@ -51,4 +54,9 @@
         android:name="com.abdullah996.leadscrm.ui.create.CreateLeadFragment"
         android:label="fragment_create_lead"
         tools:layout="@layout/fragment_create_lead" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.abdullah996.leadscrm.ui.notifications.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
 </navigation>
