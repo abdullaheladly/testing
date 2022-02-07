@@ -153,7 +153,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     }
 
     fun getAllLeads(){
-        homeViewModel.getAllLeads(1,"a",null,sharedPreferenceManger.userToken).observe(viewLifecycleOwner,{
+        homeViewModel.getAllLeads(1,"a",sharedPreferenceManger.companyId.toInt(),sharedPreferenceManger.userToken).observe(viewLifecycleOwner,{
             when(it.status){
                 ApiStatus.SUCCESS->{
                     if (it.data?.data?.data!=null) {
@@ -190,9 +190,6 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         super.onDestroyView()
         _binding=null
     }
-
-
-
     override fun onEditInfoClick(lead: Leads) {
         val action=HomeFragmentDirections.actionHomeFragment2ToEditLeadFragment2(lead)
         findNavController().navigate(action)

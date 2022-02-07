@@ -77,6 +77,7 @@ class LoginFragment : Fragment() {
                                     sharedPreferenceManger.isLoggedIn = true
                                     sharedPreferenceManger.userToken =
                                         it.data?.data?.token.toString()
+                                    sharedPreferenceManger.companyId=it.data?.data?.role?.companyId.toString()
                                     startActivity(intet)
                                     requireActivity().finish()
                                     binding.progressBar.visibility = View.INVISIBLE
