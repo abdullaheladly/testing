@@ -3,6 +3,7 @@ package com.abdullah996.leadscrm.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -47,14 +48,18 @@ class HomeActivity : AppCompatActivity() {
             findNavController(R.id.nav_hot_fragment).navigate(R.id.action_homeFragment2_to_notificationsFragment)
         }
         binding.logout.setOnClickListener {
+            binding.homePb.visibility=View.VISIBLE
             loginViewModel.logout(null,null).observe(this,{
                 when(it.status) {
                     ApiStatus.SUCCESS -> {
+                        binding.homePb.visibility=View.INVISIBLE
+
                         sharedPreferenceManger.isLoggedIn=false
                         startActivity(Intent(this,MainActivity::class.java))
                         Toast.makeText(this, "done", Toast.LENGTH_SHORT).show()
                     }
                     ApiStatus.ERROR -> {
+                        binding.homePb.visibility=View.INVISIBLE
                         Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
 
                     }
