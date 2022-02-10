@@ -13,6 +13,8 @@ import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.FragmentNotificationsBinding
 import com.abdullah996.leadscrm.ui.actions.ActionsAdapter
 import com.abdullah996.leadscrm.utill.ApiStatus
+import com.abdullah996.leadscrm.utill.SharedPreferenceManger
+import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 
 
@@ -20,7 +22,10 @@ class NotificationsFragment : Fragment() {
 
     private var _binding:FragmentNotificationsBinding?=null
     private val binding get() = _binding!!
-    private val adapter by lazy { NotificationsAdapter() }
+    private lateinit var  sharedPreferenceManger:SharedPreferenceManger
+    private lateinit var image:String
+
+    private val adapter by lazy { NotificationsAdapter(sharedPreferenceManger.logo) }
 
     private lateinit var notificationsViewModel: NotificationsViewModel
 
@@ -37,6 +42,8 @@ class NotificationsFragment : Fragment() {
         // Inflate the layout for this fragment
         activity?.findViewById<ConstraintLayout>(R.id.bottom_nav)?.visibility=View.GONE
         activity?.findViewById<ConstraintLayout>(R.id.top_nav)?.visibility=View.GONE
+        sharedPreferenceManger=SharedPreferenceMangerImpl(requireContext())
+
         _binding= FragmentNotificationsBinding.inflate(layoutInflater,container,false)
         notificationsViewModel.getAllNotifications().observe(viewLifecycleOwner,{
             when(it.status) {

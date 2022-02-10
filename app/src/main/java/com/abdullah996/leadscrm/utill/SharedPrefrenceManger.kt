@@ -8,6 +8,7 @@ interface SharedPreferenceManger{
     var userToken: String
     var isLoggedIn:Boolean
     var companyId:String
+    var logo:String
 
 }
 class SharedPreferenceMangerImpl(context: Context):SharedPreferenceManger{
@@ -31,6 +32,9 @@ private val sharedPreference:SharedPreferences=
     override var companyId: String
         get() = getString(companyIDKEY)
         set(value) {editor.putString(companyIDKEY,value).apply()}
+    override var logo: String
+        get() = getString(logoKey)
+        set(value) {editor.putString(logoKey,value).apply()}
 
 
     private fun getString(key: String): String {
@@ -67,7 +71,7 @@ private val sharedPreference:SharedPreferences=
         private const val FirstTimeKey = "TERMSAGREED"
         private const val notificationTokenKey = "NotificationToken"
 
-        private const val selectedProgramIDKEY = "SelectedProgramID"
+        private const val logoKey = "LOGO"
         private const val companyIDKEY = "CompanyID"
 
 

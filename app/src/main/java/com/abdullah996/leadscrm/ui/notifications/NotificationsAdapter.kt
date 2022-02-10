@@ -1,8 +1,10 @@
 package com.abdullah996.leadscrm.ui.notifications
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,11 +12,12 @@ import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.model.getstatus.Actions
 import com.abdullah996.leadscrm.model.notifications.Notification
 import com.abdullah996.leadscrm.utill.DiffUtilCallBack
+import com.squareup.picasso.Picasso
 
 
-class NotificationsAdapter:RecyclerView.Adapter<NotificationsAdapter.MyViewHolder>(){
+class NotificationsAdapter(image:String):RecyclerView.Adapter<NotificationsAdapter.MyViewHolder>(){
     private var notificationsList= emptyList<Notification>()
-
+    private val logo =image
 
     class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
 
@@ -25,6 +28,12 @@ class NotificationsAdapter:RecyclerView.Adapter<NotificationsAdapter.MyViewHolde
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.itemView.findViewById<TextView>(R.id.txt_notifications_text).text=notificationsList[position].data.msg
         holder.itemView.findViewById<TextView>(R.id.txt_notifications_date).text=notificationsList[position].createdAt
+        if (logo=="null"){
+                    // keep current logo as it is
+        }else{
+            val uri=Uri.parse(logo)
+            Picasso.get().load(uri).into(holder.itemView.findViewById<ImageView>(R.id.notifications_image))
+        }
     }
 
     override fun getItemCount(): Int {

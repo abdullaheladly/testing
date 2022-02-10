@@ -26,10 +26,18 @@
             app:popExitAnim="@anim/to_right"/>
         <action
             android:id="@+id/action_homeFragment2_to_createLeadFragment"
-            app:destination="@id/createLeadFragment" />
+            app:destination="@id/createLeadFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
         <action
             android:id="@+id/action_homeFragment2_to_notificationsFragment"
-            app:destination="@id/notificationsFragment" />
+            app:destination="@id/notificationsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
     </fragment>
     <fragment
         android:id="@+id/editLeadFragment2"
@@ -38,7 +46,8 @@
         tools:layout="@layout/fragment_edit_lead" >
         <argument
             android:name="lead"
-            app:argType="com.abdullah996.leadscrm.model.leeds.Leads" />
+            app:argType="com.abdullah996.leadscrm.model.leeds.Leads"
+            />
     </fragment>
     <fragment
         android:id="@+id/actionsFragment"

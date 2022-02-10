@@ -9,5 +9,7 @@ data class Role(
     @SerializedName("id")
     val id: Int?,
     @SerializedName("name")
-    val name: String?
+    val name: String?,
+    @SerializedName("company")
+    val company: company?
 )
