@@ -3,12 +3,9 @@ package com.abdullah996.leadscrm.ui.home
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
-import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,18 +14,16 @@ import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.FragmentHomeBinding
 import com.abdullah996.leadscrm.model.leeds.Leads
-import com.abdullah996.leadscrm.ui.HomeActivity
 import com.abdullah996.leadscrm.utill.ApiStatus
 import com.abdullah996.leadscrm.utill.SharedPreferenceManger
 import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
-import kotlinx.android.synthetic.main.fragment_home.*
+
 
 
 @AndroidEntryPoint
@@ -36,7 +31,6 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     private var _binding:FragmentHomeBinding?=null
     private val binding get() = _binding!!
     private lateinit var homeViewModel: HomeViewModel
-    private val args by navArgs<HomeFragmentArgs>()
     private var token:String?=null
     private val leadsAdapter by lazy { LeadsAdapter(this) }
     private lateinit var sharedPreferenceManger: SharedPreferenceManger
@@ -53,7 +47,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding= FragmentHomeBinding.inflate(layoutInflater,container,false)
         token= activity?.intent?.getStringExtra("token")
@@ -63,7 +57,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         /*binding.txtNewLeads.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment2_to_createLeadFragment)
         }*/
-        setupSwipeTorefresh()
+        setupSwipeRefresh()
         setupRecycleView()
         if (hasInternetConnection()){
             binding.sToRefresh.isRefreshing=true
@@ -150,7 +144,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
 
     }
 
-    private fun setupSwipeTorefresh() {
+    private fun setupSwipeRefresh() {
         binding.sToRefresh.setOnRefreshListener {
             binding.sToRefresh.isRefreshing =true
             if (hasInternetConnection()){
@@ -164,7 +158,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         }
     }
 
-    fun getAllLeads(){
+    private fun getAllLeads(){
         try {
         homeViewModel.getAllLeads(1,"a",sharedPreferenceManger.companyId.toInt(),sharedPreferenceManger.userToken).observe(viewLifecycleOwner,{
             when(it.status){
@@ -191,7 +185,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
 
         }
     }
-    fun makeToast(s:String){
+   private fun makeToast(s:String){
         Toast.makeText(requireContext(), s, Toast.LENGTH_SHORT).show()
     }
 
@@ -262,12 +256,12 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     override fun onNothingSelected(p0: AdapterView<*>?) {
     }
     fun onSearchClick() {
-        var text=""
+        var text: String
         val mDialog= LayoutInflater.from(requireContext()).inflate(R.layout.search_card_dialog,null)
-        val mBilder=AlertDialog.Builder(requireContext())
+        val mBuilder=AlertDialog.Builder(requireContext())
             .setView(mDialog)
           //  .setTitle("Search For Lead By Name")
-        val  mAlertDialog = mBilder.show()
+        val  mAlertDialog = mBuilder.show()
         val button=mDialog.findViewById<Button>(R.id.search_by_name_btn)
         val editText=mDialog.findViewById<EditText>(R.id.search_by_name_edt)
         button.setOnClickListener {
