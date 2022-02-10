@@ -8,6 +8,7 @@
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/edit_text_background.xml" value="0.1046875" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/edt_back.xml" value="0.15" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/edt_background.xml" value="0.1685185185185185" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/edt_bg.xml" value="0.20833333333333334" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/ic_baseline_autorenew_24.xml" value="0.1046875" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/ic_baseline_note_add_24.xml" value="0.1046875" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/ic_hamburger_menu.xml" value="0.16944444444444445" />
@@ -28,6 +29,7 @@
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/info_card.xml" value="0.2" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/notifications_cart.xml" value="0.39058171745152354" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/layout/search_card_dialog.xml" value="0.2" />
       </map>
     </option>
   </component>

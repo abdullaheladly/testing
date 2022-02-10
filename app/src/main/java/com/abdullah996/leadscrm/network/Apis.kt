@@ -28,11 +28,17 @@ interface Apis {
     @GET("lead/get-all")
     suspend fun getAllLeads(
         @Query("is_paginate") num:Int,
-        @Query("search") search:String,
         @Query("company_id") company_id:Int?,
         @Header("Authorization") token:String,
     ):Response<LeedsReponse>
 
+    @GET("lead/get-all")
+    suspend fun searchByName(
+        @Query("is_paginate") num:Int,
+        @Query("search") search:String,
+        @Query("company_id") company_id:Int?,
+        @Header("Authorization") token:String,
+    ):Response<LeedsReponse>
 
 
     @POST("lead/update")

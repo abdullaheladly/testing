@@ -12,6 +12,13 @@ interface LeedsRepo {
         token:String
     ):Response<LeedsReponse>
 
+    suspend fun searchByName(
+        is_paginate:Int,
+        search:String,
+        company_id:Int?,
+        token:String
+    ):Response<LeedsReponse>
+
     suspend fun filterByDate(
         year:String,
         month: Array<String>

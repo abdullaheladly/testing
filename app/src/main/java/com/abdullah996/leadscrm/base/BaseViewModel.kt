@@ -9,6 +9,7 @@ import android.net.NetworkCapabilities
 import androidx.datastore.preferences.protobuf.Api
 import androidx.lifecycle.*
 import com.abdullah996.leadscrm.utill.ApiResult
+import com.abdullah996.leadscrm.utill.errorHandler
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -27,8 +28,6 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
                 if (hasInternetConnection()) {
                     emit(ApiResult.Loading(null, true))
                     val response = withContext(Dispatchers.IO) {
-
-
                             requst.invoke()
                     }
 
@@ -76,12 +75,10 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
             }.map {
                 it
             }.asLiveData()
-        }catch(ex: IOException){
-           flow<ApiResult<T>> {
-               emit(ApiResult.Error("no internet"))
-           }.map {
-               it
-           }.asLiveData()
+        }catch(ex: Exception){
+            flow<ApiResult<T>> {
+                emit((ApiResult.Error("no internet")))
+            }.asLiveData()
         }
 
 
@@ -93,8 +90,9 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         val activeNetwork=connectivityManager.activeNetwork?:return false
         val capabilities=connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
         return  when{
+          //  connectivityManager.activeNetworkInfo?.isConnected == true -> true
             capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ->true
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+           capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
             capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
             else -> false
         }

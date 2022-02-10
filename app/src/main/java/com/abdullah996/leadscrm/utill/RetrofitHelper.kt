@@ -70,16 +70,19 @@ private fun failureHandler(t: Throwable): String {
     }
 }
 
-fun errorHandler(throwable: Throwable): String {
-
+fun errorHandler(throwable: Throwable): String? {
 
     try {
-        return if (throwable is HttpException)
-            responseErrorHandler(throwable.response()!!.errorBody()!!.string(), throwable.code())
-        else failureHandler(throwable)
+        return if (throwable is HttpException) {
+            val msg = responseErrorHandler(
+                throwable.response()!!.errorBody()!!.string(),
+                throwable.code()
+            )
+            msg.replace("[", "").replace("]", "")
+        } else failureHandler(throwable)
     } catch (e: Exception) {
 
     }
-    return "error"
+    return null
 
 }

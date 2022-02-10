@@ -9,15 +9,18 @@ import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.ActivitySplashBinding
 import com.abdullah996.leadscrm.utill.SharedPreferenceManger
 import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.*
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
+
     private var _binding:ActivitySplashBinding?=null
     private val binding get() = _binding!!
     private lateinit var sharedPreferenceManger: SharedPreferenceManger
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
         _binding= ActivitySplashBinding.inflate(layoutInflater)
         binding.logoSplash.startAnimation(AnimationUtils.loadAnimation(this,R.anim.pulse))
         GlobalScope.launch(Dispatchers.Main){

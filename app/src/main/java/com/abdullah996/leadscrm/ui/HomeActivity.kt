@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.ActivityHomeBinding
+import com.abdullah996.leadscrm.ui.home.HomeFragment
 import com.abdullah996.leadscrm.ui.login.LoginViewModel
 import com.abdullah996.leadscrm.utill.ApiStatus
 import com.abdullah996.leadscrm.utill.SharedPreferenceManger
@@ -22,6 +23,7 @@ class HomeActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private lateinit var sharedPreferenceManger: SharedPreferenceManger
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var searchByName:SearchByName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +34,11 @@ class HomeActivity : AppCompatActivity() {
             Toast.makeText(this, "This Feature will be added soon ", Toast.LENGTH_SHORT).show()
         }
         binding.homeSearch.setOnClickListener {
-            Toast.makeText(this, "This Feature will be added soon ", Toast.LENGTH_SHORT).show()
+            val fm=supportFragmentManager
+            val fragment=fm.findFragmentById(R.id.nav_hot_fragment)
+            val f= fragment?.childFragmentManager?.fragments?.get(0) as HomeFragment
+            f.onSearchClick()
+
         }
         binding.menu.setOnClickListener {
             Toast.makeText(this, "This Feature will be added soon ", Toast.LENGTH_SHORT).show()
@@ -69,5 +75,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding=null
+    }
+    interface SearchByName{
+        fun onSearchClicked()
     }
 }

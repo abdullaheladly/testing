@@ -34,6 +34,10 @@ class HomeViewModel @ViewModelInject constructor(
         leedsRepoImpl.getAllLeads(is_paginate, search, company_id, token)
     }
 
+    fun searchBuName(is_paginate: Int, search: String, company_id: Int?,token :String)= handleFlowResponse {
+        leedsRepoImpl.searchByName(is_paginate, search, company_id, token)
+    }
+
     fun deleteLead( company_id:Int?,
                      lead_id: String?)= handleFlowResponse {
                          deleteLeadRepoImpl.deleteLead(company_id,lead_id)

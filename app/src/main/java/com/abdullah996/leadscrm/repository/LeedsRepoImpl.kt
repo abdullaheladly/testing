@@ -12,7 +12,16 @@ class LeedsRepoImpl@Inject constructor(
     private val apis: Apis
 ):LeedsRepo {
     override suspend fun getAllLeads(is_paginate: Int, search: String, company_id: Int?,token:String):Response<LeedsReponse> {
-        return apis.getAllLeads(is_paginate,search,company_id,"Bearer $token")
+        return apis.getAllLeads(is_paginate,company_id,"Bearer $token")
+    }
+
+    override suspend fun searchByName(
+        is_paginate: Int,
+        search: String,
+        company_id: Int?,
+        token: String
+    ): Response<LeedsReponse> {
+        return apis.searchByName(is_paginate,search,company_id, token)
     }
 
     override suspend fun filterByDate(year: String, month: Array<String>): Response<LeedsReponse> {

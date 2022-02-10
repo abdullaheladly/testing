@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/leads_bg">
+    <EditText
+        android:id="@+id/search_by_name_edt"
+        android:background="@drawable/edt_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:textSize="@dimen/_12ssp"
+        android:padding="@dimen/_8sdp"
+        android:fontFamily="@font/poppins_semibold"
+        android:hint="please enter the name you want to search for"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
+        android:layout_margin="@dimen/_8sdp"/>
+    <Button
+        android:id="@+id/search_by_name_btn"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_30sdp"
+        app:background="@drawable/btn_save_background"
+        app:backgroundTint="@color/darkGreen"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Save"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintTop_toBottomOf="@id/search_by_name_edt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

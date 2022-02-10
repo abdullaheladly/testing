@@ -1,18 +1,19 @@
 package com.abdullah996.leadscrm.ui.home
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
+import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -164,6 +165,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     }
 
     fun getAllLeads(){
+        try {
         homeViewModel.getAllLeads(1,"a",sharedPreferenceManger.companyId.toInt(),sharedPreferenceManger.userToken).observe(viewLifecycleOwner,{
             when(it.status){
                 ApiStatus.SUCCESS->{
@@ -184,6 +186,10 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                 }
             }
         })
+    }catch (ex:Exception){
+        makeToast("something went wrong ")
+
+        }
     }
     fun makeToast(s:String){
         Toast.makeText(requireContext(), s, Toast.LENGTH_SHORT).show()
@@ -254,5 +260,46 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
+    }
+    fun onSearchClick() {
+        var text=""
+        val mDialog= LayoutInflater.from(requireContext()).inflate(R.layout.search_card_dialog,null)
+        val mBilder=AlertDialog.Builder(requireContext())
+            .setView(mDialog)
+          //  .setTitle("Search For Lead By Name")
+        val  mAlertDialog = mBilder.show()
+        val button=mDialog.findViewById<Button>(R.id.search_by_name_btn)
+        val editText=mDialog.findViewById<EditText>(R.id.search_by_name_edt)
+        button.setOnClickListener {
+            mAlertDialog.dismiss()
+            text=editText.text.toString()
+            binding.sToRefresh.isRefreshing=true
+            homeViewModel.searchBuName(1,text,sharedPreferenceManger.companyId.toInt(),sharedPreferenceManger.userToken).observe(viewLifecycleOwner,{
+                when(it.status){
+                    ApiStatus.SUCCESS->{
+                        if (!it.data?.data?.data.isNullOrEmpty()) {
+                            leadsAdapter.saveData(it.data?.data?.data!!)
+                            binding.sToRefresh.isRefreshing=false
+                            binding.rvLeads.visibility=View.VISIBLE
+                            binding.noDataFound.visibility=View.GONE
+                        }else{
+                            binding.sToRefresh.isRefreshing=false
+                            binding.rvLeads.visibility=View.INVISIBLE
+                            binding.noDataFound.visibility=View.VISIBLE
+                        }
+                    }
+                    ApiStatus.ERROR->{
+                        makeToast(it.message.toString())
+                        binding.sToRefresh.isRefreshing=false
+                    }
+                    ApiStatus.LOADING->{
+
+                    }
+                }
+            })
+
+        }
+
+
     }
 }
