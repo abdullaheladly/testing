@@ -35,11 +35,16 @@ object NetworkModule{
     fun headersInterceptor(@ApplicationContext context: Context):Interceptor= Interceptor { chain->
         var request=chain.request()
         val sharedPreferenceManger=SharedPreferenceMangerImpl(context)
+       try {
+
         request= request.newBuilder()
             //.header("Accept", "application/json")
             .header("Authorization","Bearer ${sharedPreferenceManger.userToken}")
             .addHeader("Accept", "application/json")
             .build()
+       }catch (ex:Exception){
+           ex.printStackTrace()
+       }
         chain.proceed(request)
     }
 

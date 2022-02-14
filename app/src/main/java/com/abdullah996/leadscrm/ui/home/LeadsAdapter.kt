@@ -37,15 +37,25 @@ class LeadsAdapter(onLeadsClickListener: OnLeadsClickListener):RecyclerView.Adap
             onClickListener.onDeleteLeadClick(leadsList[position].id)
         }
         if (leadsList[position].status!=null){
-            if (leadsList[position].status.name!=null){
+            if (!leadsList[position].status.name.isNullOrEmpty()){
                 holder.itemView.findViewById<TextView>(R.id.txt_action).text=leadsList[position].status.name.toString()
                 holder.itemView.findViewById<TextView>(R.id.txt_status).text=leadsList[position].status.name.toString()
 
+            }else{
+                holder.itemView.findViewById<TextView>(R.id.txt_action).text=""
+                holder.itemView.findViewById<TextView>(R.id.txt_status).text=""
             }
-            if (leadsList[position].status.comment!=null){
+            if (!leadsList[position].status.comment.isNullOrEmpty()){
                 holder.itemView.findViewById<TextView>(R.id.txt_comment).text=leadsList[position].status.comment.toString()
 
+            }else{
+                holder.itemView.findViewById<TextView>(R.id.txt_comment).text=""
+
             }
+        }else{
+            holder.itemView.findViewById<TextView>(R.id.txt_action).text=""
+            holder.itemView.findViewById<TextView>(R.id.txt_status).text=""
+            holder.itemView.findViewById<TextView>(R.id.txt_comment).text=""
         }
     }
 

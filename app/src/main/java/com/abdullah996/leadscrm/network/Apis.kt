@@ -96,7 +96,6 @@ interface Apis {
 
 
     @GET("lead/status")
-
     suspend fun getAllStatus(
         @Query("lead_id") lead_id: String?
     ):Response<AllStatusReponse>

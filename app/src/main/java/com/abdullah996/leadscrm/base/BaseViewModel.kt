@@ -8,11 +8,15 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.datastore.preferences.protobuf.Api
 import androidx.lifecycle.*
+import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
 import com.abdullah996.leadscrm.utill.ApiResult
 import com.abdullah996.leadscrm.utill.errorHandler
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Response
 import java.io.IOException
@@ -28,8 +32,18 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
                 if (hasInternetConnection()) {
                     emit(ApiResult.Loading(null, true))
                     val response = withContext(Dispatchers.IO) {
-                            requst.invoke()
+                       try { requst()
+                       }catch (e:Exception){
+                           Response.error(
+                               403,
+                               ResponseBody.create(
+                                   "application/json".toMediaTypeOrNull(),
+                                   "{\"message\":\"bad internet connection \"}"
+                               )
+                           );
+                       }
                     }
+
 
                     if (response.isSuccessful) {
                         emit(ApiResult.Success(response.body()))
