@@ -2,6 +2,7 @@ package com.abdullah996.leadscrm.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
@@ -27,6 +28,10 @@ class SplashActivity : AppCompatActivity() {
             goToLogin()
         }
         setContentView(binding.root)
+        binding.privacyPolicy.setOnClickListener {
+            val intent=Intent("android.intent.action.VIEW", Uri.parse("https://leadscrm.net/privacy/"))
+            startActivity(intent)
+        }
     }
     private suspend fun goToLogin(){
         delay(2000)
@@ -34,10 +39,12 @@ class SplashActivity : AppCompatActivity() {
         if (sharedPreferenceManger.isLoggedIn){
             val intet= Intent(this,HomeActivity::class.java)
             startActivity(intet)
+            finish()
 
         }else{
             val intet= Intent(this,MainActivity::class.java)
             startActivity(intet)
+            finish()
         }
     }
 }
