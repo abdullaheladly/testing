@@ -90,7 +90,6 @@ class ActionsFragment : Fragment(),OnActionClickListeners, AdapterView.OnItemSel
     }
 
     private fun uploadStatus() {
-        if (!binding.actionsCommentsTxt.text.isNullOrEmpty()) {
             comment=binding.actionsCommentsTxt.text.toString()
             status=binding.actionStatusSpinner.selectedItem.toString()
             for (item in baseAction?.data!!){
@@ -118,9 +117,7 @@ class ActionsFragment : Fragment(),OnActionClickListeners, AdapterView.OnItemSel
                     }
                 }
             })
-        }else{
-            Toast.makeText(requireContext(), "comment can't be null", Toast.LENGTH_SHORT).show()
-        }
+
     }
 
     private fun getStatus() {
