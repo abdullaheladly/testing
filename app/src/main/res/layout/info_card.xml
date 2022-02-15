@@ -9,9 +9,19 @@
     android:paddingBottom="24dp"
     android:paddingEnd="30dp"
     android:paddingStart="32dp"
-
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.abdullah996.leadscrm.ui.home.CanvasView
+        android:visibility="gone"
+        android:id="@+id/line_without_status"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_80sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="1dp"
+      />
     <ImageView
+        android:elevation="2dp"
         android:id="@+id/imageProfile"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -19,6 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
     <TextView
+        android:elevation="2dp"
         android:id="@+id/txt_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,6 +44,7 @@
         />
 
     <ImageButton
+        android:elevation="2dp"
         android:id="@+id/btn_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,6 +55,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
+        android:elevation="2dp"
         android:id="@+id/phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,6 +68,7 @@
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <TextView
+        android:elevation="2dp"
         android:id="@+id/txt_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,6 +83,7 @@
 
 
     <TextView
+        android:elevation="2dp"
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,6 +96,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
 
     <TextView
+        android:elevation="2dp"
         android:id="@+id/txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,6 +108,7 @@
         app:layout_constraintStart_toEndOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
     <TextView
+        android:elevation="2dp"
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -104,6 +121,7 @@
         app:layout_constraintTop_toBottomOf="@+id/phone" />
 
     <TextView
+        android:elevation="2dp"
         android:id="@+id/txt_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -115,6 +133,7 @@
         app:layout_constraintStart_toEndOf="@+id/email"
         app:layout_constraintTop_toBottomOf="@+id/phone" />
     <TextView
+        android:elevation="2dp"
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -127,6 +146,7 @@
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <TextView
+        android:elevation="2dp"
         android:id="@+id/txt_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -138,6 +158,7 @@
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <TextView
+        android:elevation="2dp"
         android:id="@+id/Note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -150,6 +171,7 @@
         app:layout_constraintTop_toBottomOf="@+id/status" />
 
     <TextView
+        android:elevation="2dp"
         android:id="@+id/details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -161,6 +183,7 @@
         app:layout_constraintTop_toBottomOf="@+id/Note" />
 
     <TextView
+        android:elevation="2dp"
         android:id="@+id/editInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -174,6 +197,7 @@
         app:drawableEndCompat="@drawable/ic_angle_small_down" />
 
     <TextView
+        android:elevation="2dp"
         android:id="@+id/action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -186,6 +210,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editInfo" />
 
     <TextView
+        android:elevation="2dp"
         android:id="@+id/action_t"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -198,6 +223,8 @@
         app:layout_constraintTop_toBottomOf="@+id/action" />
 
     <TextView
+
+        android:elevation="2dp"
         android:id="@+id/txt_action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -210,6 +237,8 @@
         app:layout_constraintTop_toBottomOf="@+id/action" />
 
     <TextView
+
+        android:elevation="2dp"
         android:id="@+id/comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -222,6 +251,7 @@
         app:layout_constraintTop_toBottomOf="@+id/action_t" />
 
     <TextView
+        android:elevation="2dp"
         android:id="@+id/txt_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -236,6 +266,8 @@
 
 
     <TextView
+
+        android:elevation="2dp"
         android:id="@+id/addaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -247,6 +279,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/comment"
         app:drawableEndCompat="@drawable/ic_angle_small_down"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:visibility="gone"
+        android:elevation="1dp"
+        android:id="@+id/txt_no_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="@dimen/_28ssp"
+        android:text="No Status  "
+        android:textColor="@android:color/holo_red_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 

@@ -1,5 +1,8 @@
 package com.abdullah996.leadscrm.ui.home
 
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,10 +43,13 @@ class LeadsAdapter(onLeadsClickListener: OnLeadsClickListener):RecyclerView.Adap
             if (!leadsList[position].status.name.isNullOrEmpty()){
                 holder.itemView.findViewById<TextView>(R.id.txt_action).text=leadsList[position].status.name.toString()
                 holder.itemView.findViewById<TextView>(R.id.txt_status).text=leadsList[position].status.name.toString()
-
+                holder.itemView.findViewById<CanvasView>(R.id.line_without_status).visibility=View.GONE
+                holder.itemView.findViewById<TextView>(R.id.txt_no_status).visibility=View.GONE
             }else{
                 holder.itemView.findViewById<TextView>(R.id.txt_action).text=""
                 holder.itemView.findViewById<TextView>(R.id.txt_status).text=""
+                holder.itemView.findViewById<CanvasView>(R.id.line_without_status).visibility=View.VISIBLE
+                holder.itemView.findViewById<TextView>(R.id.txt_no_status).visibility=View.VISIBLE
             }
             if (!leadsList[position].status.comment.isNullOrEmpty()){
                 holder.itemView.findViewById<TextView>(R.id.txt_comment).text=leadsList[position].status.comment.toString()
@@ -53,10 +59,14 @@ class LeadsAdapter(onLeadsClickListener: OnLeadsClickListener):RecyclerView.Adap
 
             }
         }else{
+            holder.itemView.findViewById<CanvasView>(R.id.line_without_status).visibility=View.VISIBLE
+            holder.itemView.findViewById<TextView>(R.id.txt_no_status).visibility=View.VISIBLE
             holder.itemView.findViewById<TextView>(R.id.txt_action).text=""
             holder.itemView.findViewById<TextView>(R.id.txt_status).text=""
             holder.itemView.findViewById<TextView>(R.id.txt_comment).text=""
         }
+
+
     }
 
     override fun getItemCount(): Int {
