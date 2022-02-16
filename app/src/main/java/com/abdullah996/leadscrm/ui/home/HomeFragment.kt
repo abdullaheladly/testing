@@ -213,7 +213,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
 
     override fun onDeleteLeadClick(id: Int) {
         if (hasInternetConnection()){
-        homeViewModel.deleteLead(null,id.toString()).observe(viewLifecycleOwner,{
+        homeViewModel.deleteLead(sharedPreferenceManger.companyId.toInt(),id.toString()).observe(viewLifecycleOwner,{
             when(it.status){
                 ApiStatus.SUCCESS->{
                     binding.sToRefresh.isRefreshing=true

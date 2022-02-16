@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.FragmentCreateLeadBinding
 import com.abdullah996.leadscrm.utill.ApiStatus
+import com.abdullah996.leadscrm.utill.SharedPreferenceManger
+import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 
 class CreateLeadFragment : Fragment() {
     private  var _binding:FragmentCreateLeadBinding?=null
@@ -22,6 +24,8 @@ class CreateLeadFragment : Fragment() {
     private var notes:String?=null
     private  var phonesArr:ArrayList<String> = ArrayList()
     private  var sources:ArrayList<String> = ArrayList()
+    private lateinit var sharedPreferenceManger: SharedPreferenceManger
+
 
 
 
@@ -29,6 +33,8 @@ class CreateLeadFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         createLeadViewModel=ViewModelProvider(requireActivity()).get(CreateLeadViewModel::class.java)
+        sharedPreferenceManger= SharedPreferenceMangerImpl(requireContext())
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +52,7 @@ class CreateLeadFragment : Fragment() {
     private fun setListeners() {
         binding.saveEditCreate.setOnClickListener {
             if (checkFields()){
-                createLeadViewModel.createLead(null,name,email,notes,phonesArr.toTypedArray(),sources.toTypedArray()).observe(viewLifecycleOwner,{
+                createLeadViewModel.createLead(sharedPreferenceManger.companyId.toInt(),name,email,notes,phonesArr.toTypedArray(),sources.toTypedArray()).observe(viewLifecycleOwner,{
                     phonesArr=ArrayList()
                     when(it.status) {
                         ApiStatus.SUCCESS -> {

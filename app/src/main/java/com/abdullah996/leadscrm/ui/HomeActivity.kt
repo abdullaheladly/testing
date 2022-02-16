@@ -28,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPreferenceManger= SharedPreferenceMangerImpl(this)
         loginViewModel=ViewModelProvider(this).get(LoginViewModel::class.java)
         _binding= ActivityHomeBinding.inflate(layoutInflater)
         sharedPreferenceManger=SharedPreferenceMangerImpl(this)
@@ -49,7 +50,7 @@ class HomeActivity : AppCompatActivity() {
         }
         binding.logout.setOnClickListener {
             binding.homePb.visibility=View.VISIBLE
-            loginViewModel.logout(null,null).observe(this,{
+            loginViewModel.logout(sharedPreferenceManger.companyId.toInt(),sharedPreferenceManger.userToken).observe(this,{
                 when(it.status) {
                     ApiStatus.SUCCESS -> {
                         binding.homePb.visibility=View.INVISIBLE

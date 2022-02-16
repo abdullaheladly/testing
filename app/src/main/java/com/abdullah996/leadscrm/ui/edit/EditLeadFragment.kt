@@ -15,6 +15,8 @@ import androidx.navigation.fragment.navArgs
 import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.FragmentEditLeadBinding
 import com.abdullah996.leadscrm.utill.ApiStatus
+import com.abdullah996.leadscrm.utill.SharedPreferenceManger
+import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 
 class EditLeadFragment : Fragment() {
     private var _binding:FragmentEditLeadBinding?=null
@@ -29,6 +31,9 @@ class EditLeadFragment : Fragment() {
     private  var reasons:String?=null
     private  var isQualified:String="0"
 
+    private lateinit var sharedPreferenceManger: SharedPreferenceManger
+
+
 
 
     private var phones= mutableListOf<String>()
@@ -39,6 +44,8 @@ class EditLeadFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         editLeadViewModel= ViewModelProvider(requireActivity()).get(EditLeadViewModel::class.java)
+        sharedPreferenceManger= SharedPreferenceMangerImpl(requireContext())
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +62,7 @@ class EditLeadFragment : Fragment() {
         binding.saveEdit.setOnClickListener {
             if (checkFields()){
 
-                editLeadViewModel.getAllLeads(null,args.lead.id.toString(),name,email,note,
+                editLeadViewModel.getAllLeads(sharedPreferenceManger.companyId.toInt(),args.lead.id.toString(),name,email,note,
                    phonesArr.toTypedArray() ,isQualified,reasons!!).observe(viewLifecycleOwner,{
                     phonesArr=ArrayList()
                     when(it.status) {
