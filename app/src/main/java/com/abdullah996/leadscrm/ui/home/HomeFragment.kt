@@ -367,6 +367,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                             binding.sToRefresh.isRefreshing=false
                             binding.rvLeads.visibility=View.VISIBLE
                             binding.noDataFound.visibility=View.GONE
+                            binding.pagination.visibility=View.GONE
                         }else{
                             binding.sToRefresh.isRefreshing=false
                             binding.rvLeads.visibility=View.INVISIBLE
