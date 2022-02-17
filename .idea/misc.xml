@@ -9,8 +9,10 @@
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/edt_back.xml" value="0.15" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/edt_background.xml" value="0.1685185185185185" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/edt_bg.xml" value="0.20833333333333334" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/ic_back_arrow.xml" value="0.20833333333333334" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/ic_baseline_autorenew_24.xml" value="0.1046875" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/ic_baseline_note_add_24.xml" value="0.1046875" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/ic_forward_arrow.xml" value="0.20833333333333334" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/ic_hamburger_menu.xml" value="0.16944444444444445" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/leads_bg.xml" value="0.1824074074074074" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/view_background.xml" value="0.18425925925925926" />
@@ -24,7 +26,7 @@
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_actions.xml" value="0.18" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_create_lead.xml" value="0.18" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_edit_lead.xml" value="0.25" />
-        <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_home.xml" value="0.26704545454545453" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/info_card.xml" value="0.14" />

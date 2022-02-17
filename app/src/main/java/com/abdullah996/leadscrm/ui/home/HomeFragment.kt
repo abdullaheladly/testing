@@ -34,6 +34,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     private var token:String?=null
     private val leadsAdapter by lazy { LeadsAdapter(this) }
     private lateinit var sharedPreferenceManger: SharedPreferenceManger
+    private var pageNumber=1;
 
 
 
@@ -67,6 +68,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         }
 
 
+
         setListeners()
 
 
@@ -76,6 +78,24 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
            leadsAdapter.saveData(it.data.data)
        })*/
         return binding.root
+    }
+
+    private fun setupPagination(totalPage:Int) {
+        if (totalPage>pageNumber){
+            binding.forwardArrowPagination.isEnabled=true
+            binding.forwardArrowPagination.isClickable=true
+        }else{
+            binding.forwardArrowPagination.isEnabled=false
+            binding.forwardArrowPagination.isClickable=false
+        }
+        if (pageNumber>1){
+            binding.backArrowPagination.isEnabled=true
+            binding.backArrowPagination.isClickable=true
+        }else{
+            binding.backArrowPagination.isEnabled=false
+            binding.backArrowPagination.isClickable=false
+        }
+
     }
 
     private fun setListeners() {
@@ -88,10 +108,12 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                 when(it.status){
                     ApiStatus.SUCCESS->{
                         if (!it.data?.data?.data.isNullOrEmpty()) {
+
                             leadsAdapter.saveData(it.data?.data?.data!!)
                             binding.sToRefresh.isRefreshing=false
                             binding.rvLeads.visibility=View.VISIBLE
                             binding.noDataFound.visibility=View.GONE
+                            binding.pagination.visibility=View.GONE
 
                         }else{
                             binding.rvLeads.visibility=View.INVISIBLE
@@ -116,6 +138,21 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.sToRefresh.isRefreshing=true
             getAllLeads()
             binding.filterBySpinner.setSelection(0)
+        }
+
+        binding.backArrowPagination.setOnClickListener {
+            pageNumber -= 1
+
+            binding.sToRefresh.isRefreshing =true
+            getAllLeads(pageNumber)
+        }
+
+        binding.forwardArrowPagination.setOnClickListener {
+            pageNumber+=1
+
+            binding.sToRefresh.isRefreshing =true
+            getAllLeads(pageNumber)
+
         }
     }
 
@@ -163,19 +200,27 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         homeViewModel.getAllLeads(1,"a",sharedPreferenceManger.companyId.toInt(),sharedPreferenceManger.userToken).observe(viewLifecycleOwner,{
             when(it.status){
                 ApiStatus.SUCCESS->{
+                    pageNumber=1
                     if (it.data?.data?.data!=null) {
                         leadsAdapter.saveData(it.data.data.data)
                         binding.sToRefresh.isRefreshing=false
                         binding.rvLeads.visibility=View.VISIBLE
 
                         binding.noDataFound.visibility=View.GONE
+                        binding.pagination.visibility=View.VISIBLE
+                        setupPagination(it.data.data.lastPage)
+                        binding.pageNumber.text=pageNumber.toString()
+
                     }
                 }
                 ApiStatus.ERROR->{
                     makeToast(it.message.toString())
                     binding.sToRefresh.isRefreshing=false
+                    binding.pagination.visibility=View.INVISIBLE
+
                 }
                 ApiStatus.LOADING->{
+
 
                 }
             }
@@ -184,6 +229,48 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         makeToast("something went wrong ")
 
         }
+    }
+
+   private fun getAllLeads(int: Int) {
+        try {
+            homeViewModel.getAllLeads(
+                1,
+                "a",
+                sharedPreferenceManger.companyId.toInt(),
+                sharedPreferenceManger.userToken,int
+            ).observe(viewLifecycleOwner, {
+                when (it.status) {
+                    ApiStatus.SUCCESS -> {
+                        if (it.data?.data?.data != null) {
+                            leadsAdapter.saveData(it.data.data.data)
+                            binding.sToRefresh.isRefreshing = false
+                            binding.rvLeads.visibility = View.VISIBLE
+
+                            binding.noDataFound.visibility = View.GONE
+                            binding.pagination.visibility = View.VISIBLE
+                            setupPagination(it.data.data.lastPage)
+                            binding.pageNumber.text=pageNumber.toString()
+
+                        }
+                    }
+                    ApiStatus.ERROR -> {
+                        makeToast(it.message.toString())
+                        binding.sToRefresh.isRefreshing = false
+                        binding.pagination.visibility=View.INVISIBLE
+
+                    }
+                    ApiStatus.LOADING -> {
+
+
+                    }
+                }
+            })
+        } catch (ex:Exception) {
+            makeToast("something went wrong ")
+        }
+
+
+
     }
    private fun makeToast(s:String){
         Toast.makeText(requireContext(), s, Toast.LENGTH_SHORT).show()

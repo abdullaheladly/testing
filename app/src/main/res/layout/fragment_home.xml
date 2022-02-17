@@ -275,7 +275,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/pagination"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -310,8 +310,62 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pagination"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_2sdp"
+        android:background="@drawable/leads_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/s_to_refresh"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            android:id="@+id/backArrowPagination"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:fontFamily="@font/poppins_semibold"
+            android:layout_marginStart="@dimen/_10sdp"
 
+            android:textAlignment="center"
+            android:textSize="@dimen/_12sdp"
+            android:background="@color/lightMediumGray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:drawableStartCompat="@drawable/ic_back_arrow" />
+        <TextView
+            android:id="@+id/forwardArrowPagination"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textAlignment="center"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:background="@color/lightMediumGray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:drawableEndCompat="@drawable/ic_forward_arrow" />
+        <TextView
+            android:id="@+id/pageNumber"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="0dp"
+            android:text="1"
+            android:textStyle="bold"
 
+            android:textAlignment="center"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="@dimen/_12sdp"
+            android:background="@color/lightMediumGray"
+            app:layout_constraintStart_toEndOf="@id/backArrowPagination"
+            app:layout_constraintEnd_toStartOf="@id/forwardArrowPagination"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

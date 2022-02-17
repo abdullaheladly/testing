@@ -33,6 +33,9 @@ class HomeViewModel @ViewModelInject constructor(
     fun getAllLeads(is_paginate: Int, search: String, company_id: Int?,token :String)= handleFlowResponse {
         leedsRepoImpl.getAllLeads(is_paginate, search, company_id, token)
     }
+    fun getAllLeads(is_paginate: Int, search: String, company_id: Int?,token :String,page:Int)= handleFlowResponse {
+        leedsRepoImpl.getAllLeads(is_paginate, search, company_id, token,page)
+    }
 
     fun searchBuName(is_paginate: Int, search: String, company_id: Int?,token :String)= handleFlowResponse {
         leedsRepoImpl.searchByName(is_paginate, search, company_id, token)

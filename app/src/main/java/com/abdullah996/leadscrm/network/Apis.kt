@@ -8,6 +8,7 @@ import com.abdullah996.leadscrm.model.leeds.LeedsReponse
 import com.abdullah996.leadscrm.model.notifications.NotificationsResponse
 import com.abdullah996.leadscrm.model.updateaction.AddActionResponse
 import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
+import com.abdullah996.leadscrm.model.user.Page
 import com.abdullah996.leadscrm.model.user.UserResponse
 import retrofit2.Response
 import retrofit2.http.*
@@ -29,7 +30,9 @@ interface Apis {
     suspend fun getAllLeads(
         @Query("is_paginate") num:Int,
         @Query("company_id") company_id:Int?,
+        @Query("page") page: Int,
         @Header("Authorization") token:String,
+
     ):Response<LeedsReponse>
 
     @GET("lead/get-all")
