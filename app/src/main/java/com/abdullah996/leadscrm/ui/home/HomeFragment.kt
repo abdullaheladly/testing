@@ -222,6 +222,10 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                 ApiStatus.ERROR->{
                     makeToast(it.message.toString())
                     binding.sToRefresh.isRefreshing=false
+                    if (it.message.toString()=="UnAuthenticated"){
+                        sharedPreferenceManger.isLoggedIn=false
+                    }
+
                 }
                 ApiStatus.LOADING->{
 
