@@ -26,6 +26,7 @@ interface Apis {
 
 
 
+    // get all leads by company id and page
     @GET("lead/get-all")
     suspend fun getAllLeads(
         @Query("is_paginate") num:Int,
@@ -35,6 +36,8 @@ interface Apis {
 
     ):Response<LeedsReponse>
 
+
+    //search for lead by name
     @GET("lead/get-all")
     suspend fun searchByName(
         @Query("is_paginate") num:Int,
@@ -44,6 +47,7 @@ interface Apis {
     ):Response<LeedsReponse>
 
 
+    //update already exist  lead
     @POST("lead/update")
     @FormUrlEncoded
     suspend fun updateLead(
@@ -58,6 +62,7 @@ interface Apis {
     ):Response<UpdateLeadsRespons>
 
 
+    //create new lead
     @POST("lead/create")
     @FormUrlEncoded
     suspend fun createLead(
@@ -69,6 +74,7 @@ interface Apis {
         @Field("sources[]") sources:Array<String>
     ):Response<CreateLeadResponse>
 
+    //delete current lead by id
     @POST("lead/delete")
     @FormUrlEncoded
     suspend fun deleteLead(
@@ -76,6 +82,8 @@ interface Apis {
         @Field("lead_id") lead_id: String?
     ):Response<DeleteLeadResponse>
 
+
+    //logout
     @POST("user/logout")
     @FormUrlEncoded
     suspend fun logout(
@@ -84,10 +92,12 @@ interface Apis {
     ):Response<UpdateLeadsRespons>
 
 
+    // get all action available status
     @GET("lead-statuses")
     suspend fun getStatus(
     ):Response<BaseAction>
 
+    //create new action for the lead
     @POST("lead/status")
     @FormUrlEncoded
     suspend fun updateStatus(
@@ -98,6 +108,7 @@ interface Apis {
 
 
 
+    // get all actions for the current lead
     @GET("lead/status")
     suspend fun getAllStatus(
         @Query("lead_id") lead_id: String?
@@ -105,11 +116,13 @@ interface Apis {
 
 
 
+    //get all notification
     @GET("user/notification/get-all")
     suspend fun getAllNotifications(
     ):Response<NotificationsResponse>
 
 
+    //filter the leads by date
     @GET("lead/filter-by-date")
     suspend fun filterByData(
         @Query("year") year:String,

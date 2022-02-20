@@ -14,6 +14,7 @@ plugins {
 android {
     compileSdk 31
 
+
     defaultConfig {
         applicationId "com.abdullah996.leadscrm"
         minSdk 23
@@ -22,6 +23,19 @@ android {
         versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs{
+        release{
+            try {
+                storeFile file("../keyStore/KeyStore.jks")
+                storePassword KEYSTORE_PASSWORD
+                keyAlias "LeadsCRM"
+                keyPassword KEY_PASSWORD
+            }catch(ex){
+                throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.",ex)
+
+            }
+        }
     }
 
     buildTypes {
