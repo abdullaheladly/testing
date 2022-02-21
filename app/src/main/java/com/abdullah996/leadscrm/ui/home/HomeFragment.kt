@@ -124,6 +124,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             })
         }
 
+        //filter by tag
         binding.goFilterTag.setOnClickListener {
             val tag =binding.tagSpinner.selectedItem.toString()
             binding.sToRefresh.isRefreshing=true
@@ -156,10 +157,48 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                 }
             })
         }
+
+
+        //filter By type
+        binding.goFilterType.setOnClickListener {
+            val type =binding.typeSpinner.selectedItem.toString()
+            binding.sToRefresh.isRefreshing=true
+            homeViewModel.filterByType(type).observe(viewLifecycleOwner,{
+                when(it.status){
+                    ApiStatus.SUCCESS->{
+                        if (!it.data?.data?.data.isNullOrEmpty()) {
+
+                            leadsAdapter.saveData(it.data?.data?.data!!)
+                            binding.sToRefresh.isRefreshing=false
+                            binding.rvLeads.visibility=View.VISIBLE
+                            binding.noDataFound.visibility=View.GONE
+                            binding.pagination.visibility=View.GONE
+
+                        }else{
+                            binding.rvLeads.visibility=View.INVISIBLE
+                            binding.noDataFound.visibility=View.VISIBLE
+                            binding.sToRefresh.isRefreshing=false
+
+
+                        }
+                    }
+                    ApiStatus.ERROR->{
+                        makeToast(it.message.toString())
+                        binding.sToRefresh.isRefreshing=false
+                    }
+                    ApiStatus.LOADING->{
+
+                    }
+                }
+            })
+        }
+
+
         //clear filter and return to the ordinary get all leads
         binding.btnClearFilter.setOnClickListener {
             binding.filterLayout.visibility=View.GONE
             binding.filterByTagLayout.visibility=View.GONE
+            binding.filterByTypeLayout.visibility=View.GONE
             binding.sToRefresh.isRefreshing=true
             getAllLeads()
             binding.filterBySpinner.setSelection(0)
@@ -206,6 +245,12 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.tagSpinner.adapter=it
         }
         binding.tagSpinner.onItemSelectedListener=this
+
+        //type Spinner
+        ArrayAdapter.createFromResource(requireContext(),R.array.type_filter,android.R.layout.simple_list_item_1).also {
+            binding.typeSpinner.adapter=it
+        }
+        binding.typeSpinner.onItemSelectedListener=this
     }
 
     override fun onResume() {
@@ -386,6 +431,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         }
         else if (binding.filterBySpinner.selectedItem=="Tag"){
             binding.filterByTagLayout.visibility=View.VISIBLE
+        } else if (binding.filterBySpinner.selectedItem == "Type"){
+            binding.filterByTypeLayout.visibility=View.VISIBLE
         }
     }
 

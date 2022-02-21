@@ -130,10 +130,16 @@ interface Apis {
 
 
 
-    // filter
+    // filter by tags
     @GET("lead/filter")
     suspend fun filterByTag(
         @Query("tag") tag: String
+    ):Response<LeedsReponse>
+
+    // filter by type
+    @GET("lead/filter")
+    suspend fun filterByType(
+        @Query("type") type: String
     ):Response<LeedsReponse>
 
 

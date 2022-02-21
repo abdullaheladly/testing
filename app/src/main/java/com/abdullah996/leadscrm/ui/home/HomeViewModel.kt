@@ -42,6 +42,11 @@ class HomeViewModel @ViewModelInject constructor(
     }
 
 
+    fun filterByType(type:String)=handleFlowResponse {
+        leadsFilterImpl.filterByType(type)
+    }
+
+
 
 
 }

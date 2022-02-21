@@ -10,7 +10,12 @@ import javax.inject.Inject
 class LeadsFilterImpl@Inject constructor(
     private val apis: Apis
 ): LeadsFilters {
+
     override suspend fun filterByTag(tag: String): Response<LeedsReponse> {
         return apis.filterByTag(tag)
+    }
+
+    override suspend fun filterByType(tag: String): Response<LeedsReponse> {
+        return apis.filterByType(tag)
     }
 }

@@ -7,4 +7,8 @@ interface LeadsFilters {
     suspend fun filterByTag(
         tag:String
     ): Response<LeedsReponse>
+
+    suspend fun filterByType(
+        tag:String
+    ): Response<LeedsReponse>
 }
