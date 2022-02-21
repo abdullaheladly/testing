@@ -53,11 +53,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         _binding= FragmentHomeBinding.inflate(layoutInflater,container,false)
         token= activity?.intent?.getStringExtra("token")
         setSpinners()
-      // Toast.makeText(requireContext(), token, Toast.LENGTH_SHORT).show()
 
-        /*binding.txtNewLeads.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment2_to_createLeadFragment)
-        }*/
+
         setupSwipeRefresh()
         setupRecycleView()
         if (hasInternetConnection()){
@@ -66,20 +63,12 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         }else{
             Toast.makeText(requireContext(), "no internet ", Toast.LENGTH_SHORT).show()
         }
-
-
-
         setListeners()
 
-
-       /* homeViewModel.getAllLeads(1,"a",null,sharedPreferenceManger.userToken)
-       homeViewModel.leadsResponse.observe(viewLifecycleOwner,{
-           Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-           leadsAdapter.saveData(it.data.data)
-       })*/
         return binding.root
     }
 
+    // setup the pagination buttons enable or disable
     private fun setupPagination(totalPage:Int) {
         if (totalPage>pageNumber){
             binding.forwardArrowPagination.isEnabled=true
@@ -99,6 +88,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     }
 
     private fun setListeners() {
+        // filter by data is the only option until now
         binding.goFilter.setOnClickListener {
             binding.sToRefresh.isRefreshing=true
             val year=binding.yearSpinner.selectedItem.toString()
@@ -133,6 +123,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                 }
             })
         }
+        //clear filter and return to the ordinary get all leads
         binding.btnClearFilter.setOnClickListener {
             binding.filterLayout.visibility=View.GONE
             binding.sToRefresh.isRefreshing=true
@@ -158,15 +149,19 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
 
     @SuppressLint("ResourceType")
     private fun setSpinners() {
+
+        //years spinner
         ArrayAdapter.createFromResource(requireContext(),R.array.years,android.R.layout.simple_list_item_1).also {
             binding.yearSpinner.adapter=it
         }
+        //months spinner
         binding.yearSpinner.onItemSelectedListener=this
         ArrayAdapter.createFromResource(requireContext(),R.array.months,android.R.layout.simple_list_item_1).also {
             binding.monthSpinner.adapter=it
         }
         binding.monthSpinner.onItemSelectedListener=this
 
+        // filters spinner
         ArrayAdapter.createFromResource(requireContext(),R.array.filters,android.R.layout.simple_list_item_1).also {
             binding.filterBySpinner.adapter=it
         }
@@ -175,11 +170,13 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
 
     override fun onResume() {
         super.onResume()
+        //enable bottom and top nav cause they arent visible in another fragments
         activity?.findViewById<ConstraintLayout>(R.id.bottom_nav)?.visibility=View.VISIBLE
         activity?.findViewById<ConstraintLayout>(R.id.top_nav)?.visibility=View.VISIBLE
 
 
     }
+
 
     private fun setupSwipeRefresh() {
         binding.sToRefresh.setOnRefreshListener {
@@ -195,6 +192,9 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         }
     }
 
+    /**
+     * get all leads for that company id
+     */
     private fun getAllLeads(){
         try {
         homeViewModel.getAllLeads(1,"a",sharedPreferenceManger.companyId.toInt(),sharedPreferenceManger.userToken).observe(viewLifecycleOwner,{
@@ -230,7 +230,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
 
         }
     }
-
+    // get all leads with pagination and page number
    private fun getAllLeads(int: Int) {
         try {
             homeViewModel.getAllLeads(
@@ -272,6 +272,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
 
 
     }
+
    private fun makeToast(s:String){
         Toast.makeText(requireContext(), s, Toast.LENGTH_SHORT).show()
     }
@@ -288,6 +289,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         super.onDestroyView()
         _binding=null
     }
+
     override fun onEditInfoClick(lead: Leads) {
         val action=HomeFragmentDirections.actionHomeFragment2ToEditLeadFragment2(lead)
         findNavController().navigate(action)
@@ -346,6 +348,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
     }
+
     fun onSearchClick() {
         var text: String
         val mDialog= LayoutInflater.from(requireContext()).inflate(R.layout.search_card_dialog,null)

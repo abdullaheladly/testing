@@ -12,7 +12,7 @@
         android:textSize="@dimen/_12ssp"
         android:padding="@dimen/_8sdp"
         android:fontFamily="@font/poppins_semibold"
-        android:hint="please enter the name you want to search for"
+        android:hint="search by name or phone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
