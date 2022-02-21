@@ -164,8 +164,8 @@ interface Apis {
     // filter by budget
     @GET("lead/filter")
     suspend fun filterByBudget(
-        @Query("budget_from") from: Int,
-        @Query("budget_to") to: Int
+        @Query("budget_from") from: Long,
+        @Query("budget_to") to: Long
     ):Response<LeedsReponse>
 
     // filter by unit Type id

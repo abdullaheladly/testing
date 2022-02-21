@@ -35,7 +35,7 @@ class LeadsFilterImpl@Inject constructor(
         return apis.filterByUnitTypeId(id)
     }
 
-    override suspend fun filterByBudget(from: Int, to: Int): Response<LeedsReponse> {
+    override suspend fun filterByBudget(from: Long, to: Long): Response<LeedsReponse> {
         return apis.filterByBudget(from, to)
     }
 }

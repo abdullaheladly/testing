@@ -55,8 +55,13 @@ class HomeViewModel @ViewModelInject constructor(
     }
     fun filterBySourceID(id:Int)=handleFlowResponse {
         leadsFilterImpl.filterBySourceId(id)
-    }fun filterByUnitTYpeID(id:Int)=handleFlowResponse {
+    }
+    fun filterByUnitTYpeID(id:Int)=handleFlowResponse {
         leadsFilterImpl.filterByUnitTypeId(id)
+    }
+
+    fun filterByBudget(from:Long,to:Long)=handleFlowResponse {
+        leadsFilterImpl.filterByBudget(from,to)
     }
 
 

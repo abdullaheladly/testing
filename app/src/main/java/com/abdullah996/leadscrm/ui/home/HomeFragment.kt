@@ -260,37 +260,42 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
 
         //filter By Source
         binding.goFilterSource.setOnClickListener {
-            val sourceId=binding.sourceIdSearch.text.toString()
-            binding.sToRefresh.isRefreshing=true
-            homeViewModel.filterBySourceID(sourceId.toInt()).observe(viewLifecycleOwner,{
-                when(it.status){
-                    ApiStatus.SUCCESS->{
-                        if (!it.data?.data?.data.isNullOrEmpty()) {
+            if (!binding.sourceIdSearch.text.toString().isNullOrEmpty()) {
+                val sourceId = binding.sourceIdSearch.text.toString()
+                binding.sToRefresh.isRefreshing = true
+                homeViewModel.filterBySourceID(sourceId.toInt()).observe(viewLifecycleOwner, {
+                    when (it.status) {
+                        ApiStatus.SUCCESS -> {
+                            if (!it.data?.data?.data.isNullOrEmpty()) {
 
-                            leadsAdapter.saveData(it.data?.data?.data!!)
-                            binding.sToRefresh.isRefreshing=false
-                            binding.rvLeads.visibility=View.VISIBLE
-                            binding.noDataFound.visibility=View.GONE
-                            binding.pagination.visibility=View.GONE
+                                leadsAdapter.saveData(it.data?.data?.data!!)
+                                binding.sToRefresh.isRefreshing = false
+                                binding.rvLeads.visibility = View.VISIBLE
+                                binding.noDataFound.visibility = View.GONE
+                                binding.pagination.visibility = View.GONE
 
-                        }else{
-                            binding.rvLeads.visibility=View.INVISIBLE
-                            binding.noDataFound.visibility=View.VISIBLE
-                            binding.sToRefresh.isRefreshing=false
+                            } else {
+                                binding.rvLeads.visibility = View.INVISIBLE
+                                binding.noDataFound.visibility = View.VISIBLE
+                                binding.sToRefresh.isRefreshing = false
 
+
+                            }
+                        }
+                        ApiStatus.ERROR -> {
+                            makeToast(it.message.toString())
+                            binding.sToRefresh.isRefreshing = false
+                        }
+                        ApiStatus.LOADING -> {
 
                         }
                     }
-                    ApiStatus.ERROR->{
-                        makeToast(it.message.toString())
-                        binding.sToRefresh.isRefreshing=false
-                    }
-                    ApiStatus.LOADING->{
-
-                    }
-                }
-            })
+                })
+            }else{
+                makeToast("please enter the source number first")
+            }
         }
+        //filter By Unit Type
         binding.goFilterUnitTypeId.setOnClickListener {
             val unitType=binding.unitTypeIdSearch.text.toString()
             binding.sToRefresh.isRefreshing=true
@@ -323,6 +328,43 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                 }
             })
         }
+        binding.goFilterBudget.setOnClickListener {
+            if (!binding.budgetFromSearch.text.toString().isNullOrEmpty()&&!binding.budgetToSearch.text.toString().isNullOrEmpty()) {
+                val from = binding.budgetFromSearch.text.toString()
+                val to = binding.budgetToSearch.text.toString()
+                binding.sToRefresh.isRefreshing = true
+                homeViewModel.filterByBudget(from.toLong(), to.toLong()).observe(viewLifecycleOwner, {
+                    when (it.status) {
+                        ApiStatus.SUCCESS -> {
+                            if (!it.data?.data?.data.isNullOrEmpty()) {
+
+                                leadsAdapter.saveData(it.data?.data?.data!!)
+                                binding.sToRefresh.isRefreshing = false
+                                binding.rvLeads.visibility = View.VISIBLE
+                                binding.noDataFound.visibility = View.GONE
+                                binding.pagination.visibility = View.GONE
+
+                            } else {
+                                binding.rvLeads.visibility = View.INVISIBLE
+                                binding.noDataFound.visibility = View.VISIBLE
+                                binding.sToRefresh.isRefreshing = false
+
+
+                            }
+                        }
+                        ApiStatus.ERROR -> {
+                            makeToast(it.message.toString())
+                            binding.sToRefresh.isRefreshing = false
+                        }
+                        ApiStatus.LOADING -> {
+
+                        }
+                    }
+                })
+            }else{
+                makeToast("please enter budget range first")
+            }
+        }
 
 
         //clear filter and return to the ordinary get all leads
@@ -334,6 +376,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterByRequestInterestLayout.visibility=View.GONE
             binding.filterBySourceIdLayout.visibility=View.GONE
             binding.filterByUnitTypeIdLayout.visibility = View.GONE
+            binding.filterByBudgetLayout.visibility = View.GONE
+
 
 
             binding.sToRefresh.isRefreshing=true
@@ -587,6 +631,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterByRequestInterestLayout.visibility=View.GONE
             binding.filterBySourceIdLayout.visibility=View.GONE
             binding.filterByUnitTypeIdLayout.visibility = View.GONE
+            binding.filterByBudgetLayout.visibility = View.GONE
+
 
 
         }
@@ -598,6 +644,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterByRequestInterestLayout.visibility=View.GONE
             binding.filterBySourceIdLayout.visibility=View.GONE
             binding.filterByUnitTypeIdLayout.visibility = View.GONE
+            binding.filterByBudgetLayout.visibility = View.GONE
+
 
 
         } else if (binding.filterBySpinner.selectedItem == "Type"){
@@ -608,6 +656,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterByRequestInterestLayout.visibility=View.GONE
             binding.filterBySourceIdLayout.visibility=View.GONE
             binding.filterByUnitTypeIdLayout.visibility = View.GONE
+            binding.filterByBudgetLayout.visibility = View.GONE
+
 
 
         }else if (binding.filterBySpinner.selectedItem == "Interested Type"){
@@ -618,6 +668,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterByRequestInterestLayout.visibility=View.GONE
             binding.filterBySourceIdLayout.visibility=View.GONE
             binding.filterByUnitTypeIdLayout.visibility = View.GONE
+            binding.filterByBudgetLayout.visibility = View.GONE
+
 
 
         }else if (binding.filterBySpinner.selectedItem == "Request Interest"){
@@ -628,6 +680,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterByInterestedTypeLayout.visibility=View.GONE
             binding.filterBySourceIdLayout.visibility=View.GONE
             binding.filterByUnitTypeIdLayout.visibility = View.GONE
+            binding.filterByBudgetLayout.visibility = View.GONE
+
 
 
         } else if (binding.filterBySpinner.selectedItem == "Source ID") {
@@ -638,9 +692,32 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterByTypeLayout.visibility = View.GONE
             binding.filterByInterestedTypeLayout.visibility = View.GONE
             binding.filterByUnitTypeIdLayout.visibility = View.GONE
+            binding.filterByBudgetLayout.visibility = View.GONE
+
 
         } else if (binding.filterBySpinner.selectedItem == "Unit Type") {
             binding.filterByUnitTypeIdLayout.visibility = View.VISIBLE
+            binding.filterBySourceIdLayout.visibility = View.GONE
+            binding.filterByRequestInterestLayout.visibility = View.GONE
+            binding.filterLayout.visibility = View.GONE
+            binding.filterByTagLayout.visibility = View.GONE
+            binding.filterByTypeLayout.visibility = View.GONE
+            binding.filterByInterestedTypeLayout.visibility = View.GONE
+            binding.filterByBudgetLayout.visibility = View.GONE
+
+        }
+        else if (binding.filterBySpinner.selectedItem == "Budget") {
+            binding.filterByBudgetLayout.visibility = View.VISIBLE
+            binding.filterByUnitTypeIdLayout.visibility = View.GONE
+            binding.filterBySourceIdLayout.visibility = View.GONE
+            binding.filterByRequestInterestLayout.visibility = View.GONE
+            binding.filterLayout.visibility = View.GONE
+            binding.filterByTagLayout.visibility = View.GONE
+            binding.filterByTypeLayout.visibility = View.GONE
+            binding.filterByInterestedTypeLayout.visibility = View.GONE
+        }else{
+            binding.filterByBudgetLayout.visibility = View.GONE
+            binding.filterByUnitTypeIdLayout.visibility = View.GONE
             binding.filterBySourceIdLayout.visibility = View.GONE
             binding.filterByRequestInterestLayout.visibility = View.GONE
             binding.filterLayout.visibility = View.GONE

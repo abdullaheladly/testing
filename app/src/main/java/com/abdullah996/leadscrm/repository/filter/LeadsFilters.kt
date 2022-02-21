@@ -27,7 +27,7 @@ interface LeadsFilters {
         id:Int
     ): Response<LeedsReponse>
     suspend fun filterByBudget(
-        from:Int,
-        to:Int
+        from:Long,
+        to:Long
     ): Response<LeedsReponse>
 }
