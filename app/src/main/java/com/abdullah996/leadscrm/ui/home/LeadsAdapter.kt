@@ -1,8 +1,5 @@
 package com.abdullah996.leadscrm.ui.home
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

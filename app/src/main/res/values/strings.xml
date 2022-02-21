@@ -25,6 +25,7 @@
     <string-array name="filters">
         <item> </item>
         <item>Date</item>
+        <item>Tag</item>
     </string-array>
     <string-array name="months">
         <item>1</item>
@@ -40,5 +41,28 @@
         <item>11</item>
         <item>12</item>
     </string-array>
+
+    <string-array name="tags_filter">
+        <item>hot_lead</item>
+        <item>interested</item>
+        <item>not_interested</item>
+        <item>vip</item>
+        <item>urgent</item>
+    </string-array>
+    <string-array name="type_filter">
+        <item>buy</item>
+        <item>sell</item>
+        <item>rent</item>
+        <item>sell/rent</item>
+    </string-array>
+    <string-array name="interested_type_filter">
+        <item>primary</item>
+        <item>resale</item>
+    </string-array>
+    <string-array name="request_interest_filter">
+        <item>commercial</item>
+        <item>residential</item>
+    </string-array>
+
 
 </resources>

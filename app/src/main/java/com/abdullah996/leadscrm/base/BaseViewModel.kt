@@ -6,22 +6,16 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import androidx.datastore.preferences.protobuf.Api
 import androidx.lifecycle.*
-import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
 import com.abdullah996.leadscrm.utill.ApiResult
-import com.abdullah996.leadscrm.utill.errorHandler
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Response
-import java.io.IOException
 import java.lang.Exception
-import java.net.UnknownHostException
 
 open class BaseViewModel(application: Application) : AndroidViewModel(application) {
 

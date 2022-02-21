@@ -1,19 +1,9 @@
 package com.abdullah996.leadscrm.ui.edit
 
-import android.app.Activity
 import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.asLiveData
 import com.abdullah996.leadscrm.base.BaseViewModel
-import com.abdullah996.leadscrm.model.leeds.LeedsReponse
-import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
 import com.abdullah996.leadscrm.repository.UpdateLeadImpl
-import com.abdullah996.leadscrm.utill.ApiResult
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 
 class EditLeadViewModel @ViewModelInject constructor(
     private val updateLeadImpl: UpdateLeadImpl,

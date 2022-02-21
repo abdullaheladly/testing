@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Leadscrm">
         <activity
-            android:name=".ui.SplashActivity"
+            android:name="com.abdullah996.leadscrm.ui.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,12 +24,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.HomeActivity"
+            android:name="com.abdullah996.leadscrm.ui.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.Leadscrm.NoActionBar" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.abdullah996.leadscrm.ui.MainActivity"
             android:exported="false">
 
         </activity>
@@ -52,7 +52,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <service
-            android:name=".utill.FirebaseInstanceIDService"
+            android:name="com.abdullah996.leadscrm.utill.FirebaseInstanceIDService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

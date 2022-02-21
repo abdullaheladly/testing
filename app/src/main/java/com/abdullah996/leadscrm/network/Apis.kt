@@ -8,7 +8,6 @@ import com.abdullah996.leadscrm.model.leeds.LeedsReponse
 import com.abdullah996.leadscrm.model.notifications.NotificationsResponse
 import com.abdullah996.leadscrm.model.updateaction.AddActionResponse
 import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
-import com.abdullah996.leadscrm.model.user.Page
 import com.abdullah996.leadscrm.model.user.UserResponse
 import retrofit2.Response
 import retrofit2.http.*
@@ -128,6 +127,17 @@ interface Apis {
         @Query("year") year:String,
         @Query("months[]") month: Array<String>
     ):Response<LeedsReponse>
+
+
+
+    // filter
+    @GET("lead/filter")
+    suspend fun filterByTag(
+        @Query("tag") tag: String
+    ):Response<LeedsReponse>
+
+
+
 
 
 

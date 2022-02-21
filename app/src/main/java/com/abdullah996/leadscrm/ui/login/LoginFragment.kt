@@ -12,20 +12,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.abdullah996.leadscrm.R
 
 import com.abdullah996.leadscrm.databinding.FragmentLoginBinding
 import com.abdullah996.leadscrm.ui.HomeActivity
-import com.abdullah996.leadscrm.utill.ApiResult
 import com.abdullah996.leadscrm.utill.ApiStatus
 import com.abdullah996.leadscrm.utill.SharedPreferenceManger
 import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
-import javax.inject.Inject
-import kotlin.math.log
 
 
 @AndroidEntryPoint

@@ -13,7 +13,6 @@ import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.abdullah996.leadscrm.R
-import com.abdullah996.leadscrm.ui.MainActivity
 import com.abdullah996.leadscrm.ui.SplashActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage

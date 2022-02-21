@@ -2,7 +2,6 @@ package com.abdullah996.leadscrm.utill
 
 import android.content.Context
 import android.content.SharedPreferences
-import dagger.hilt.android.qualifiers.ApplicationContext
 
 interface SharedPreferenceManger{
     var userToken: String
