@@ -258,6 +258,72 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             })
         }
 
+        //filter By Source
+        binding.goFilterSource.setOnClickListener {
+            val sourceId=binding.sourceIdSearch.text.toString()
+            binding.sToRefresh.isRefreshing=true
+            homeViewModel.filterBySourceID(sourceId.toInt()).observe(viewLifecycleOwner,{
+                when(it.status){
+                    ApiStatus.SUCCESS->{
+                        if (!it.data?.data?.data.isNullOrEmpty()) {
+
+                            leadsAdapter.saveData(it.data?.data?.data!!)
+                            binding.sToRefresh.isRefreshing=false
+                            binding.rvLeads.visibility=View.VISIBLE
+                            binding.noDataFound.visibility=View.GONE
+                            binding.pagination.visibility=View.GONE
+
+                        }else{
+                            binding.rvLeads.visibility=View.INVISIBLE
+                            binding.noDataFound.visibility=View.VISIBLE
+                            binding.sToRefresh.isRefreshing=false
+
+
+                        }
+                    }
+                    ApiStatus.ERROR->{
+                        makeToast(it.message.toString())
+                        binding.sToRefresh.isRefreshing=false
+                    }
+                    ApiStatus.LOADING->{
+
+                    }
+                }
+            })
+        }
+        binding.goFilterUnitTypeId.setOnClickListener {
+            val unitType=binding.unitTypeIdSearch.text.toString()
+            binding.sToRefresh.isRefreshing=true
+            homeViewModel.filterByUnitTYpeID(unitType.toInt()).observe(viewLifecycleOwner,{
+                when(it.status){
+                    ApiStatus.SUCCESS->{
+                        if (!it.data?.data?.data.isNullOrEmpty()) {
+
+                            leadsAdapter.saveData(it.data?.data?.data!!)
+                            binding.sToRefresh.isRefreshing=false
+                            binding.rvLeads.visibility=View.VISIBLE
+                            binding.noDataFound.visibility=View.GONE
+                            binding.pagination.visibility=View.GONE
+
+                        }else{
+                            binding.rvLeads.visibility=View.INVISIBLE
+                            binding.noDataFound.visibility=View.VISIBLE
+                            binding.sToRefresh.isRefreshing=false
+
+
+                        }
+                    }
+                    ApiStatus.ERROR->{
+                        makeToast(it.message.toString())
+                        binding.sToRefresh.isRefreshing=false
+                    }
+                    ApiStatus.LOADING->{
+
+                    }
+                }
+            })
+        }
+
 
         //clear filter and return to the ordinary get all leads
         binding.btnClearFilter.setOnClickListener {
@@ -266,6 +332,10 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterByTypeLayout.visibility=View.GONE
             binding.filterByInterestedTypeLayout.visibility=View.GONE
             binding.filterByRequestInterestLayout.visibility=View.GONE
+            binding.filterBySourceIdLayout.visibility=View.GONE
+            binding.filterByUnitTypeIdLayout.visibility = View.GONE
+
+
             binding.sToRefresh.isRefreshing=true
             getAllLeads()
             binding.filterBySpinner.setSelection(0)
@@ -505,17 +575,78 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+        /***
+         * enable one filter and disable the others
+         */
         if (binding.filterBySpinner.selectedItem=="Date"){
             binding.filterLayout.visibility=View.VISIBLE
+            binding.filterByTagLayout.visibility=View.GONE
+            binding.filterByTypeLayout.visibility=View.GONE
+            binding.filterByInterestedTypeLayout.visibility=View.GONE
+            binding.filterByRequestInterestLayout.visibility=View.GONE
+            binding.filterBySourceIdLayout.visibility=View.GONE
+            binding.filterByUnitTypeIdLayout.visibility = View.GONE
+
+
         }
         else if (binding.filterBySpinner.selectedItem=="Tag"){
             binding.filterByTagLayout.visibility=View.VISIBLE
+            binding.filterLayout.visibility=View.GONE
+            binding.filterByTypeLayout.visibility=View.GONE
+            binding.filterByInterestedTypeLayout.visibility=View.GONE
+            binding.filterByRequestInterestLayout.visibility=View.GONE
+            binding.filterBySourceIdLayout.visibility=View.GONE
+            binding.filterByUnitTypeIdLayout.visibility = View.GONE
+
+
         } else if (binding.filterBySpinner.selectedItem == "Type"){
             binding.filterByTypeLayout.visibility=View.VISIBLE
+            binding.filterLayout.visibility=View.GONE
+            binding.filterByTagLayout.visibility=View.GONE
+            binding.filterByInterestedTypeLayout.visibility=View.GONE
+            binding.filterByRequestInterestLayout.visibility=View.GONE
+            binding.filterBySourceIdLayout.visibility=View.GONE
+            binding.filterByUnitTypeIdLayout.visibility = View.GONE
+
+
         }else if (binding.filterBySpinner.selectedItem == "Interested Type"){
             binding.filterByInterestedTypeLayout.visibility=View.VISIBLE
+            binding.filterLayout.visibility=View.GONE
+            binding.filterByTagLayout.visibility=View.GONE
+            binding.filterByTypeLayout.visibility=View.GONE
+            binding.filterByRequestInterestLayout.visibility=View.GONE
+            binding.filterBySourceIdLayout.visibility=View.GONE
+            binding.filterByUnitTypeIdLayout.visibility = View.GONE
+
+
         }else if (binding.filterBySpinner.selectedItem == "Request Interest"){
             binding.filterByRequestInterestLayout.visibility=View.VISIBLE
+            binding.filterLayout.visibility=View.GONE
+            binding.filterByTagLayout.visibility=View.GONE
+            binding.filterByTypeLayout.visibility=View.GONE
+            binding.filterByInterestedTypeLayout.visibility=View.GONE
+            binding.filterBySourceIdLayout.visibility=View.GONE
+            binding.filterByUnitTypeIdLayout.visibility = View.GONE
+
+
+        } else if (binding.filterBySpinner.selectedItem == "Source ID") {
+            binding.filterBySourceIdLayout.visibility = View.VISIBLE
+            binding.filterByRequestInterestLayout.visibility = View.GONE
+            binding.filterLayout.visibility = View.GONE
+            binding.filterByTagLayout.visibility = View.GONE
+            binding.filterByTypeLayout.visibility = View.GONE
+            binding.filterByInterestedTypeLayout.visibility = View.GONE
+            binding.filterByUnitTypeIdLayout.visibility = View.GONE
+
+        } else if (binding.filterBySpinner.selectedItem == "Unit Type") {
+            binding.filterByUnitTypeIdLayout.visibility = View.VISIBLE
+            binding.filterBySourceIdLayout.visibility = View.GONE
+            binding.filterByRequestInterestLayout.visibility = View.GONE
+            binding.filterLayout.visibility = View.GONE
+            binding.filterByTagLayout.visibility = View.GONE
+            binding.filterByTypeLayout.visibility = View.GONE
+            binding.filterByInterestedTypeLayout.visibility = View.GONE
         }
     }
 

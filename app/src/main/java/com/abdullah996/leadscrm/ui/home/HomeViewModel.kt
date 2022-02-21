@@ -53,6 +53,11 @@ class HomeViewModel @ViewModelInject constructor(
     fun filterByRequestInterest(type:String)=handleFlowResponse {
         leadsFilterImpl.filterByRequestInterest(type)
     }
+    fun filterBySourceID(id:Int)=handleFlowResponse {
+        leadsFilterImpl.filterBySourceId(id)
+    }fun filterByUnitTYpeID(id:Int)=handleFlowResponse {
+        leadsFilterImpl.filterByUnitTypeId(id)
+    }
 
 
 

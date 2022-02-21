@@ -29,6 +29,9 @@
         <item>Type</item>
         <item>Interested Type</item>
         <item>Request Interest</item>
+        <item>Source ID</item>
+        <item>Budget</item>
+        <item>Unit Type</item>
     </string-array>
     <string-array name="months">
         <item>1</item>

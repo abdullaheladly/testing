@@ -19,4 +19,15 @@ interface LeadsFilters {
     suspend fun filterByRequestInterest(
         tag:String
     ): Response<LeedsReponse>
+
+    suspend fun filterBySourceId(
+        id:Int
+    ): Response<LeedsReponse>
+    suspend fun filterByUnitTypeId(
+        id:Int
+    ): Response<LeedsReponse>
+    suspend fun filterByBudget(
+        from:Int,
+        to:Int
+    ): Response<LeedsReponse>
 }

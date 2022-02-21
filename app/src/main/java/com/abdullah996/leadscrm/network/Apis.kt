@@ -155,6 +155,26 @@ interface Apis {
     ):Response<LeedsReponse>
 
 
+    // filter by source id
+    @GET("lead/filter")
+    suspend fun filterBySourceID(
+        @Query("source_id") id: Int
+    ):Response<LeedsReponse>
+
+    // filter by budget
+    @GET("lead/filter")
+    suspend fun filterByBudget(
+        @Query("budget_from") from: Int,
+        @Query("budget_to") to: Int
+    ):Response<LeedsReponse>
+
+    // filter by unit Type id
+    @GET("lead/filter")
+    suspend fun filterByUnitTypeId(
+        @Query("unit_type_id") id: Int
+    ):Response<LeedsReponse>
+
+
 
 
 
