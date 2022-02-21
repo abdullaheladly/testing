@@ -27,6 +27,8 @@
         <item>Date</item>
         <item>Tag</item>
         <item>Type</item>
+        <item>Interested Type</item>
+        <item>Request Interest</item>
     </string-array>
     <string-array name="months">
         <item>1</item>

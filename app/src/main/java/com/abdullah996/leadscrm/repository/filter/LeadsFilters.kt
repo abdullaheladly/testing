@@ -11,4 +11,12 @@ interface LeadsFilters {
     suspend fun filterByType(
         tag:String
     ): Response<LeedsReponse>
+
+    suspend fun filterByInterest(
+        tag:String
+    ): Response<LeedsReponse>
+
+    suspend fun filterByRequestInterest(
+        tag:String
+    ): Response<LeedsReponse>
 }

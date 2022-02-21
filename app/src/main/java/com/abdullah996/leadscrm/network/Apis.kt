@@ -142,6 +142,19 @@ interface Apis {
         @Query("type") type: String
     ):Response<LeedsReponse>
 
+    // filter by interest
+    @GET("lead/filter")
+    suspend fun filterByInterest(
+        @Query("interested_type") type: String
+    ):Response<LeedsReponse>
+
+    // filter by request interest
+    @GET("lead/filter")
+    suspend fun filterByRequestInterest(
+        @Query("request_interest") type: String
+    ):Response<LeedsReponse>
+
+
 
 
 
