@@ -3,6 +3,7 @@ package com.abdullah996.leadscrm.ui.home
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.FragmentHomeBinding
 import com.abdullah996.leadscrm.model.leeds.Leads
+import com.abdullah996.leadscrm.ui.SplashActivity
 import com.abdullah996.leadscrm.utill.ApiStatus
 import com.abdullah996.leadscrm.utill.SharedPreferenceManger
 import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
@@ -495,6 +497,15 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                     makeToast(it.message.toString())
                     binding.sToRefresh.isRefreshing=false
                     binding.pagination.visibility=View.INVISIBLE
+                    try {
+
+                        if (it.message.toString() == "UnAuthenticated") {
+                            sharedPreferenceManger.isLoggedIn = false
+                        }
+                        startActivity(Intent(requireActivity(), SplashActivity::class.java))
+                    }catch (ex:Exception){
+                        ex.printStackTrace()
+                    }
 
                 }
                 ApiStatus.LOADING->{
