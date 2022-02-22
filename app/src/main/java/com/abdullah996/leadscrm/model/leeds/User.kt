@@ -2,8 +2,9 @@ package com.abdullah996.leadscrm.model.leeds
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-data class User(
+data class User (
     @SerializedName("agent")
     val agent: Agent,
     @SerializedName("email")
@@ -16,4 +17,4 @@ data class User(
     val roleId: Int,
     @SerializedName("username")
     val username: String
-)
+):Serializable

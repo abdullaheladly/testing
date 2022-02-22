@@ -1,32 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.edit.EditLeadFragment">
 
-  <TextView
-      android:id="@+id/edit_lead"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:text="Edit lead"
-      android:textSize="24sp"
-      android:textColor="@color/black"
-      android:fontFamily="@font/poppins_bold"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/edtLeadScroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/saveEdit"
-        app:layout_constraintTop_toBottomOf="@id/edit_lead"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="match_parent"
+
         >
 
 
@@ -41,10 +26,7 @@
         android:paddingTop="19dp"
         android:paddingBottom="19dp"
         android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@id/saveEdit"
-        app:layout_constraintTop_toBottomOf="@id/edit_lead"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        >
 
         <EditText
             android:id="@+id/edt_name"
@@ -167,26 +149,30 @@
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
+        <Button
+            android:id="@+id/saveEdit"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_30sdp"
+            app:background="@drawable/btn_save_background"
+            app:backgroundTint="@color/darkGreen"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Save"
+            app:layout_constraintTop_toBottomOf="@id/edit_Note"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.core.widget.NestedScrollView>
-    <Button
-        android:id="@+id/saveEdit"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_30sdp"
-        app:background="@drawable/btn_save_background"
-        app:backgroundTint="@color/darkGreen"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Save"
-        app:layout_constraintTop_toBottomOf="@id/edtLeadScroll"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
