@@ -126,12 +126,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:text="Abdullaheladly@gmail.com"
+        android:text="Abdullaheladly@gmail.com jkhfdsb lashas  jkashd  sakljd k "
         android:textSize="14sp"
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/phone" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phone"
+        app:layout_constraintBottom_toTopOf="@id/status"/>
     <TextView
         android:elevation="2dp"
         android:id="@+id/status"
