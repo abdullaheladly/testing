@@ -299,36 +299,40 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         }
         //filter By Unit Type
         binding.goFilterUnitTypeId.setOnClickListener {
-            val unitType=binding.unitTypeIdSearch.text.toString()
-            binding.sToRefresh.isRefreshing=true
-            homeViewModel.filterByUnitTYpeID(unitType.toInt()).observe(viewLifecycleOwner,{
-                when(it.status){
-                    ApiStatus.SUCCESS->{
-                        if (!it.data?.data?.data.isNullOrEmpty()) {
+            if (!binding.unitTypeIdSearch.text.toString().isNullOrEmpty()) {
+                val unitType = binding.unitTypeIdSearch.text.toString()
+                binding.sToRefresh.isRefreshing = true
+                homeViewModel.filterByUnitTYpeID(unitType.toInt()).observe(viewLifecycleOwner, {
+                    when (it.status) {
+                        ApiStatus.SUCCESS -> {
+                            if (!it.data?.data?.data.isNullOrEmpty()) {
 
-                            leadsAdapter.saveData(it.data?.data?.data!!)
-                            binding.sToRefresh.isRefreshing=false
-                            binding.rvLeads.visibility=View.VISIBLE
-                            binding.noDataFound.visibility=View.GONE
-                            binding.pagination.visibility=View.GONE
+                                leadsAdapter.saveData(it.data?.data?.data!!)
+                                binding.sToRefresh.isRefreshing = false
+                                binding.rvLeads.visibility = View.VISIBLE
+                                binding.noDataFound.visibility = View.GONE
+                                binding.pagination.visibility = View.GONE
 
-                        }else{
-                            binding.rvLeads.visibility=View.INVISIBLE
-                            binding.noDataFound.visibility=View.VISIBLE
-                            binding.sToRefresh.isRefreshing=false
+                            } else {
+                                binding.rvLeads.visibility = View.INVISIBLE
+                                binding.noDataFound.visibility = View.VISIBLE
+                                binding.sToRefresh.isRefreshing = false
 
+
+                            }
+                        }
+                        ApiStatus.ERROR -> {
+                            makeToast(it.message.toString())
+                            binding.sToRefresh.isRefreshing = false
+                        }
+                        ApiStatus.LOADING -> {
 
                         }
                     }
-                    ApiStatus.ERROR->{
-                        makeToast(it.message.toString())
-                        binding.sToRefresh.isRefreshing=false
-                    }
-                    ApiStatus.LOADING->{
-
-                    }
-                }
-            })
+                })
+            }else{
+                makeToast("unit type id field can't be null")
+            }
         }
         binding.goFilterBudget.setOnClickListener {
             if (!binding.budgetFromSearch.text.toString().isNullOrEmpty()&&!binding.budgetToSearch.text.toString().isNullOrEmpty()) {
