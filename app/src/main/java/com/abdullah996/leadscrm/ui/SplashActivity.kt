@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatDelegate
 import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.ActivitySplashBinding
 import com.abdullah996.leadscrm.utill.SharedPreferenceManger
@@ -21,6 +22,7 @@ class SplashActivity : AppCompatActivity() {
     private lateinit var sharedPreferenceManger: SharedPreferenceManger
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
         _binding= ActivitySplashBinding.inflate(layoutInflater)
         binding.logoSplash.startAnimation(AnimationUtils.loadAnimation(this,R.anim.pulse))
