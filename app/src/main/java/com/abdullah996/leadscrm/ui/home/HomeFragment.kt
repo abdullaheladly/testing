@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdullah996.leadscrm.R
@@ -25,7 +26,10 @@ import com.abdullah996.leadscrm.utill.SharedPreferenceManger
 import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
-
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
@@ -37,6 +41,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     private val leadsAdapter by lazy { LeadsAdapter(this) }
     private lateinit var sharedPreferenceManger: SharedPreferenceManger
     private var pageNumber=1;
+    private var nostatus=0;
 
 
 
@@ -485,6 +490,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             when(it.status){
                 ApiStatus.SUCCESS->{
                     pageNumber=1
+                    nostatus=0
                     if (it.data?.data?.data!=null) {
                         if (it.data.data.total!=null){
                             binding.txtTotalLeadsNumber.text=it.data.data.total.toString()
@@ -496,6 +502,23 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                             binding.txtNewLeadstoNumber.text=it.data.data.to.toString()
                         }
                         leadsAdapter.saveData(it.data.data.data)
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            it.data.data.data.asFlow().filter {
+                                it.status==null
+                            }.collect {
+                                nostatus+=1
+
+                            }
+
+                           withContext(Dispatchers.Main){
+                               binding.txtNewLeadsslashNumber.text=nostatus.toString()
+
+                           }
+
+
+
+                        }
+
                         binding.sToRefresh.isRefreshing=false
                         binding.rvLeads.visibility=View.VISIBLE
                         binding.viewsLayout.visibility=View.VISIBLE

@@ -35,5 +35,5 @@ data class Leads(
     @SerializedName("users_count")
     val usersCount: Int,
     @SerializedName("status")
-    val status: @RawValue Actions
+    val status: @RawValue Actions?
 ):Parcelable

@@ -69,9 +69,9 @@ class LeadsAdapter(onLeadsClickListener: OnLeadsClickListener):RecyclerView.Adap
             onClickListener.onDeleteLeadClick(leadsList[position].id)
         }
         if (leadsList[position].status!=null){
-            if (!leadsList[position].status.name.isNullOrEmpty()){
-                holder.itemView.findViewById<TextView>(R.id.txt_action).text=leadsList[position].status.name.toString()
-                holder.itemView.findViewById<TextView>(R.id.txt_status).text=leadsList[position].status.name.toString()
+            if (!leadsList[position].status!!.name.isNullOrEmpty()){
+                holder.itemView.findViewById<TextView>(R.id.txt_action).text=leadsList[position].status!!.name.toString()
+                holder.itemView.findViewById<TextView>(R.id.txt_status).text=leadsList[position].status!!.name.toString()
                 holder.itemView.findViewById<CanvasView>(R.id.line_without_status).visibility=View.GONE
                 holder.itemView.findViewById<TextView>(R.id.txt_no_status).visibility=View.GONE
             }else{
@@ -80,8 +80,8 @@ class LeadsAdapter(onLeadsClickListener: OnLeadsClickListener):RecyclerView.Adap
                 holder.itemView.findViewById<CanvasView>(R.id.line_without_status).visibility=View.VISIBLE
                 holder.itemView.findViewById<TextView>(R.id.txt_no_status).visibility=View.VISIBLE
             }
-            if (!leadsList[position].status.comment.isNullOrEmpty()){
-                holder.itemView.findViewById<TextView>(R.id.txt_comment).text=leadsList[position].status.comment.toString()
+            if (!leadsList[position].status!!.comment.isNullOrEmpty()){
+                holder.itemView.findViewById<TextView>(R.id.txt_comment).text=leadsList[position].status!!.comment.toString()
 
             }else{
                 holder.itemView.findViewById<TextView>(R.id.txt_comment).text=""
