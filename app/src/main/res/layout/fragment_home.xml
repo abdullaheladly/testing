@@ -10,7 +10,6 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/viewsLayout"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,20 +22,11 @@
             android:layout_height="match_parent"
             android:background="@drawable/view_background_green"
             android:layout_marginEnd="6dp"
-            app:layout_constraintEnd_toStartOf="@id/view2"
+            app:layout_constraintEnd_toStartOf="@id/view3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/view2"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/view_bg_black"
-            app:layout_constraintStart_toEndOf="@id/view"
-            app:layout_constraintEnd_toStartOf="@id/view3"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <View
             android:id="@+id/view3"
@@ -44,7 +34,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/view_bg_black"
             android:layout_marginStart="6dp"
-            app:layout_constraintStart_toEndOf="@id/view2"
+            app:layout_constraintStart_toEndOf="@id/view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="New leads"
+            android:text="Current page "
             android:textSize="14sp"
             android:fontFamily="@font/poppins"
             android:textColor="@color/white"
@@ -67,39 +57,38 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="10"
+            android:text=".."
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toStartOf="@+id/txt_newLeadsslashNumber"
+            app:layout_constraintStart_toStartOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/txt_newLeads" />
+        <TextView
+            android:id="@+id/txt_newLeadsslashNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text=".."
             android:textColor="@color/white"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@+id/view"
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toBottomOf="@+id/txt_newLeads" />
 
-
         <TextView
-            android:id="@+id/txt_thisMonthLeads"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Jan leads"
-            android:textSize="14sp"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/view2"
-            app:layout_constraintStart_toStartOf="@+id/view2"
-            app:layout_constraintTop_toTopOf="@+id/view2" />
-
-        <TextView
-            android:id="@+id/txt_thisMonthLeadsNumber"
+            android:id="@+id/txt_newLeadstoNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="500"
+            android:text=".."
             android:textColor="@color/white"
             android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/view2"
-            app:layout_constraintStart_toStartOf="@+id/view2"
-            app:layout_constraintTop_toBottomOf="@+id/txt_thisMonthLeads" />
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintStart_toEndOf="@+id/txt_newLeadsslashNumber"
+            app:layout_constraintTop_toBottomOf="@+id/txt_newLeads" />
+
 
         <TextView
             android:id="@+id/txt_totalLeads"
@@ -120,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="500"
+            android:text=".."
             android:textColor="@color/white"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@+id/view3"
@@ -151,7 +140,7 @@
         android:spinnerMode="dropdown"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewsLayout"
         app:layout_constraintStart_toEndOf="@id/txt_filter_by"
         app:layout_constraintEnd_toStartOf="@id/btn_clearFilter"
         />

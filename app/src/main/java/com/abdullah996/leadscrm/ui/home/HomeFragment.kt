@@ -486,9 +486,20 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                 ApiStatus.SUCCESS->{
                     pageNumber=1
                     if (it.data?.data?.data!=null) {
+                        if (it.data.data.total!=null){
+                            binding.txtTotalLeadsNumber.text=it.data.data.total.toString()
+                        }
+                        if (it.data.data.from!=null){
+                            binding.txtNewLeadsNumber.text=it.data.data.from.toString()
+                        }
+                        if (it.data.data.to!=null){
+                            binding.txtNewLeadstoNumber.text=it.data.data.to.toString()
+                        }
                         leadsAdapter.saveData(it.data.data.data)
                         binding.sToRefresh.isRefreshing=false
                         binding.rvLeads.visibility=View.VISIBLE
+                        binding.viewsLayout.visibility=View.VISIBLE
+
 
                         binding.noDataFound.visibility=View.GONE
                         binding.pagination.visibility=View.VISIBLE
@@ -501,6 +512,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                     makeToast(it.message.toString())
                     binding.sToRefresh.isRefreshing=false
                     binding.pagination.visibility=View.INVISIBLE
+                    binding.viewsLayout.visibility=View.GONE
+
                     try {
 
                         if (it.message.toString() == "UnAuthenticated") {
@@ -535,6 +548,15 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                 when (it.status) {
                     ApiStatus.SUCCESS -> {
                         if (it.data?.data?.data != null) {
+                            if (it.data.data.total!=null){
+                                binding.txtTotalLeadsNumber.text=it.data.data.total.toString()
+                            }
+                            if (it.data.data.from!=null){
+                                binding.txtNewLeadsNumber.text=it.data.data.from.toString()
+                            }
+                            if (it.data.data.to!=null){
+                                binding.txtNewLeadstoNumber.text=it.data.data.to.toString()
+                            }
                             leadsAdapter.saveData(it.data.data.data)
                             binding.sToRefresh.isRefreshing = false
                             binding.rvLeads.visibility = View.VISIBLE
@@ -543,6 +565,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                             binding.pagination.visibility = View.VISIBLE
                             setupPagination(it.data.data.lastPage)
                             binding.pageNumber.text=pageNumber.toString()
+                            binding.viewsLayout.visibility=View.VISIBLE
+
 
                         }
                     }
@@ -550,6 +574,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                         makeToast(it.message.toString())
                         binding.sToRefresh.isRefreshing = false
                         binding.pagination.visibility=View.INVISIBLE
+                        binding.viewsLayout.visibility=View.GONE
+
 
                     }
                     ApiStatus.LOADING -> {
@@ -647,6 +673,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterBySourceIdLayout.visibility=View.GONE
             binding.filterByUnitTypeIdLayout.visibility = View.GONE
             binding.filterByBudgetLayout.visibility = View.GONE
+            binding.viewsLayout.visibility=View.GONE
+
 
 
 
@@ -660,6 +688,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterBySourceIdLayout.visibility=View.GONE
             binding.filterByUnitTypeIdLayout.visibility = View.GONE
             binding.filterByBudgetLayout.visibility = View.GONE
+            binding.viewsLayout.visibility=View.GONE
+
 
 
 
@@ -672,6 +702,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterBySourceIdLayout.visibility=View.GONE
             binding.filterByUnitTypeIdLayout.visibility = View.GONE
             binding.filterByBudgetLayout.visibility = View.GONE
+            binding.viewsLayout.visibility=View.GONE
+
 
 
 
@@ -684,6 +716,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterBySourceIdLayout.visibility=View.GONE
             binding.filterByUnitTypeIdLayout.visibility = View.GONE
             binding.filterByBudgetLayout.visibility = View.GONE
+            binding.viewsLayout.visibility=View.GONE
+
 
 
 
@@ -696,6 +730,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterBySourceIdLayout.visibility=View.GONE
             binding.filterByUnitTypeIdLayout.visibility = View.GONE
             binding.filterByBudgetLayout.visibility = View.GONE
+            binding.viewsLayout.visibility=View.GONE
+
 
 
 
@@ -708,6 +744,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterByInterestedTypeLayout.visibility = View.GONE
             binding.filterByUnitTypeIdLayout.visibility = View.GONE
             binding.filterByBudgetLayout.visibility = View.GONE
+            binding.viewsLayout.visibility=View.GONE
+
 
 
         } else if (binding.filterBySpinner.selectedItem == "Unit Type") {
@@ -719,6 +757,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterByTypeLayout.visibility = View.GONE
             binding.filterByInterestedTypeLayout.visibility = View.GONE
             binding.filterByBudgetLayout.visibility = View.GONE
+            binding.viewsLayout.visibility=View.GONE
+
 
         }
         else if (binding.filterBySpinner.selectedItem == "Budget") {
@@ -730,6 +770,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterByTagLayout.visibility = View.GONE
             binding.filterByTypeLayout.visibility = View.GONE
             binding.filterByInterestedTypeLayout.visibility = View.GONE
+            binding.viewsLayout.visibility=View.GONE
+
         }else{
             binding.filterByBudgetLayout.visibility = View.GONE
             binding.filterByUnitTypeIdLayout.visibility = View.GONE
@@ -739,6 +781,9 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.filterByTagLayout.visibility = View.GONE
             binding.filterByTypeLayout.visibility = View.GONE
             binding.filterByInterestedTypeLayout.visibility = View.GONE
+            getAllLeads()
+            binding.viewsLayout.visibility=View.VISIBLE
+
         }
     }
 
@@ -767,10 +812,14 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                             binding.rvLeads.visibility=View.VISIBLE
                             binding.noDataFound.visibility=View.GONE
                             binding.pagination.visibility=View.GONE
+                            binding.viewsLayout.visibility=View.GONE
+
                         }else{
                             binding.sToRefresh.isRefreshing=false
                             binding.rvLeads.visibility=View.INVISIBLE
                             binding.noDataFound.visibility=View.VISIBLE
+                            binding.viewsLayout.visibility=View.GONE
+
                         }
                     }
                     ApiStatus.ERROR->{
