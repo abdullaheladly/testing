@@ -22,10 +22,42 @@ class LeadsAdapter(onLeadsClickListener: OnLeadsClickListener):RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        if(!leadsList[position].name.isNullOrEmpty()){
         holder.itemView.findViewById<TextView>(R.id.txt_name).text = leadsList[position].name.toString()
-        holder.itemView.findViewById<TextView>(R.id.txt_phone).text = leadsList[position].phones.toString()
-        holder.itemView.findViewById<TextView>(R.id.txt_email).text = leadsList[position].email.toString()
-        holder.itemView.findViewById<TextView>(R.id.details).text = leadsList[position].notes.toString()
+        }else {
+            holder.itemView.findViewById<TextView>(R.id.txt_name).text =
+                ""
+        }
+        if(!leadsList[position].phones.isNullOrEmpty()){
+            holder.itemView.findViewById<TextView>(R.id.txt_phone).text = leadsList[position].phones.toString()
+
+        }else {
+            holder.itemView.findViewById<TextView>(R.id.txt_phone).text =
+                ""
+
+        }
+        if(!leadsList[position].email.isNullOrEmpty()){
+            holder.itemView.findViewById<TextView>(R.id.txt_email).text = leadsList[position].email.toString()
+
+
+        }else {
+            holder.itemView.findViewById<TextView>(R.id.txt_email).text =
+                ""
+
+
+        }
+        if(!leadsList[position].notes.isNullOrEmpty()){
+            holder.itemView.findViewById<TextView>(R.id.details).text = leadsList[position].notes.toString()
+
+
+        }else {
+            holder.itemView.findViewById<TextView>(R.id.details).text = ""
+
+
+        }
+
+
+
       //  holder.itemView.findViewById<TextView>(R.id.txt_status).text = leadsList[position].st.toString()
         holder.itemView.findViewById<TextView>(R.id.editInfo).setOnClickListener {
             onClickListener.onEditInfoClick(leadsList[position])
