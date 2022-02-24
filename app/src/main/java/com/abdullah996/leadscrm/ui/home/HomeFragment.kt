@@ -511,7 +511,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                             }
 
                            withContext(Dispatchers.Main){
-                               binding.txtNewLeadsslashNumber.text=nostatus.toString()
+                               binding.txtNoStatusLeadsNumber.text=nostatus.toString()
 
                            }
 
@@ -568,6 +568,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                 sharedPreferenceManger.companyId.toInt(),
                 sharedPreferenceManger.userToken,int
             ).observe(viewLifecycleOwner, {
+                nostatus=0
                 when (it.status) {
                     ApiStatus.SUCCESS -> {
                         if (it.data?.data?.data != null) {
@@ -589,6 +590,23 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                             setupPagination(it.data.data.lastPage)
                             binding.pageNumber.text=pageNumber.toString()
                             binding.viewsLayout.visibility=View.VISIBLE
+
+                            lifecycleScope.launch(Dispatchers.IO) {
+                                it.data.data.data.asFlow().filter {
+                                    it.status==null
+                                }.collect {
+                                    nostatus+=1
+
+                                }
+
+                                withContext(Dispatchers.Main){
+                                    binding.txtNoStatusLeadsNumber.text=nostatus.toString()
+
+                                }
+
+
+
+                            }
 
 
                         }

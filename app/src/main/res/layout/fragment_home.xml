@@ -22,19 +22,28 @@
             android:layout_height="match_parent"
             android:background="@drawable/view_background_green"
             android:layout_marginEnd="6dp"
-            app:layout_constraintEnd_toStartOf="@id/view3"
+            app:layout_constraintEnd_toStartOf="@id/view2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
 
         <View
-            android:id="@+id/view3"
+            android:id="@+id/view2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@drawable/view_bg_black"
             android:layout_marginStart="6dp"
             app:layout_constraintStart_toEndOf="@id/view"
+            app:layout_constraintEnd_toStartOf="@id/view3"
+            app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:id="@+id/view3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/view_bg_black"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@id/view2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,6 +98,32 @@
             app:layout_constraintStart_toEndOf="@+id/txt_newLeadsslashNumber"
             app:layout_constraintTop_toBottomOf="@+id/txt_newLeads" />
 
+
+        <TextView
+            android:id="@+id/txt_noStatusLeads"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="No Status in this page"
+            android:textSize="10sp"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/view2"
+            app:layout_constraintStart_toStartOf="@+id/view2"
+            app:layout_constraintTop_toTopOf="@+id/view2" />
+
+        <TextView
+            android:id="@+id/txt_noStatusLeadsNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text=".."
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/view2"
+            app:layout_constraintStart_toStartOf="@+id/view2"
+            app:layout_constraintTop_toBottomOf="@+id/txt_noStatusLeads" />
 
         <TextView
             android:id="@+id/txt_totalLeads"
