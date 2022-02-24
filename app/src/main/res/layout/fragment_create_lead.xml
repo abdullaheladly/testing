@@ -20,6 +20,7 @@
         />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/saveEdit_create"
@@ -179,6 +180,7 @@
         android:textSize="16sp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Save"
+        app:layout_constraintTop_toBottomOf="@id/scrollView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
