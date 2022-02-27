@@ -680,15 +680,10 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                         if (it.data.data.total!=null){
                             binding.txtTotalLeadsNumber.text=it.data.data.total.toString()
                         }
-
                         leadsAdapter.saveData(it.data.data.data)
-
-
                         binding.sToRefresh.isRefreshing=false
                         binding.rvLeads.visibility=View.VISIBLE
                         binding.viewsLayout.visibility=View.VISIBLE
-
-
                         binding.noDataFound.visibility=View.GONE
                         binding.pagination.visibility=View.VISIBLE
                         binding.paginationStatus.visibility=View.GONE
@@ -703,9 +698,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                     binding.pagination.visibility=View.INVISIBLE
                     binding.paginationStatus.visibility=View.GONE
                     binding.viewsLayout.visibility=View.GONE
-
                     try {
-
                         if (it.message.toString() == "UnAuthenticated") {
                             sharedPreferenceManger.isLoggedIn = false
                         }
@@ -713,11 +706,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                     }catch (ex:Exception){
                         ex.printStackTrace()
                     }
-
                 }
                 ApiStatus.LOADING->{
-
-
                 }
             }
         })
@@ -753,12 +743,6 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                             setupPagination(it.data.data.lastPage)
                             binding.pageNumber.text=pageNumber.toString()
                             binding.viewsLayout.visibility=View.VISIBLE
-
-
-
-
-
-
                         }
                     }
                     ApiStatus.ERROR -> {
@@ -767,12 +751,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                         binding.pagination.visibility=View.INVISIBLE
                         binding.paginationStatus.visibility=View.GONE
                         binding.viewsLayout.visibility=View.GONE
-
-
                     }
                     ApiStatus.LOADING -> {
-
-
                     }
                 }
             })
@@ -866,153 +846,42 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
          * enable one filter and disable the others
          */
         if (binding.filterBySpinner.selectedItem=="Date"){
+            makeUnvisible()
             binding.filterLayout.visibility=View.VISIBLE
-            binding.filterByTagLayout.visibility=View.GONE
-            binding.filterByTypeLayout.visibility=View.GONE
-            binding.filterByInterestedTypeLayout.visibility=View.GONE
-            binding.filterByRequestInterestLayout.visibility=View.GONE
-            binding.filterBySourceIdLayout.visibility=View.GONE
-            binding.filterByUnitTypeIdLayout.visibility = View.GONE
-            binding.filterByBudgetLayout.visibility = View.GONE
-            binding.viewsLayout.visibility=View.GONE
-            binding.filterByStatusLayout.visibility=View.GONE
-
-
-
-
-
         }
         else if (binding.filterBySpinner.selectedItem=="Tag"){
+            makeUnvisible()
             binding.filterByTagLayout.visibility=View.VISIBLE
-            binding.filterLayout.visibility=View.GONE
-            binding.filterByTypeLayout.visibility=View.GONE
-            binding.filterByInterestedTypeLayout.visibility=View.GONE
-            binding.filterByRequestInterestLayout.visibility=View.GONE
-            binding.filterBySourceIdLayout.visibility=View.GONE
-            binding.filterByUnitTypeIdLayout.visibility = View.GONE
-            binding.filterByBudgetLayout.visibility = View.GONE
-            binding.viewsLayout.visibility=View.GONE
-            binding.filterByStatusLayout.visibility=View.GONE
-
-
-
-
-
         } else if (binding.filterBySpinner.selectedItem == "Type"){
+            makeUnvisible()
             binding.filterByTypeLayout.visibility=View.VISIBLE
-            binding.filterLayout.visibility=View.GONE
-            binding.filterByTagLayout.visibility=View.GONE
-            binding.filterByInterestedTypeLayout.visibility=View.GONE
-            binding.filterByRequestInterestLayout.visibility=View.GONE
-            binding.filterBySourceIdLayout.visibility=View.GONE
-            binding.filterByUnitTypeIdLayout.visibility = View.GONE
-            binding.filterByBudgetLayout.visibility = View.GONE
-            binding.viewsLayout.visibility=View.GONE
-            binding.filterByStatusLayout.visibility=View.GONE
-
-
-
-
-
         }else if (binding.filterBySpinner.selectedItem == "Interested Type"){
+            makeUnvisible()
             binding.filterByInterestedTypeLayout.visibility=View.VISIBLE
-            binding.filterLayout.visibility=View.GONE
-            binding.filterByTagLayout.visibility=View.GONE
-            binding.filterByTypeLayout.visibility=View.GONE
-            binding.filterByRequestInterestLayout.visibility=View.GONE
-            binding.filterBySourceIdLayout.visibility=View.GONE
-            binding.filterByUnitTypeIdLayout.visibility = View.GONE
-            binding.filterByBudgetLayout.visibility = View.GONE
-            binding.viewsLayout.visibility=View.GONE
-            binding.filterByStatusLayout.visibility=View.GONE
-
-
-
-
 
         }else if (binding.filterBySpinner.selectedItem == "Request Interest"){
+            makeUnvisible()
             binding.filterByRequestInterestLayout.visibility=View.VISIBLE
-            binding.filterLayout.visibility=View.GONE
-            binding.filterByTagLayout.visibility=View.GONE
-            binding.filterByTypeLayout.visibility=View.GONE
-            binding.filterByInterestedTypeLayout.visibility=View.GONE
-            binding.filterBySourceIdLayout.visibility=View.GONE
-            binding.filterByUnitTypeIdLayout.visibility = View.GONE
-            binding.filterByBudgetLayout.visibility = View.GONE
-            binding.viewsLayout.visibility=View.GONE
-            binding.filterByStatusLayout.visibility=View.GONE
-
-
-
-
-
         } else if (binding.filterBySpinner.selectedItem == "Source ID") {
+            makeUnvisible()
             binding.filterBySourceIdLayout.visibility = View.VISIBLE
-            binding.filterByRequestInterestLayout.visibility = View.GONE
-            binding.filterLayout.visibility = View.GONE
-            binding.filterByTagLayout.visibility = View.GONE
-            binding.filterByTypeLayout.visibility = View.GONE
-            binding.filterByInterestedTypeLayout.visibility = View.GONE
-            binding.filterByUnitTypeIdLayout.visibility = View.GONE
-            binding.filterByBudgetLayout.visibility = View.GONE
-            binding.viewsLayout.visibility=View.GONE
-            binding.filterByStatusLayout.visibility=View.GONE
-
-
-
 
         } else if (binding.filterBySpinner.selectedItem == "Unit Type") {
+            makeUnvisible()
             binding.filterByUnitTypeIdLayout.visibility = View.VISIBLE
-            binding.filterBySourceIdLayout.visibility = View.GONE
-            binding.filterByRequestInterestLayout.visibility = View.GONE
-            binding.filterLayout.visibility = View.GONE
-            binding.filterByTagLayout.visibility = View.GONE
-            binding.filterByTypeLayout.visibility = View.GONE
-            binding.filterByInterestedTypeLayout.visibility = View.GONE
-            binding.filterByBudgetLayout.visibility = View.GONE
-            binding.viewsLayout.visibility=View.GONE
-            binding.filterByStatusLayout.visibility=View.GONE
-
-
 
         }
         else if (binding.filterBySpinner.selectedItem == "Budget") {
+            makeUnvisible()
             binding.filterByBudgetLayout.visibility = View.VISIBLE
-            binding.filterByUnitTypeIdLayout.visibility = View.GONE
-            binding.filterBySourceIdLayout.visibility = View.GONE
-            binding.filterByRequestInterestLayout.visibility = View.GONE
-            binding.filterLayout.visibility = View.GONE
-            binding.filterByTagLayout.visibility = View.GONE
-            binding.filterByTypeLayout.visibility = View.GONE
-            binding.filterByInterestedTypeLayout.visibility = View.GONE
-            binding.viewsLayout.visibility=View.GONE
-            binding.filterByStatusLayout.visibility=View.GONE
-
 
         }else if(binding.filterBySpinner.selectedItem=="Status"){
+            makeUnvisible()
             binding.filterByStatusLayout.visibility=View.VISIBLE
-            binding.filterByBudgetLayout.visibility = View.GONE
-            binding.filterByUnitTypeIdLayout.visibility = View.GONE
-            binding.filterBySourceIdLayout.visibility = View.GONE
-            binding.filterByRequestInterestLayout.visibility = View.GONE
-            binding.filterLayout.visibility = View.GONE
-            binding.filterByTagLayout.visibility = View.GONE
-            binding.filterByTypeLayout.visibility = View.GONE
-            binding.filterByInterestedTypeLayout.visibility = View.GONE
-            binding.viewsLayout.visibility=View.GONE
 
         } else
         {
-            binding.filterByBudgetLayout.visibility = View.GONE
-            binding.filterByUnitTypeIdLayout.visibility = View.GONE
-            binding.filterBySourceIdLayout.visibility = View.GONE
-            binding.filterByRequestInterestLayout.visibility = View.GONE
-            binding.filterLayout.visibility = View.GONE
-            binding.filterByTagLayout.visibility = View.GONE
-            binding.filterByTypeLayout.visibility = View.GONE
-            binding.filterByInterestedTypeLayout.visibility = View.GONE
-            binding.filterByStatusLayout.visibility=View.GONE
-
+          makeUnvisible()
             getAllLeads()
             binding.viewsLayout.visibility=View.VISIBLE
 
@@ -1101,5 +970,18 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         }
 
 
+    }
+
+    private fun makeUnvisible(){
+        binding.filterByStatusLayout.visibility=View.GONE
+        binding.filterByBudgetLayout.visibility = View.GONE
+        binding.filterByUnitTypeIdLayout.visibility = View.GONE
+        binding.filterBySourceIdLayout.visibility = View.GONE
+        binding.filterByRequestInterestLayout.visibility = View.GONE
+        binding.filterLayout.visibility = View.GONE
+        binding.filterByTagLayout.visibility = View.GONE
+        binding.filterByTypeLayout.visibility = View.GONE
+        binding.filterByInterestedTypeLayout.visibility = View.GONE
+        binding.viewsLayout.visibility=View.GONE
     }
 }
