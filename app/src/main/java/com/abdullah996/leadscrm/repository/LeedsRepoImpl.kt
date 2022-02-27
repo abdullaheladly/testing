@@ -1,6 +1,7 @@
 package com.abdullah996.leadscrm.repository
 
 import com.abdullah996.leadscrm.model.leeds.LeedsReponse
+import com.abdullah996.leadscrm.model.statusmodel.StatusModelResponse
 import com.abdullah996.leadscrm.model.unreadnotifications.UnreadNotificationsResponse
 import com.abdullah996.leadscrm.network.Apis
 import dagger.hilt.android.scopes.ActivityRetainedScoped
@@ -34,6 +35,27 @@ class LeedsRepoImpl@Inject constructor(
 
     override suspend fun getAllUnreadNotifications(): Response<UnreadNotificationsResponse> {
         return apis.getAllUnreadNotifications()
+    }
+
+    override suspend fun getAllLeadsByStatusId(
+        is_paginate: Int,
+        company_id: Int?,
+        statusId:Int
+    ): Response<LeedsReponse> {
+        return apis.getAllLeadsByStatus(is_paginate,company_id,statusId)
+    }
+
+    override suspend fun getAllLeadsByStatusId(
+        is_paginate: Int,
+        company_id: Int?,
+        statusId:Int,
+        page: Int
+    ): Response<LeedsReponse> {
+        return apis.getAllLeadsByStatus(is_paginate,company_id,statusId,page)
+    }
+
+    override suspend fun getAllStatusToFilter(company_id: Int?): Response<StatusModelResponse> {
+        return apis.getAllStatusToFilter(company_id)
     }
 
 }

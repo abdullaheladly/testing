@@ -1,6 +1,7 @@
 package com.abdullah996.leadscrm.repository
 
 import com.abdullah996.leadscrm.model.leeds.LeedsReponse
+import com.abdullah996.leadscrm.model.statusmodel.StatusModelResponse
 import com.abdullah996.leadscrm.model.unreadnotifications.UnreadNotificationsResponse
 import retrofit2.Response
 
@@ -34,4 +35,22 @@ interface LeedsRepo {
     suspend fun getAllUnreadNotifications(
 
     ):Response<UnreadNotificationsResponse>
+
+
+    suspend fun getAllLeadsByStatusId(
+        is_paginate:Int,
+        company_id:Int?,
+        statusId:Int
+    ):Response<LeedsReponse>
+
+    suspend fun getAllLeadsByStatusId(
+        is_paginate:Int,
+        company_id:Int?,
+        statusId:Int,
+        page: Int
+    ):Response<LeedsReponse>
+
+    suspend fun getAllStatusToFilter(
+        company_id:Int?,
+    ):Response<StatusModelResponse>
 }

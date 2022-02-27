@@ -6,6 +6,7 @@ import com.abdullah996.leadscrm.model.delete.DeleteLeadResponse
 import com.abdullah996.leadscrm.model.getstatus.AllStatusReponse
 import com.abdullah996.leadscrm.model.leeds.LeedsReponse
 import com.abdullah996.leadscrm.model.notifications.NotificationsResponse
+import com.abdullah996.leadscrm.model.statusmodel.StatusModelResponse
 import com.abdullah996.leadscrm.model.unreadnotifications.UnreadNotificationsResponse
 import com.abdullah996.leadscrm.model.updateaction.AddActionResponse
 import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
@@ -34,6 +35,22 @@ interface Apis {
         @Query("page") page: Int,
         @Header("Authorization") token:String,
 
+    ):Response<LeedsReponse>
+
+    // get all leads by company id and page
+    @GET("lead/get-all")
+    suspend fun getAllLeadsByStatus(
+        @Query("is_paginate") num:Int,
+        @Query("company_id") company_id:Int?,
+        @Query("status_id") status_id: Int?,
+        ):Response<LeedsReponse>
+
+    @GET("lead/get-all")
+    suspend fun getAllLeadsByStatus(
+        @Query("is_paginate") num:Int,
+        @Query("company_id") company_id:Int?,
+        @Query("status_id") status_id: Int?,
+        @Query("page") page: Int,
     ):Response<LeedsReponse>
 
 
@@ -97,6 +114,12 @@ interface Apis {
     suspend fun getStatus(
     ):Response<BaseAction>
 
+    // get all action available status
+    @GET("lead-statuses/stats")
+    suspend fun getAllStatusToFilter(
+        @Query("company_id") company_id:Int?,
+    ):Response<StatusModelResponse>
+
     //create new action for the lead
     @POST("lead/status")
     @FormUrlEncoded
@@ -120,6 +143,8 @@ interface Apis {
     @GET("user/notification/get-all")
     suspend fun getAllNotifications(
     ):Response<NotificationsResponse>
+
+
 
 
     //mark all notifications as read

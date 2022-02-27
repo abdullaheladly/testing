@@ -11,5 +11,6 @@ data class Data(
     @SerializedName("name")
     val name: String,
     @SerializedName("updated_at")
-    val updatedAt: String
+    val updatedAt: String,
+
 )

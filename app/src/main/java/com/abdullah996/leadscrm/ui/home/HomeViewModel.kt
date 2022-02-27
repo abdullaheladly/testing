@@ -67,6 +67,25 @@ class HomeViewModel @ViewModelInject constructor(
     fun getAllUnreadNotifications()=handleFlowResponse {
         leedsRepoImpl.getAllUnreadNotifications()
     }
+    fun getAllLeadsByStatusId(   is_paginate: Int,
+                                 company_id: Int?,
+                                 statusId:Int,
+                                 page: Int)=handleFlowResponse {
+                                     leedsRepoImpl.getAllLeadsByStatusId(is_paginate, company_id, statusId, page)
+    }
+    fun getAllLeadsByStatusId(   is_paginate: Int,
+                                 company_id: Int?,
+                                 statusId:Int,
+    )=handleFlowResponse {
+        leedsRepoImpl.getAllLeadsByStatusId(is_paginate, company_id, statusId)
+    }
+
+
+    fun getAllStatusToFilter(
+        company_id: Int?
+    )=handleFlowResponse {
+        leedsRepoImpl.getAllStatusToFilter(company_id)
+    }
 
 
 

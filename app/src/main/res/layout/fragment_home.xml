@@ -16,114 +16,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/view_background_green"
-            android:layout_marginEnd="6dp"
-            app:layout_constraintEnd_toStartOf="@id/view2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
 
 
-        <View
-            android:id="@+id/view2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/view_bg_black"
-            android:layout_marginStart="6dp"
-            app:layout_constraintStart_toEndOf="@id/view"
-            app:layout_constraintEnd_toStartOf="@id/view3"
-            app:layout_constraintTop_toTopOf="parent" />
+
+
         <View
             android:id="@+id/view3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@drawable/view_bg_black"
             android:layout_marginStart="6dp"
-            app:layout_constraintStart_toEndOf="@id/view2"
+            android:layout_marginEnd="6dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txt_newLeads"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Current page "
-            android:textSize="14sp"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toTopOf="@+id/view" />
-
-        <TextView
-            android:id="@+id/txt_newLeadsNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text=".."
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toStartOf="@+id/txt_newLeadsslashNumber"
-            app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/txt_newLeads" />
-        <TextView
-            android:id="@+id/txt_newLeadsslashNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text=".."
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/txt_newLeads" />
-
-        <TextView
-            android:id="@+id/txt_newLeadstoNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text=".."
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintStart_toEndOf="@+id/txt_newLeadsslashNumber"
-            app:layout_constraintTop_toBottomOf="@+id/txt_newLeads" />
-
-
-        <TextView
-            android:id="@+id/txt_noStatusLeads"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="No Status in this page"
-            android:textSize="10sp"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/view2"
-            app:layout_constraintStart_toStartOf="@+id/view2"
-            app:layout_constraintTop_toTopOf="@+id/view2" />
-
-        <TextView
-            android:id="@+id/txt_noStatusLeadsNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text=".."
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/view2"
-            app:layout_constraintStart_toStartOf="@+id/view2"
-            app:layout_constraintTop_toBottomOf="@+id/txt_noStatusLeads" />
 
         <TextView
             android:id="@+id/txt_totalLeads"
@@ -533,6 +441,45 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/filterByStatus_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filter_layout"
+        >
+
+
+
+        <Spinner
+            android:layout_marginTop="@dimen/_4sdp"
+            android:id="@+id/status_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textAlignment="center"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:spinnerMode="dropdown"
+            android:gravity="center"
+            />
+
+        <Button
+            android:id="@+id/go_filter_Status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:text="filter"
+            android:backgroundTint="@color/darkGreen"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            />
+
+    </LinearLayout>
+
 
 
     <com.google.android.material.chip.ChipGroup
@@ -595,7 +542,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filterByBudgetLayout"
+        app:layout_constraintTop_toBottomOf="@id/filterByStatus_layout"
         app:layout_constraintVertical_bias="1.0">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -677,6 +624,62 @@
             android:background="@color/lightMediumGray"
             app:layout_constraintStart_toEndOf="@id/backArrowPagination"
             app:layout_constraintEnd_toStartOf="@id/forwardArrowPagination"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/paginationStatus"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp"
+        android:background="@drawable/leads_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            android:id="@+id/backArrowPaginationStatus"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:fontFamily="@font/poppins_semibold"
+            android:layout_marginStart="@dimen/_10sdp"
+
+            android:textAlignment="center"
+            android:textSize="@dimen/_12sdp"
+            android:background="@color/lightMediumGray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:drawableStartCompat="@drawable/ic_back_arrow" />
+        <TextView
+            android:id="@+id/forwardArrowPaginationStatus"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textAlignment="center"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:background="@color/lightMediumGray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:drawableEndCompat="@drawable/ic_forward_arrow" />
+        <TextView
+            android:id="@+id/pageNumberStatus"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="0dp"
+            android:text="1"
+            android:textStyle="bold"
+
+            android:textAlignment="center"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="@dimen/_12sdp"
+            android:background="@color/lightMediumGray"
+            app:layout_constraintStart_toEndOf="@id/backArrowPaginationStatus"
+            app:layout_constraintEnd_toStartOf="@id/forwardArrowPaginationStatus"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
