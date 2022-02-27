@@ -1,6 +1,7 @@
 package com.abdullah996.leadscrm.repository.notifications
 
 import com.abdullah996.leadscrm.model.notifications.NotificationsResponse
+import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
 import com.abdullah996.leadscrm.network.Apis
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import retrofit2.Response
@@ -13,5 +14,9 @@ class NotificationsRepoImpl @Inject constructor(
 ) :NotificationRepo {
     override suspend fun getAllNotifications(): Response<NotificationsResponse> {
         return apis.getAllNotifications()
+    }
+
+    override suspend fun markAsRead(): Response<UpdateLeadsRespons> {
+        return apis.markAllAsRead()
     }
 }

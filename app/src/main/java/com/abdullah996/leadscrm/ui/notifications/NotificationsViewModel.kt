@@ -13,4 +13,7 @@ class NotificationsViewModel @ViewModelInject constructor(
     fun getAllNotifications()=handleFlowResponse {
         notificationRepo.getAllNotifications()
     }
+    fun markAllAsREad()=handleFlowResponse {
+        notificationRepo.markAsRead()
+    }
 }

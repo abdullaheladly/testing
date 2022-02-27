@@ -1,5 +1,7 @@
 package com.abdullah996.leadscrm.ui.notifications
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +29,12 @@ class NotificationsAdapter(image:String):RecyclerView.Adapter<NotificationsAdapt
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.itemView.findViewById<TextView>(R.id.txt_notifications_text).text=notificationsList[position].data.msg
         holder.itemView.findViewById<TextView>(R.id.txt_notifications_date).text=notificationsList[position].createdAt
+        if (notificationsList[position].readAt!=null){
+            holder.itemView.setBackgroundColor(Color.WHITE)
+        }else{
+            holder.itemView.setBackgroundColor(Color.LTGRAY)
+
+        }
         if (logo=="null"){
                     // keep current logo as it is
         }else{

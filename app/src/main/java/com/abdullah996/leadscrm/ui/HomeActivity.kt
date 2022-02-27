@@ -85,7 +85,7 @@ class HomeActivity : AppCompatActivity() {
         super.onDestroy()
         _binding=null
     }
-    private fun getAllUnreadNotifications() : Int {
+     fun getAllUnreadNotifications() : Int {
         var x=0
         homeViewModel.getAllUnreadNotifications().observe(this,{
             when(it.status){

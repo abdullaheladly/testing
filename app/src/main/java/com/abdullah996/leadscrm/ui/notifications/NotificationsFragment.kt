@@ -11,10 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.FragmentNotificationsBinding
+import com.abdullah996.leadscrm.ui.HomeActivity
 import com.abdullah996.leadscrm.utill.ApiStatus
 import com.abdullah996.leadscrm.utill.SharedPreferenceManger
 import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
+import android.app.Activity
+
+
+
 
 
 class NotificationsFragment : Fragment() {
@@ -48,6 +53,7 @@ class NotificationsFragment : Fragment() {
             when(it.status) {
                 ApiStatus.SUCCESS -> {
                     adapter.saveData(it.data?.data?.data!!)
+                    makeAllnotificationsAsRead()
                 }
                 ApiStatus.ERROR -> {
                     Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
@@ -62,6 +68,27 @@ class NotificationsFragment : Fragment() {
         return binding.root
     }
 
+    private fun makeAllnotificationsAsRead() {
+        notificationsViewModel.markAllAsREad().observe(viewLifecycleOwner,{
+            when(it.status) {
+                ApiStatus.SUCCESS -> {
+                    val activity: Activity? = activity
+                    if (activity is HomeActivity) {
+                        val myactivity: HomeActivity? = activity as HomeActivity?
+                        myactivity?.getAllUnreadNotifications()
+                    }
+                }
+                ApiStatus.ERROR -> {
+                    Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
+
+                }
+                ApiStatus.LOADING -> {
+
+                }
+            }
+        })
+    }
+
     private fun setupRecycleView() {
         binding.rvNotifications.adapter=adapter
         binding.rvNotifications.layoutManager= LinearLayoutManager(requireContext())
@@ -69,6 +96,8 @@ class NotificationsFragment : Fragment() {
             addDuration=500
         }
     }
+
+
 
 
     override fun onDestroyView() {

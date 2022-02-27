@@ -13,5 +13,5 @@ data class Notification(
     @SerializedName("notifiable_id")
     val notifiableId: Int,
     @SerializedName("read_at")
-    val readAt: Any
+    val readAt: Any?
 )

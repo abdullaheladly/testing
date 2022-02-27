@@ -122,6 +122,10 @@ interface Apis {
     ):Response<NotificationsResponse>
 
 
+    //mark all notifications as read
+    @GET("user/notification/mark-as-read")
+    suspend fun markAllAsRead():Response<UpdateLeadsRespons>
+
     //totalUnreadNotification
     @GET("user/notification/total-unread-notifications")
     suspend fun getAllUnreadNotifications():Response<UnreadNotificationsResponse>
