@@ -425,6 +425,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             if (statusId==null){
                 statusId=1
             }
+            binding.sToRefresh.isRefreshing=true
             getallLeadsByStatus(statusId)
         }
 
@@ -489,6 +490,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                                 binding.txtTotalLeadsNumber.text=it.data.data.total.toString()
                             }
 
+
                             leadsAdapter.saveData(it.data.data.data)
 
 
@@ -497,12 +499,17 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                             binding.viewsLayout.visibility=View.VISIBLE
 
 
-                            binding.noDataFound.visibility=View.GONE
                             binding.pagination.visibility=View.GONE
                             binding.paginationStatus.visibility=View.VISIBLE
                             setupPaginationStatus(it.data.data.lastPage)
-                            binding.pageNumber.text=pageNumber.toString()
+                            binding.pageNumberStatus.text=pageNumber.toString()
+                            if (it.data.data.data.size>0){
+                                binding.noDataFound.visibility=View.GONE
 
+                            }else{
+                                binding.noDataFound.visibility=View.VISIBLE
+
+                            }
                         }
                     }
                     ApiStatus.ERROR->{
@@ -556,7 +563,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                             binding.pagination.visibility=View.GONE
                             binding.paginationStatus.visibility=View.VISIBLE
                             setupPaginationStatus(it.data.data.lastPage)
-                            binding.pageNumber.text=pageNumber.toString()
+                            binding.pageNumberStatus.text=pageNumber.toString()
 
                         }
                     }
@@ -835,6 +842,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     }
 
     override fun onStatusItemClick(id: Int) {
+        binding.sToRefresh.isRefreshing=true
         getallLeadsByStatus(id)
     }
 
