@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class StatusModelResponse(
     @SerializedName("data")
-    val `data`: List<Data>,
+    val `data`: List<StatusModel>,
     @SerializedName("message")
     val message: String,
     @SerializedName("status")

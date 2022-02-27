@@ -23,13 +23,13 @@
 
         <View
             android:id="@+id/view3"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="match_parent"
             android:background="@drawable/view_bg_black"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/rv_status"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -59,7 +59,17 @@
             app:layout_constraintStart_toStartOf="@+id/view3"
             app:layout_constraintTop_toBottomOf="@+id/txt_totalLeads" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/rv_status"
+            app:layout_constraintStart_toEndOf="@id/view3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <TextView
         android:id="@+id/txt_filter_by"

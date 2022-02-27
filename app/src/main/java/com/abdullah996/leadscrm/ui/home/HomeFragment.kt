@@ -43,6 +43,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     private lateinit var actionsViewModel: ActionsViewModel
     private var token:String?=null
     private val leadsAdapter by lazy { LeadsAdapter(this) }
+    private val statusHomeAdapter by lazy { StatusHomeAdapter(this) }
     private lateinit var sharedPreferenceManger: SharedPreferenceManger
     private var pageNumber=1;
     private var nostatus=0;
@@ -786,6 +787,10 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         binding.rvLeads.itemAnimator=SlideInLeftAnimator().apply {
             addDuration=500
         }
+
+        binding.rvStatus.adapter=statusHomeAdapter
+        binding.rvStatus.layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+
     }
 
     override fun onDestroyView() {
@@ -827,6 +832,10 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
 
     })
         }
+    }
+
+    override fun onStatusItemClick(id: Int) {
+        getallLeadsByStatus(id)
     }
 
     private fun hasInternetConnection():Boolean{
@@ -1007,6 +1016,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             when(it.status) {
                 ApiStatus.SUCCESS -> {
                         baseAction=it.data
+                    it.data?.data?.let { it1 -> statusHomeAdapter.saveData(it1) }
                     for (item in it.data!!.data){
                         list.add(item.name+"    ("+item.leadsCount+")")
                     }

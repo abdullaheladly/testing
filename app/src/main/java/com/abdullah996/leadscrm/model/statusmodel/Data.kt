@@ -3,7 +3,7 @@ package com.abdullah996.leadscrm.model.statusmodel
 
 import com.google.gson.annotations.SerializedName
 
-data class Data(
+data class StatusModel(
     @SerializedName("created_at")
     val createdAt: Any,
     @SerializedName("id")
