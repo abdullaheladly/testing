@@ -1,6 +1,7 @@
 package com.abdullah996.leadscrm.repository
 
 import com.abdullah996.leadscrm.model.leeds.LeedsReponse
+import com.abdullah996.leadscrm.model.unreadnotifications.UnreadNotificationsResponse
 import retrofit2.Response
 
 interface LeedsRepo {
@@ -29,4 +30,8 @@ interface LeedsRepo {
         year:String,
         month: Array<String>
     ):Response<LeedsReponse>
+
+    suspend fun getAllUnreadNotifications(
+
+    ):Response<UnreadNotificationsResponse>
 }

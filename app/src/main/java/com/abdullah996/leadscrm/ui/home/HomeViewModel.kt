@@ -64,6 +64,10 @@ class HomeViewModel @ViewModelInject constructor(
         leadsFilterImpl.filterByBudget(from,to)
     }
 
+    fun getAllUnreadNotifications()=handleFlowResponse {
+        leedsRepoImpl.getAllUnreadNotifications()
+    }
+
 
 
 

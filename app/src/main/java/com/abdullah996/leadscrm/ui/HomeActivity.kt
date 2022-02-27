@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.ActivityHomeBinding
 import com.abdullah996.leadscrm.ui.home.HomeFragment
+import com.abdullah996.leadscrm.ui.home.HomeViewModel
 import com.abdullah996.leadscrm.ui.login.LoginViewModel
 import com.abdullah996.leadscrm.utill.ApiStatus
 import com.abdullah996.leadscrm.utill.SharedPreferenceManger
@@ -23,14 +24,17 @@ class HomeActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private lateinit var sharedPreferenceManger: SharedPreferenceManger
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var homeViewModel: HomeViewModel
     private lateinit var searchByName:SearchByName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferenceManger= SharedPreferenceMangerImpl(this)
         loginViewModel=ViewModelProvider(this).get(LoginViewModel::class.java)
+        homeViewModel=ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding= ActivityHomeBinding.inflate(layoutInflater)
         sharedPreferenceManger=SharedPreferenceMangerImpl(this)
+        getAllUnreadNotifications()
         binding.home.setOnClickListener {
             Toast.makeText(this, "This Feature will be added soon ", Toast.LENGTH_SHORT).show()
         }
@@ -81,6 +85,42 @@ class HomeActivity : AppCompatActivity() {
         super.onDestroy()
         _binding=null
     }
+    private fun getAllUnreadNotifications() : Int {
+        var x=0
+        homeViewModel.getAllUnreadNotifications().observe(this,{
+            when(it.status){
+                ApiStatus.SUCCESS->{
+                    if (it.data?.data!=null) {
+                        if (it.data?.data.isNotEmpty()){
+                            x=it.data.data.size
+                            binding.unreadNotificationNumber.visibility=View.VISIBLE
+                            binding.unreadNotificationNumber.text=it.data.data.size.toString()
+                        }else{
+                            binding.unreadNotificationNumber.visibility=View.GONE
+
+                        }
+
+
+                    }else{
+                        binding.unreadNotificationNumber.visibility=View.GONE
+
+                    }
+                }
+                ApiStatus.ERROR->{
+                    binding.unreadNotificationNumber.visibility=View.GONE
+
+                    Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
+
+                }
+                ApiStatus.LOADING->{
+                    binding.unreadNotificationNumber.visibility=View.GONE
+
+                }
+            }
+        })
+        return x
+    }
+
     interface SearchByName{
         fun onSearchClicked()
     }

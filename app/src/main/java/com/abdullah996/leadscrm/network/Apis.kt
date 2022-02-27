@@ -6,6 +6,7 @@ import com.abdullah996.leadscrm.model.delete.DeleteLeadResponse
 import com.abdullah996.leadscrm.model.getstatus.AllStatusReponse
 import com.abdullah996.leadscrm.model.leeds.LeedsReponse
 import com.abdullah996.leadscrm.model.notifications.NotificationsResponse
+import com.abdullah996.leadscrm.model.unreadnotifications.UnreadNotificationsResponse
 import com.abdullah996.leadscrm.model.updateaction.AddActionResponse
 import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
 import com.abdullah996.leadscrm.model.user.UserResponse
@@ -119,6 +120,11 @@ interface Apis {
     @GET("user/notification/get-all")
     suspend fun getAllNotifications(
     ):Response<NotificationsResponse>
+
+
+    //totalUnreadNotification
+    @GET("user/notification/total-unread-notifications")
+    suspend fun getAllUnreadNotifications():Response<UnreadNotificationsResponse>
 
 
     //filter the leads by date

@@ -1,6 +1,7 @@
 package com.abdullah996.leadscrm.repository
 
 import com.abdullah996.leadscrm.model.leeds.LeedsReponse
+import com.abdullah996.leadscrm.model.unreadnotifications.UnreadNotificationsResponse
 import com.abdullah996.leadscrm.network.Apis
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import retrofit2.Response
@@ -29,6 +30,10 @@ class LeedsRepoImpl@Inject constructor(
 
     override suspend fun filterByDate(year: String, month: Array<String>): Response<LeedsReponse> {
        return apis.filterByData(year, month)
+    }
+
+    override suspend fun getAllUnreadNotifications(): Response<UnreadNotificationsResponse> {
+        return apis.getAllUnreadNotifications()
     }
 
 }
