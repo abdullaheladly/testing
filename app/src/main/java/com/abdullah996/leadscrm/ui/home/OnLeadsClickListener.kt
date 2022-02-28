@@ -7,4 +7,6 @@ interface OnLeadsClickListener {
     fun onAddActionClick(id: Int)
     fun onDeleteLeadClick(id: Int)
     fun onStatusItemClick(id: Int)
+    fun onPhoneTextClick(phone:String)
+    fun onEmailTextClick(phone:String)
 }

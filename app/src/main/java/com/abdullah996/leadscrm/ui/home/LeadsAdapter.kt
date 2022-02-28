@@ -28,8 +28,12 @@ class LeadsAdapter(onLeadsClickListener: OnLeadsClickListener):RecyclerView.Adap
             holder.itemView.findViewById<TextView>(R.id.txt_name).text =
                 ""
         }
+
         if(!leadsList[position].phones.isNullOrEmpty()){
             holder.itemView.findViewById<TextView>(R.id.txt_phone).text = leadsList[position].phones.toString()
+            holder.itemView.findViewById<TextView>(R.id.txt_phone).setOnClickListener {
+                onClickListener.onPhoneTextClick(holder.itemView.findViewById<TextView>(R.id.txt_phone).text.toString())
+            }
 
         }else {
             holder.itemView.findViewById<TextView>(R.id.txt_phone).text =
@@ -38,7 +42,9 @@ class LeadsAdapter(onLeadsClickListener: OnLeadsClickListener):RecyclerView.Adap
         }
         if(!leadsList[position].email.isNullOrEmpty()){
             holder.itemView.findViewById<TextView>(R.id.txt_email).text = leadsList[position].email.toString()
-
+            holder.itemView.findViewById<TextView>(R.id.txt_email).setOnClickListener {
+                onClickListener.onEmailTextClick(holder.itemView.findViewById<TextView>(R.id.txt_email).text.toString())
+            }
 
         }else {
             holder.itemView.findViewById<TextView>(R.id.txt_email).text =

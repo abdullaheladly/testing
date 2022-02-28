@@ -15,6 +15,7 @@
     <color name="trans">#00000000</color>
     <color name="darkWhite">#F5F5F5</color>
     <color name="darkGreen">#007E54</color>
+    <color name="blue">#070BDF</color>
     //custom chip color
     <color name="checkChipBackgroundColor">#206200EA</color>
     <color name="chipBackgroundColor">@color/lightGray</color>

@@ -1,5 +1,6 @@
 package com.abdullah996.leadscrm.ui.home
 
+import android.R.attr
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
@@ -29,6 +30,16 @@ import com.abdullah996.leadscrm.utill.SharedPreferenceManger
 import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
+import android.R.attr.label
+
+import android.content.ClipData
+import android.content.ClipboardManager
+import androidx.core.content.ContextCompat
+
+import androidx.core.content.ContextCompat.getSystemService
+
+
+
 
 
 @AndroidEntryPoint
@@ -606,6 +617,22 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     override fun onStatusItemClick(id: Int) {
         binding.sToRefresh.isRefreshing=true
         getallLeadsByStatus(id)
+    }
+
+    override fun onPhoneTextClick(phone: String) {
+        val clipboard: ClipboardManager =requireActivity().
+            getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("phone", phone)
+        clipboard.setPrimaryClip(clip)
+        makeToast("phone Copied")
+    }
+
+    override fun onEmailTextClick(phone: String) {
+        val clipboard: ClipboardManager =requireActivity().
+        getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("email", phone)
+        clipboard.setPrimaryClip(clip)
+        makeToast("email Copied")
     }
 
     private fun hasInternetConnection():Boolean{
