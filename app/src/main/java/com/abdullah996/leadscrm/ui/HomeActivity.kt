@@ -53,7 +53,7 @@ class HomeActivity : AppCompatActivity() {
         }
         binding.logout.setOnClickListener {
             binding.homePb.visibility=View.VISIBLE
-            loginViewModel.logout(sharedPreferenceManger.companyId.toInt(),sharedPreferenceManger.userToken).observe(this,{
+            loginViewModel.logout(sharedPreferenceManger.companyId.toInt(),sharedPreferenceManger.firebaseToken).observe(this,{
                 when(it.status) {
                     ApiStatus.SUCCESS -> {
                         binding.homePb.visibility=View.INVISIBLE

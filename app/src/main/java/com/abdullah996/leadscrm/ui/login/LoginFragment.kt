@@ -67,6 +67,7 @@ class LoginFragment : Fragment() {
                         .observe(viewLifecycleOwner, {
                             when (it.status) {
                                 ApiStatus.SUCCESS -> {
+                                    sharedPreferenceManger.firebaseToken=token.toString()
                                     val intet = Intent(requireActivity(), HomeActivity::class.java)
                                     intet.putExtra("token", it.data?.data?.token)
                                     sharedPreferenceManger.isLoggedIn = true

@@ -8,6 +8,7 @@ interface SharedPreferenceManger{
     var isLoggedIn:Boolean
     var companyId:String
     var logo:String
+    var firebaseToken:String
 
 }
 class SharedPreferenceMangerImpl(context: Context):SharedPreferenceManger{
@@ -36,6 +37,11 @@ private val sharedPreference:SharedPreferences=
         set(value) {editor.putString(logoKey,value).apply()}
 
 
+    override var firebaseToken: String
+        get() = getString(userFirebaseToken)
+        set(value) {editor.putString(userFirebaseToken,value).apply()}
+
+
     private fun getString(key: String): String {
         sharedPreference.getString(key, "").let { s ->
             return if (s.isNullOrBlank())
@@ -58,7 +64,7 @@ private val sharedPreference:SharedPreferences=
         private const val sharedPreferencesKey = "USERDATA"
 
         private const val userTokenKey = "API_TOKEN"
-        private const val userIDKey = "USERID"
+        private const val userFirebaseToken = "USERFCMTOKEN"
         private const val userNameKey = "USERNAME"
         private const val userPhoneKey = "USERPHONE"
         private const val userEmailKey = "USEREMAIL"
