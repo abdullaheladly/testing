@@ -226,6 +226,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
            binding.viewsLayout.visibility=View.VISIBLE
             binding.sToRefresh.isRefreshing=true
             getAllLeads()
+            getAllStatuesType()
             binding.filterBySpinner.setSelection(0)
         }
 
@@ -436,6 +437,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             binding.sToRefresh.isRefreshing =true
             if (hasInternetConnection()){
                 getAllLeads()
+                getAllStatuesType()
+
             }
             else{
                 makeToast("no internet")
