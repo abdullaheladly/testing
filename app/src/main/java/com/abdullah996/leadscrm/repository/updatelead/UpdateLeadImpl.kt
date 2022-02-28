@@ -1,4 +1,4 @@
-package com.abdullah996.leadscrm.repository
+package com.abdullah996.leadscrm.repository.updatelead
 
 import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
 import com.abdullah996.leadscrm.network.Apis
@@ -9,7 +9,7 @@ import javax.inject.Inject
 @ActivityRetainedScoped
 class UpdateLeadImpl @Inject constructor(
     private val apis: Apis
-) :UpdateLeadRepo {
+) : UpdateLeadRepo {
     override suspend fun updateLead(
         company_id: Int?,
         lead_id: String?,

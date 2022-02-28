@@ -3,7 +3,7 @@ package com.abdullah996.leadscrm.ui.home
 import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
 import com.abdullah996.leadscrm.base.BaseViewModel
-import com.abdullah996.leadscrm.repository.LeedsRepoImpl
+import com.abdullah996.leadscrm.repository.home.LeedsRepoImpl
 import com.abdullah996.leadscrm.repository.delete.DeleteLeadRepoImpl
 import com.abdullah996.leadscrm.repository.filter.LeadsFilterImpl
 

@@ -1,4 +1,4 @@
-package com.abdullah996.leadscrm.repository
+package com.abdullah996.leadscrm.repository.updatelead
 
 import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
 import retrofit2.Response

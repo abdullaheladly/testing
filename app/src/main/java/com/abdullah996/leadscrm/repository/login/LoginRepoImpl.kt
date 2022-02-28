@@ -1,8 +1,9 @@
-package com.abdullah996.leadscrm.repository
+package com.abdullah996.leadscrm.repository.login
 
 import com.abdullah996.leadscrm.model.updateleads.UpdateLeadsRespons
 import com.abdullah996.leadscrm.model.user.UserResponse
 import com.abdullah996.leadscrm.network.Apis
+import com.abdullah996.leadscrm.repository.login.LoginRepo
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import retrofit2.Response
 import javax.inject.Inject
@@ -11,7 +12,7 @@ import javax.inject.Inject
 @ActivityRetainedScoped
 class LoginRepoImpl @Inject constructor(
     private val apis: Apis
-):LoginRepo {
+): LoginRepo {
     override suspend fun login(email: String, password: String, notificationToken: String?):Response<UserResponse> {
         return apis.userLogin(email, password, notificationToken)
     }

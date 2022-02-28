@@ -1,4 +1,4 @@
-package com.abdullah996.leadscrm.repository
+package com.abdullah996.leadscrm.repository.home
 
 import com.abdullah996.leadscrm.model.leeds.LeedsReponse
 import com.abdullah996.leadscrm.model.statusmodel.StatusModelResponse
