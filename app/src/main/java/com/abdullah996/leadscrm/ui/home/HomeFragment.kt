@@ -14,25 +14,21 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdullah996.leadscrm.R
 import com.abdullah996.leadscrm.databinding.FragmentHomeBinding
-import com.abdullah996.leadscrm.model.baseactions.BaseAction
 import com.abdullah996.leadscrm.model.leeds.Leads
+import com.abdullah996.leadscrm.model.leeds.LeedsReponse
 import com.abdullah996.leadscrm.model.statusmodel.StatusModelResponse
 import com.abdullah996.leadscrm.ui.SplashActivity
 import com.abdullah996.leadscrm.ui.actions.ActionsViewModel
+import com.abdullah996.leadscrm.utill.ApiResult
 import com.abdullah996.leadscrm.utill.ApiStatus
 import com.abdullah996.leadscrm.utill.SharedPreferenceManger
 import com.abdullah996.leadscrm.utill.SharedPreferenceMangerImpl
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
@@ -45,9 +41,9 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     private val leadsAdapter by lazy { LeadsAdapter(this) }
     private val statusHomeAdapter by lazy { StatusHomeAdapter(this) }
     private lateinit var sharedPreferenceManger: SharedPreferenceManger
-    private var pageNumber=1;
-    private var nostatus=0;
-    private var statusId=0;
+    private var pageNumber=1
+    private var nostatus=0
+    private var statusId=0
     private var baseAction:StatusModelResponse?=null
     private var list= mutableListOf<String>()
 
@@ -123,6 +119,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
 
     }
 
+
+
     private fun setListeners() {
         // filter by data is the only option until now
         binding.goFilter.setOnClickListener {
@@ -131,33 +129,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             val month=binding.monthSpinner.selectedItem.toString()
             val months= arrayOf(month)
             homeViewModel.filterByData(year,months).observe(viewLifecycleOwner,{
-                when(it.status){
-                    ApiStatus.SUCCESS->{
-                        if (!it.data?.data?.data.isNullOrEmpty()) {
-
-                            leadsAdapter.saveData(it.data?.data?.data!!)
-                            binding.sToRefresh.isRefreshing=false
-                            binding.rvLeads.visibility=View.VISIBLE
-                            binding.noDataFound.visibility=View.GONE
-                            binding.pagination.visibility=View.GONE
-                            binding.paginationStatus.visibility=View.GONE
-
-                        }else{
-                            binding.rvLeads.visibility=View.INVISIBLE
-                            binding.noDataFound.visibility=View.VISIBLE
-                            binding.sToRefresh.isRefreshing=false
-
-
-                        }
-                    }
-                    ApiStatus.ERROR->{
-                        makeToast(it.message.toString())
-                        binding.sToRefresh.isRefreshing=false
-                    }
-                    ApiStatus.LOADING->{
-
-                    }
-                }
+                handleFilterResponse(it)
             })
         }
 
@@ -166,33 +138,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             val tag =binding.tagSpinner.selectedItem.toString()
             binding.sToRefresh.isRefreshing=true
             homeViewModel.filterByTag(tag).observe(viewLifecycleOwner,{
-                when(it.status){
-                    ApiStatus.SUCCESS->{
-                        if (!it.data?.data?.data.isNullOrEmpty()) {
-
-                            leadsAdapter.saveData(it.data?.data?.data!!)
-                            binding.sToRefresh.isRefreshing=false
-                            binding.rvLeads.visibility=View.VISIBLE
-                            binding.noDataFound.visibility=View.GONE
-                            binding.pagination.visibility=View.GONE
-                            binding.paginationStatus.visibility=View.GONE
-
-                        }else{
-                            binding.rvLeads.visibility=View.INVISIBLE
-                            binding.noDataFound.visibility=View.VISIBLE
-                            binding.sToRefresh.isRefreshing=false
-
-
-                        }
-                    }
-                    ApiStatus.ERROR->{
-                        makeToast(it.message.toString())
-                        binding.sToRefresh.isRefreshing=false
-                    }
-                    ApiStatus.LOADING->{
-
-                    }
-                }
+                handleFilterResponse(it)
             })
         }
         //filter by interest
@@ -200,33 +146,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             val tag =binding.interestTypeSpinner.selectedItem.toString()
             binding.sToRefresh.isRefreshing=true
             homeViewModel.filterByInterest(tag).observe(viewLifecycleOwner,{
-                when(it.status){
-                    ApiStatus.SUCCESS->{
-                        if (!it.data?.data?.data.isNullOrEmpty()) {
-
-                            leadsAdapter.saveData(it.data?.data?.data!!)
-                            binding.sToRefresh.isRefreshing=false
-                            binding.rvLeads.visibility=View.VISIBLE
-                            binding.noDataFound.visibility=View.GONE
-                            binding.pagination.visibility=View.GONE
-                            binding.paginationStatus.visibility=View.GONE
-
-                        }else{
-                            binding.rvLeads.visibility=View.INVISIBLE
-                            binding.noDataFound.visibility=View.VISIBLE
-                            binding.sToRefresh.isRefreshing=false
-
-
-                        }
-                    }
-                    ApiStatus.ERROR->{
-                        makeToast(it.message.toString())
-                        binding.sToRefresh.isRefreshing=false
-                    }
-                    ApiStatus.LOADING->{
-
-                    }
-                }
+                handleFilterResponse(it)
             })
         }
         //filter by request interest
@@ -234,33 +154,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             val tag =binding.requestInterestSpinner.selectedItem.toString()
             binding.sToRefresh.isRefreshing=true
             homeViewModel.filterByRequestInterest(tag).observe(viewLifecycleOwner,{
-                when(it.status){
-                    ApiStatus.SUCCESS->{
-                        if (!it.data?.data?.data.isNullOrEmpty()) {
-
-                            leadsAdapter.saveData(it.data?.data?.data!!)
-                            binding.sToRefresh.isRefreshing=false
-                            binding.rvLeads.visibility=View.VISIBLE
-                            binding.noDataFound.visibility=View.GONE
-                            binding.pagination.visibility=View.GONE
-                            binding.paginationStatus.visibility=View.GONE
-
-                        }else{
-                            binding.rvLeads.visibility=View.INVISIBLE
-                            binding.noDataFound.visibility=View.VISIBLE
-                            binding.sToRefresh.isRefreshing=false
-
-
-                        }
-                    }
-                    ApiStatus.ERROR->{
-                        makeToast(it.message.toString())
-                        binding.sToRefresh.isRefreshing=false
-                    }
-                    ApiStatus.LOADING->{
-
-                    }
-                }
+                handleFilterResponse(it)
             })
         }
 
@@ -269,33 +163,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
             val type =binding.typeSpinner.selectedItem.toString()
             binding.sToRefresh.isRefreshing=true
             homeViewModel.filterByType(type).observe(viewLifecycleOwner,{
-                when(it.status){
-                    ApiStatus.SUCCESS->{
-                        if (!it.data?.data?.data.isNullOrEmpty()) {
-
-                            leadsAdapter.saveData(it.data?.data?.data!!)
-                            binding.sToRefresh.isRefreshing=false
-                            binding.rvLeads.visibility=View.VISIBLE
-                            binding.noDataFound.visibility=View.GONE
-                            binding.pagination.visibility=View.GONE
-                            binding.paginationStatus.visibility=View.GONE
-
-                        }else{
-                            binding.rvLeads.visibility=View.INVISIBLE
-                            binding.noDataFound.visibility=View.VISIBLE
-                            binding.sToRefresh.isRefreshing=false
-
-
-                        }
-                    }
-                    ApiStatus.ERROR->{
-                        makeToast(it.message.toString())
-                        binding.sToRefresh.isRefreshing=false
-                    }
-                    ApiStatus.LOADING->{
-
-                    }
-                }
+                handleFilterResponse(it)
             })
         }
 
@@ -305,33 +173,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                 val sourceId = binding.sourceIdSearch.text.toString()
                 binding.sToRefresh.isRefreshing = true
                 homeViewModel.filterBySourceID(sourceId.toInt()).observe(viewLifecycleOwner, {
-                    when (it.status) {
-                        ApiStatus.SUCCESS -> {
-                            if (!it.data?.data?.data.isNullOrEmpty()) {
-
-                                leadsAdapter.saveData(it.data?.data?.data!!)
-                                binding.sToRefresh.isRefreshing = false
-                                binding.rvLeads.visibility = View.VISIBLE
-                                binding.noDataFound.visibility = View.GONE
-                                binding.pagination.visibility = View.GONE
-                                binding.paginationStatus.visibility = View.GONE
-
-                            } else {
-                                binding.rvLeads.visibility = View.INVISIBLE
-                                binding.noDataFound.visibility = View.VISIBLE
-                                binding.sToRefresh.isRefreshing = false
-
-
-                            }
-                        }
-                        ApiStatus.ERROR -> {
-                            makeToast(it.message.toString())
-                            binding.sToRefresh.isRefreshing = false
-                        }
-                        ApiStatus.LOADING -> {
-
-                        }
-                    }
+                    handleFilterResponse(it)
                 })
             }else{
                 makeToast("please enter the source number first")
@@ -343,33 +185,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                 val unitType = binding.unitTypeIdSearch.text.toString()
                 binding.sToRefresh.isRefreshing = true
                 homeViewModel.filterByUnitTYpeID(unitType.toInt()).observe(viewLifecycleOwner, {
-                    when (it.status) {
-                        ApiStatus.SUCCESS -> {
-                            if (!it.data?.data?.data.isNullOrEmpty()) {
-
-                                leadsAdapter.saveData(it.data?.data?.data!!)
-                                binding.sToRefresh.isRefreshing = false
-                                binding.rvLeads.visibility = View.VISIBLE
-                                binding.noDataFound.visibility = View.GONE
-                                binding.pagination.visibility = View.GONE
-                                binding.paginationStatus.visibility = View.GONE
-
-                            } else {
-                                binding.rvLeads.visibility = View.INVISIBLE
-                                binding.noDataFound.visibility = View.VISIBLE
-                                binding.sToRefresh.isRefreshing = false
-
-
-                            }
-                        }
-                        ApiStatus.ERROR -> {
-                            makeToast(it.message.toString())
-                            binding.sToRefresh.isRefreshing = false
-                        }
-                        ApiStatus.LOADING -> {
-
-                        }
-                    }
+                   handleFilterResponse(it)
                 })
             }else{
                 makeToast("unit type id field can't be null")
@@ -381,33 +197,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
                 val to = binding.budgetToSearch.text.toString()
                 binding.sToRefresh.isRefreshing = true
                 homeViewModel.filterByBudget(from.toLong(), to.toLong()).observe(viewLifecycleOwner, {
-                    when (it.status) {
-                        ApiStatus.SUCCESS -> {
-                            if (!it.data?.data?.data.isNullOrEmpty()) {
-
-                                leadsAdapter.saveData(it.data?.data?.data!!)
-                                binding.sToRefresh.isRefreshing = false
-                                binding.rvLeads.visibility = View.VISIBLE
-                                binding.noDataFound.visibility = View.GONE
-                                binding.pagination.visibility = View.GONE
-                                binding.paginationStatus.visibility = View.GONE
-
-                            } else {
-                                binding.rvLeads.visibility = View.INVISIBLE
-                                binding.noDataFound.visibility = View.VISIBLE
-                                binding.sToRefresh.isRefreshing = false
-
-
-                            }
-                        }
-                        ApiStatus.ERROR -> {
-                            makeToast(it.message.toString())
-                            binding.sToRefresh.isRefreshing = false
-                        }
-                        ApiStatus.LOADING -> {
-
-                        }
-                    }
+                    handleFilterResponse(it)
                 })
             }else{
                 makeToast("please enter budget range first")
@@ -432,19 +222,8 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
 
         //clear filter and return to the ordinary get all leads
         binding.btnClearFilter.setOnClickListener {
-            binding.filterLayout.visibility=View.GONE
-            binding.filterByTagLayout.visibility=View.GONE
-            binding.filterByTypeLayout.visibility=View.GONE
-            binding.filterByInterestedTypeLayout.visibility=View.GONE
-            binding.filterByRequestInterestLayout.visibility=View.GONE
-            binding.filterBySourceIdLayout.visibility=View.GONE
-            binding.filterByUnitTypeIdLayout.visibility = View.GONE
-            binding.filterByBudgetLayout.visibility = View.GONE
-            binding.filterByStatusLayout.visibility=View.GONE
-
-
-
-
+           makeInvisible()
+           binding.viewsLayout.visibility=View.VISIBLE
             binding.sToRefresh.isRefreshing=true
             getAllLeads()
             binding.filterBySpinner.setSelection(0)
@@ -846,42 +625,42 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
          * enable one filter and disable the others
          */
         if (binding.filterBySpinner.selectedItem=="Date"){
-            makeUnvisible()
+            makeInvisible()
             binding.filterLayout.visibility=View.VISIBLE
         }
         else if (binding.filterBySpinner.selectedItem=="Tag"){
-            makeUnvisible()
+            makeInvisible()
             binding.filterByTagLayout.visibility=View.VISIBLE
         } else if (binding.filterBySpinner.selectedItem == "Type"){
-            makeUnvisible()
+            makeInvisible()
             binding.filterByTypeLayout.visibility=View.VISIBLE
         }else if (binding.filterBySpinner.selectedItem == "Interested Type"){
-            makeUnvisible()
+            makeInvisible()
             binding.filterByInterestedTypeLayout.visibility=View.VISIBLE
 
         }else if (binding.filterBySpinner.selectedItem == "Request Interest"){
-            makeUnvisible()
+            makeInvisible()
             binding.filterByRequestInterestLayout.visibility=View.VISIBLE
         } else if (binding.filterBySpinner.selectedItem == "Source ID") {
-            makeUnvisible()
+            makeInvisible()
             binding.filterBySourceIdLayout.visibility = View.VISIBLE
 
         } else if (binding.filterBySpinner.selectedItem == "Unit Type") {
-            makeUnvisible()
+            makeInvisible()
             binding.filterByUnitTypeIdLayout.visibility = View.VISIBLE
 
         }
         else if (binding.filterBySpinner.selectedItem == "Budget") {
-            makeUnvisible()
+            makeInvisible()
             binding.filterByBudgetLayout.visibility = View.VISIBLE
 
         }else if(binding.filterBySpinner.selectedItem=="Status"){
-            makeUnvisible()
+            makeInvisible()
             binding.filterByStatusLayout.visibility=View.VISIBLE
 
         } else
         {
-          makeUnvisible()
+          makeInvisible()
             getAllLeads()
             binding.viewsLayout.visibility=View.VISIBLE
 
@@ -972,7 +751,7 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
 
     }
 
-    private fun makeUnvisible(){
+    private fun makeInvisible(){
         binding.filterByStatusLayout.visibility=View.GONE
         binding.filterByBudgetLayout.visibility = View.GONE
         binding.filterByUnitTypeIdLayout.visibility = View.GONE
@@ -983,5 +762,35 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         binding.filterByTypeLayout.visibility = View.GONE
         binding.filterByInterestedTypeLayout.visibility = View.GONE
         binding.viewsLayout.visibility=View.GONE
+    }
+
+    private fun handleFilterResponse(apiResult: ApiResult<LeedsReponse>){
+        when(apiResult.status){
+            ApiStatus.SUCCESS->{
+                if (!apiResult.data?.data?.data.isNullOrEmpty()) {
+
+                    leadsAdapter.saveData(apiResult.data?.data?.data!!)
+                    binding.sToRefresh.isRefreshing=false
+                    binding.rvLeads.visibility=View.VISIBLE
+                    binding.noDataFound.visibility=View.GONE
+                    binding.pagination.visibility=View.GONE
+                    binding.paginationStatus.visibility=View.GONE
+
+                }else{
+                    binding.rvLeads.visibility=View.INVISIBLE
+                    binding.noDataFound.visibility=View.VISIBLE
+                    binding.sToRefresh.isRefreshing=false
+
+
+                }
+            }
+            ApiStatus.ERROR->{
+                makeToast(apiResult.message.toString())
+                binding.sToRefresh.isRefreshing=false
+            }
+            ApiStatus.LOADING->{
+
+            }
+        }
     }
 }
