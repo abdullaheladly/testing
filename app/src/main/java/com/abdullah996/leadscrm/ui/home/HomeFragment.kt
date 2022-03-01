@@ -588,14 +588,19 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
         findNavController().navigate(action)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onDeleteLeadClick(id: Int) {
         val mDialog= LayoutInflater.from(requireContext()).inflate(R.layout.delete_lead_dialog,null)
         val mBuilder=AlertDialog.Builder(requireContext())
             .setView(mDialog)
         //  .setTitle("Search For Lead By Name")
+        val deleteText=mDialog.findViewById<TextView>(R.id.delete_lead_dialog_text)
+        val deleteImage=mDialog.findViewById<ImageView>(R.id.delete_lead_dialog_icon)
+        deleteText.text="Delete item "
+        deleteImage.setImageResource(R.drawable.ic_baseline_delete_24)
         val  mAlertDialog = mBuilder.show()
         val yesButton=mDialog.findViewById<Button>(R.id.delete_lead_dialog_yes)
-        val noButton=mDialog.findViewById<EditText>(R.id.delete_lead_dialog_no)
+        val noButton=mDialog.findViewById<Button>(R.id.delete_lead_dialog_no)
         yesButton.setOnClickListener {
             mAlertDialog.dismiss()
 

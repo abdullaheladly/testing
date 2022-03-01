@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/delete_lead_dialog_icon"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
         android:src="@drawable/ic_baseline_delete_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,8 +25,8 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:textColor="@color/black"
         android:textAlignment="center"
-        android:textSize="@dimen/_15ssp"
-        android:fontFamily="@font/poppins_bold"
+        android:textSize="@dimen/_12ssp"
+        android:fontFamily="@font/poppins_semibold"
         />
 
     <LinearLayout
@@ -45,8 +45,8 @@
             android:layout_weight="1"
             android:textColor="@color/black"
             android:text="Yes"
-            android:textSize="@dimen/_15ssp"
-            android:fontFamily="@font/poppins_bold"
+            android:textSize="@dimen/_12ssp"
+            android:fontFamily="@font/poppins_semibold"
             android:textAlignment="center"
             app:background="@drawable/login_bg"
             android:backgroundTint="@color/trans"
@@ -59,8 +59,8 @@
             android:layout_weight="1"
             android:textColor="@color/black"
             android:text="No"
-            android:textSize="@dimen/_15ssp"
-            android:fontFamily="@font/poppins_bold"
+            android:textSize="@dimen/_12ssp"
+            android:fontFamily="@font/poppins_semibold"
             android:textAlignment="center"
             app:background="@drawable/login_bg"
             android:backgroundTint="@color/trans"

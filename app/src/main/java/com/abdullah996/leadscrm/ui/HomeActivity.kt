@@ -66,8 +66,15 @@ class HomeActivity : AppCompatActivity() {
             //  .setTitle("Search For Lead By Name")
             val  mAlertDialog = mBuilder.show()
             val yesButton=mDialog.findViewById<Button>(R.id.delete_lead_dialog_yes)
-            val noButton=mDialog.findViewById<EditText>(R.id.delete_lead_dialog_no)
+            val noButton=mDialog.findViewById<Button>(R.id.delete_lead_dialog_no)
             yesButton.setOnClickListener {
+                if (sharedPreferenceManger.firebaseToken.isNullOrEmpty()){
+                    sharedPreferenceManger.firebaseToken=sharedPreferenceManger.userToken
+                }else{
+                    if (sharedPreferenceManger.firebaseToken.length<30){
+                        sharedPreferenceManger.firebaseToken=sharedPreferenceManger.userToken
+                    }
+                }
                 mAlertDialog.dismiss()
                 binding.homePb.visibility = View.VISIBLE
                 loginViewModel.logout(

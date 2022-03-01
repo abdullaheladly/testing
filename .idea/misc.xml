@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/btn_login_background.xml" value="0.16944444444444445" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/btn_save_background.xml" value="0.1824074074074074" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/dialog_bg.xml" value="0.1" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/edit_text_background.xml" value="0.1046875" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/edt_back.xml" value="0.15" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/drawable/edt_background.xml" value="0.1685185185185185" />
@@ -24,6 +25,7 @@
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/activity_splash.xml" value="0.15" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/content_home.xml" value="0.11503623188405797" />
+        <entry key="..\:/projets/leadscrm/app/src/main/res/layout/delete_lead_dialog.xml" value="0.2" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_actions.xml" value="0.18" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_create_lead.xml" value="0.18" />
         <entry key="..\:/projets/leadscrm/app/src/main/res/layout/fragment_edit_lead.xml" value="0.22" />
