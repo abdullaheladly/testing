@@ -589,29 +589,46 @@ class HomeFragment : Fragment(),OnLeadsClickListener, AdapterView.OnItemSelected
     }
 
     override fun onDeleteLeadClick(id: Int) {
-        if (hasInternetConnection()){
-        homeViewModel.deleteLead(sharedPreferenceManger.companyId.toInt(),id.toString()).observe(viewLifecycleOwner,{
-            when(it.status){
-                ApiStatus.SUCCESS->{
-                    binding.sToRefresh.isRefreshing=true
-                    getAllLeads()
-                }
-                ApiStatus.ERROR->{
-                    makeToast(it.message.toString())
-                    binding.sToRefresh.isRefreshing=false
-                    if (it.message.toString()=="UnAuthenticated"){
-                        sharedPreferenceManger.isLoggedIn=false
+        val mDialog= LayoutInflater.from(requireContext()).inflate(R.layout.delete_lead_dialog,null)
+        val mBuilder=AlertDialog.Builder(requireContext())
+            .setView(mDialog)
+        //  .setTitle("Search For Lead By Name")
+        val  mAlertDialog = mBuilder.show()
+        val yesButton=mDialog.findViewById<Button>(R.id.delete_lead_dialog_yes)
+        val noButton=mDialog.findViewById<EditText>(R.id.delete_lead_dialog_no)
+        yesButton.setOnClickListener {
+            mAlertDialog.dismiss()
+
+            binding.sToRefresh.isRefreshing=true
+            if (hasInternetConnection()){
+                homeViewModel.deleteLead(sharedPreferenceManger.companyId.toInt(),id.toString()).observe(viewLifecycleOwner,{
+                    when(it.status){
+                        ApiStatus.SUCCESS->{
+                            binding.sToRefresh.isRefreshing=true
+                            getAllLeads()
+                        }
+                        ApiStatus.ERROR->{
+                            makeToast(it.message.toString())
+                            binding.sToRefresh.isRefreshing=false
+                            if (it.message.toString()=="UnAuthenticated"){
+                                sharedPreferenceManger.isLoggedIn=false
+                            }
+
+                        }
+                        ApiStatus.LOADING->{
+
+                        }
+
                     }
 
-                }
-                ApiStatus.LOADING->{
-
-                }
+                })
+            }
 
         }
-
-    })
+        noButton.setOnClickListener {
+            mAlertDialog.dismiss()
         }
+
     }
 
     override fun onStatusItemClick(id: Int) {

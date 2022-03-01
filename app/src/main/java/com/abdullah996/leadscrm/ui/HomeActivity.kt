@@ -1,10 +1,13 @@
 package com.abdullah996.leadscrm.ui
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
+import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.abdullah996.leadscrm.R
@@ -27,6 +30,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var searchByName:SearchByName
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferenceManger= SharedPreferenceMangerImpl(this)
@@ -52,27 +56,47 @@ class HomeActivity : AppCompatActivity() {
             findNavController(R.id.nav_hot_fragment).navigate(R.id.action_homeFragment2_to_notificationsFragment)
         }
         binding.logout.setOnClickListener {
-            binding.homePb.visibility=View.VISIBLE
-            loginViewModel.logout(sharedPreferenceManger.companyId.toInt(),sharedPreferenceManger.firebaseToken).observe(this,{
-                when(it.status) {
-                    ApiStatus.SUCCESS -> {
-                        binding.homePb.visibility=View.INVISIBLE
+            val mDialog= LayoutInflater.from(this).inflate(R.layout.delete_lead_dialog,null)
+            val mBuilder= AlertDialog.Builder(this)
+                .setView(mDialog)
+            val logoutText=mDialog.findViewById<TextView>(R.id.delete_lead_dialog_text)
+            val logoutImage=mDialog.findViewById<ImageView>(R.id.delete_lead_dialog_icon)
+            logoutText.text="Logout"
+            logoutImage.setImageResource(R.drawable.ic_logout_line)
+            //  .setTitle("Search For Lead By Name")
+            val  mAlertDialog = mBuilder.show()
+            val yesButton=mDialog.findViewById<Button>(R.id.delete_lead_dialog_yes)
+            val noButton=mDialog.findViewById<EditText>(R.id.delete_lead_dialog_no)
+            yesButton.setOnClickListener {
+                mAlertDialog.dismiss()
+                binding.homePb.visibility = View.VISIBLE
+                loginViewModel.logout(
+                    sharedPreferenceManger.companyId.toInt(),
+                    sharedPreferenceManger.firebaseToken
+                ).observe(this, {
+                    when (it.status) {
+                        ApiStatus.SUCCESS -> {
+                            binding.homePb.visibility = View.INVISIBLE
 
-                        sharedPreferenceManger.isLoggedIn=false
-                        startActivity(Intent(this,MainActivity::class.java))
-                        Toast.makeText(this, "done", Toast.LENGTH_SHORT).show()
+                            sharedPreferenceManger.isLoggedIn = false
+                            startActivity(Intent(this, MainActivity::class.java))
+                            Toast.makeText(this, "done", Toast.LENGTH_SHORT).show()
+                        }
+                        ApiStatus.ERROR -> {
+                            binding.homePb.visibility = View.INVISIBLE
+                            Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
+
+                        }
+                        ApiStatus.LOADING -> {
+
+                        }
                     }
-                    ApiStatus.ERROR -> {
-                        binding.homePb.visibility=View.INVISIBLE
-                        Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
 
-                    }
-                    ApiStatus.LOADING -> {
-
-                    }
-                }
-
-            })
+                })
+            }
+            noButton.setOnClickListener {
+                mAlertDialog.dismiss()
+            }
         }
         binding.createLead.setOnClickListener {
 
