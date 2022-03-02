@@ -23,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        // AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(false)
         _binding= ActivitySplashBinding.inflate(layoutInflater)
         binding.logoSplash.startAnimation(AnimationUtils.loadAnimation(this,R.anim.pulse))
         GlobalScope.launch(Dispatchers.Main){
