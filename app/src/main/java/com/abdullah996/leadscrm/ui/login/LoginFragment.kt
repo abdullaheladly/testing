@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding= FragmentLoginBinding.inflate(layoutInflater,container,false)
+        _binding= FragmentLoginBinding.inflate(layoutInflater,container,true)
         getNotificationToken()
         sharedPreferenceManger=SharedPreferenceMangerImpl(requireContext())
         setListeners()
@@ -73,10 +73,16 @@ class LoginFragment : Fragment() {
                                     sharedPreferenceManger.isLoggedIn = true
                                     sharedPreferenceManger.userToken =
                                         it.data?.data?.token.toString()
-                                    sharedPreferenceManger.companyId=it.data?.data?.role?.companyId.toString()
-
-                                    sharedPreferenceManger.logo=it.data?.data?.role?.company?.logo.toString()
-
+                                    if (it.data?.data?.role?.companyId!=null) {
+                                        sharedPreferenceManger.companyId =
+                                            it.data?.data?.role?.companyId.toString()
+                                    }else{
+                                        sharedPreferenceManger.companyId="0"
+                                    }
+                                    if (it.data?.data?.role?.company!=null) {
+                                        sharedPreferenceManger.logo =
+                                            it.data?.data?.role?.company?.logo.toString()
+                                    }
 
                                     startActivity(intet)
                                     requireActivity().finish()
